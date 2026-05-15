@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIS Saturday — AI Tools for Every Problem</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #080d1a;
+            --secondary: #0f172a;
+            --surface: #131d30;
+            --surface2: #1a2540;
+            --accent: #3b82f6;
+            --accent2: #6366f1;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --mis: #8b5cf6;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border: rgba(255,255,255,0.07);
+            --border-hover: rgba(59,130,246,0.4);
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Layout */
+        .container { display: flex; height: 100vh; }
+
+        /* Sidebar */
+        .sidebar {
+            width: 270px;
+            background: var(--secondary);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .sidebar-header {
+            padding: 1.4rem 1.4rem 1rem;
+            border-bottom: 1px solid var(--border);
+            position: sticky; top: 0; z-index: 100;
+            background: var(--secondary);
+        }
+
+        .sidebar-logo {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(120deg, #60a5fa 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sidebar-tagline {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 2px;
+        }
+
+        .sidebar-search {
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.5rem 0.8rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .sidebar-section { border-bottom: 1px solid var(--border); }
+
+        .sidebar-section-title {
+            padding: 0.9rem 1.2rem 0.4rem;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-item {
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            transition: all 0.15s;
+            border-left: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .sidebar-item:hover {
+            background: rgba(59,130,246,0.08);
+            color: var(--text);
+            border-left-color: var(--accent);
+        }
+
+        .sidebar-item.active {
+            background: rgba(59,130,246,0.12);
+            color: var(--accent);
+            border-left-color: var(--accent);
+            font-weight: 500;
+        }
+
+        .sidebar-item.mis-item:hover, .sidebar-item.mis-item.active {
+            background: rgba(139,92,246,0.12);
+            color: #a78bfa;
+            border-left-color: var(--mis);
+        }
+
+        .sidebar-item.ai-item:hover, .sidebar-item.ai-item.active {
+            background: rgba(16,185,129,0.08);
+            color: #34d399;
+            border-left-color: var(--success);
+        }
+
+        .sidebar-item-icon { font-size: 1rem; flex-shrink: 0; width: 20px; text-align: center; }
+
+        /* Main */
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+        .content-header {
+            padding: 1.4rem 2rem;
+            background: var(--secondary);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .content-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            letter-spacing: -0.3px;
+        }
+
+        .header-badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-dept { background: rgba(59,130,246,0.15); color: var(--accent); border: 1px solid rgba(59,130,246,0.3); }
+        .badge-ind  { background: rgba(245,158,11,0.15); color: var(--warning); border: 1px solid rgba(245,158,11,0.3); }
+        .badge-mis  { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
+        .badge-ai   { background: rgba(16,185,129,0.12); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+        .badge-tool { background: rgba(148,163,184,0.1); color: var(--text-muted); border: 1px solid var(--border); }
+
+        /* Content Area */
+        .content-area { flex: 1; overflow-y: auto; padding: 1.8rem 2rem; }
+
+        .content-view { display: none; animation: fadeIn 0.25s ease forwards; }
+        .content-view.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Welcome */
+        .welcome-screen {
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; min-height: 70vh; gap: 1rem;
+        }
+
+        .welcome-icon { font-size: 3rem; }
+        .welcome-title {
+            font-size: 2rem; font-weight: 700; letter-spacing: -0.5px;
+            background: linear-gradient(120deg, #60a5fa, #818cf8, #34d399);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .welcome-desc { color: var(--text-muted); font-size: 1rem; max-width: 520px; margin-top: 0.25rem; }
+
+        .welcome-steps { display: flex; gap: 1.2rem; margin-top: 1.5rem; flex-wrap: wrap; justify-content: center; }
+        .step-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.2rem 1.5rem;
+            border-radius: 10px;
+            min-width: 150px;
+            text-align: center;
+        }
+        .step-num { font-size: 1.3rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem; }
+        .step-card p { color: var(--text-muted); font-size: 0.88rem; }
+
+        /* Cards */
+        .usecase-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.8rem;
+            border-radius: 12px;
+            margin-bottom: 1.8rem;
+        }
+
+        .usecase-header { display: flex; align-items: flex-start; gap: 1.2rem; margin-bottom: 1.5rem; }
+        .usecase-icon { font-size: 2.2rem; flex-shrink: 0; }
+        .usecase-title { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 0.2rem; }
+        .usecase-desc { color: var(--text-muted); font-size: 0.9rem; }
+
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.4rem 0;
+        }
+
+        .problem, .solution {
+            background: var(--secondary);
+            padding: 1.2rem;
+            border-radius: 8px;
+            border-left: 3px solid;
+        }
+
+        .problem { border-left-color: var(--danger); }
+        .solution { border-left-color: var(--success); }
+
+        .problem h4, .solution h4 {
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .problem-list, .benefit-list { list-style: none; }
+
+        .problem-list li, .benefit-list li {
+            padding: 0.3rem 0 0.3rem 1.4rem;
+            color: var(--text-muted);
+            position: relative;
+            font-size: 0.875rem;
+        }
+
+        .problem-list li::before { content: '✗'; position: absolute; left: 0; color: var(--danger); font-weight: bold; }
+        .benefit-list li::before { content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: bold; }
+
+        /* AI Tool Cards */
+        .ai-tools-section { margin-top: 1.5rem; }
+        .ai-tools-section h3 { margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.75rem; }
+
+        .ai-tool-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.4rem;
+            border-radius: 10px;
+            margin-bottom: 1.2rem;
+            transition: border-color 0.2s;
+        }
+
+        .ai-tool-card:hover { border-color: var(--border-hover); }
+
+        .tool-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem; }
+        .tool-icon { font-size: 1.6rem; }
+        .tool-name { font-weight: 600; font-size: 1rem; }
+
+        .prompt-box {
+            background: rgba(15,23,42,0.8);
+            border: 1px solid rgba(59,130,246,0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 0.8rem;
+        }
+
+        .prompt-label {
+            font-size: 0.68rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+        }
+
+        .prompt-text {
+            background: var(--primary);
+            padding: 0.8rem;
+            border-radius: 6px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            word-break: break-word;
+            margin-bottom: 0.8rem;
+            max-height: 140px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            color: #93c5fd;
+        }
+
+        .btn-row { display: flex; gap: 0.6rem; }
+
+        .copy-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.45rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: 500;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+            flex: 1;
+        }
+
+        .copy-btn:hover { background: #2563eb; transform: translateY(-1px); }
+        .copy-btn.copied { background: var(--success); }
+
+        .use-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 0.45rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .use-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.25); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(59,130,246,0.45); }
+
+        /* Info blocks */
+        .info-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.2rem 1.4rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .info-block h4 { font-size: 0.95rem; margin-bottom: 0.4rem; font-weight: 600; }
+        .info-block p { color: var(--text-muted); font-size: 0.875rem; }
+
+        .ai-profile-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .ai-profile-icon { font-size: 2.5rem; }
+
+        .ai-profile-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .ai-profile-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .ai-profile-link {
+            margin-top: 1rem;
+        }
+
+        .ai-profile-link a {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .ai-profile-link a:hover {
+            background: #2563eb;
+        }
+
+        @media (max-width: 900px) {
+            .problem-solution { grid-template-columns: 1fr; }
+            .sidebar { width: 220px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ══ SIDEBAR ══ -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">🤖 MIS Saturday</div>
+            <div class="sidebar-tagline">AI for Data Executives</div>
+        </div>
+
+        <div class="sidebar-search">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search use cases…" />
+        </div>
+
+        <!-- Departments -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">📊 Departments</div>
+            <div class="sidebar-item" onclick="loadUseCase('sales-tracking',this)"><span class="sidebar-item-icon">📈</span>Sales Tracking</div>
+            <div class="sidebar-item" onclick="loadUseCase('operations-management',this)"><span class="sidebar-item-icon">⚙️</span>Operations</div>
+            <div class="sidebar-item" onclick="loadUseCase('finance-accounting',this)"><span class="sidebar-item-icon">💰</span>Finance</div>
+            <div class="sidebar-item" onclick="loadUseCase('hr-attendance',this)"><span class="sidebar-item-icon">👥</span>HR & Payroll</div>
+            <div class="sidebar-item" onclick="loadUseCase('inventory-management',this)"><span class="sidebar-item-icon">📦</span>Inventory</div>
+            <div class="sidebar-item" onclick="loadUseCase('customer-support',this)"><span class="sidebar-item-icon">🎧</span>Customer Support</div><div class='sidebar-item' onclick="loadUseCase('marketing-campaigns',this)"><span class='sidebar-item-icon'>📣</span>Marketing</div>
+        </div>
+
+        <!-- Industries -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">🏭 Industries</div>
+            <div class="sidebar-item" onclick="loadUseCase('manufacturing-production',this)"><span class="sidebar-item-icon">🏭</span>Manufacturing</div>
+            <div class="sidebar-item" onclick="loadUseCase('retail-ecommerce',this)"><span class="sidebar-item-icon">🛒</span>Retail</div>
+            <div class="sidebar-item" onclick="loadUseCase('pharma-healthcare',this)"><span class="sidebar-item-icon">💊</span>Pharma</div>
+            <div class="sidebar-item" onclick="loadUseCase('education-training',this)"><span class="sidebar-item-icon">🎓</span>Education</div>
+            <div class="sidebar-item" onclick="loadUseCase('realestate-property',this)"><span class="sidebar-item-icon">🏠</span>Real Estate</div>
+            <div class="sidebar-item" onclick="loadUseCase('logistics-delivery',this)"><span class="sidebar-item-icon">🚚</span>Logistics</div><div class='sidebar-item' onclick="loadUseCase('banking-finance',this)"><span class='sidebar-item-icon'>🏦</span>Banking</div>
+        </div>
+
+        <!-- MIS & Dashboards -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">🗄️ MIS & Dashboards</div>
+            <div class="sidebar-item mis-item" onclick="loadUseCase('mis-monthly-report',this)"><span class="sidebar-item-icon">📋</span>Monthly MIS Report</div>
+            <div class="sidebar-item mis-item" onclick="loadUseCase('mis-kpi-dashboard',this)"><span class="sidebar-item-icon">📊</span>KPI Dashboard</div>
+            <div class="sidebar-item mis-item" onclick="loadUseCase('mis-data-consolidation',this)"><span class="sidebar-item-icon">🔗</span>Data Consolidation</div>
+            <div class="sidebar-item mis-item" onclick="loadUseCase('mis-variance-analysis',this)"><span class="sidebar-item-icon">📉</span>Variance Analysis</div>
+            <div class="sidebar-item mis-item" onclick="loadUseCase('mis-auto-reporting',this)"><span class="sidebar-item-icon">⚡</span>Automated Reporting</div>
+            <div class="sidebar-item mis-item" onclick="loadUseCase('mis-pivot-analysis',this)"><span class="sidebar-item-icon">🔄</span>Pivot & Trend Analysis</div>
+            <div class="sidebar-item mis-item" onclick="loadUseCase('mis-data-cleaning',this)"><span class="sidebar-item-icon">🧹</span>Data Cleaning</div>
+            <div class="sidebar-item mis-item" onclick="loadUseCase('mis-executive-deck',this)"><span class="sidebar-item-icon">📑</span>Executive Deck</div><div class='sidebar-item mis-item' onclick="loadUseCase('mis-cashflow',this)"><span class='sidebar-item-icon'>💵</span>Cash Flow Dashboard</div>
+        </div>
+
+        <!-- AI Tools -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">🤖 AI Tools</div>
+            <div class="sidebar-item ai-item" onclick="loadTool('ai-chatgpt',this)"><span class="sidebar-item-icon">🟢</span>ChatGPT</div>
+            <div class="sidebar-item ai-item" onclick="loadTool('ai-claude',this)"><span class="sidebar-item-icon">🟠</span>Claude</div>
+            <div class="sidebar-item ai-item" onclick="loadTool('ai-gemini',this)"><span class="sidebar-item-icon">🔵</span>Gemini</div>
+            <div class="sidebar-item ai-item" onclick="loadTool('ai-perplexity',this)"><span class="sidebar-item-icon">⚡</span>Perplexity</div>
+            <div class="sidebar-item ai-item" onclick="loadTool('ai-notebooklm',this)"><span class="sidebar-item-icon">📓</span>NotebookLM</div>
+        </div>
+    </div>
+
+    <!-- ══ MAIN ══ -->
+    <div class="main-content">
+        <div class="content-header">
+            <div class="content-title">
+                <span id="titleIcon">🤖</span>
+                <span id="titleText">Welcome to MIS Saturday</span>
+            </div>
+            <span id="headerBadge" class="header-badge badge-tool" style="display:none"></span>
+        </div>
+
+        <div class="content-area">
+            <!-- Welcome -->
+            <div id="welcome-view" class="content-view active">
+                <div class="welcome-screen">
+                    <div class="welcome-icon">📊</div>
+                    <div class="welcome-title">AI for Every MIS Problem</div>
+                    <div class="welcome-desc">
+                        Choose a department, industry, or MIS use case from the sidebar. Get ready-to-use prompts for ChatGPT, Claude, Gemini, Perplexity, and NotebookLM.
+                    </div>
+                    <div class="welcome-steps">
+                        <div class="step-card"><div class="step-num">1</div><p>Pick a use case</p></div>
+                        <div class="step-card"><div class="step-num">2</div><p>Copy the prompt</p></div>
+                        <div class="step-card"><div class="step-num">3</div><p>Paste into any AI</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div id="usecases-view" class="content-view"></div>
+
+            <!-- Tools / AI Info -->
+            <div id="tools-view" class="content-view"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ---
+//  DATABASE
+// ---
+const useCasesDB = {
+
+    // DEPARTMENTS
+
+    'sales-tracking': {
+        icon:'📈', badge:'dept', title:'Sales Target Tracker',
+        desc:'Track daily sales vs target -- auto-flag underperformers',
+        problem:['Sales reps submit handwritten daily sales on WhatsApp','Target data stored in manager\'s notebook, not accessible to team','No visibility into who\'s actually hitting monthly goals','Payouts calculated wrong because numbers not tracked consistently'],
+        solution:['All sales entered in one Google Sheet with timestamps','Target visibility built into the sheet for every rep','Real-time achievement % shows who\'s winning','Payouts calculated automatically from tracked data'],
+        prompts:{
+            chatgpt:'Build a Google Sheets Sales Target Tracker for 10 sales reps. Each rep has a monthly target. I log daily sales. Auto-show: MTD per rep, achievement %, status flag (Target Hit / On Track / Behind). Real-time leaderboard sorted by achievement %. Color-coded flags for performance levels.',
+            claude:'Create a Google Sheets Sales Target Tracker. Team of 10 reps, each with monthly targets. Inputs: daily sales by rep. Auto-calculate: MTD total, achievement %, performance status (Hit/On Track/Behind). Output: Dynamic leaderboard sorted by achievement %, color-coded performance flags. Include full setup guide.',
+            gemini:'Design a Sales Target Tracker in Google Sheets for 10 reps with monthly targets. Auto-track: daily sales, MTD, achievement %, status flags. Show sorted leaderboard and team summary dashboard at the top. Use color alerts for performance levels.',
+            perplexity:'I need a Google Sheets tool to track 10 sales reps against monthly targets. Features: daily sales logging, MTD totals, achievement %, status indicator (Hit/On Track/Behind), real-time leaderboard. Include setup instructions and formula explanations.',
+            notebooklm:'Document a Sales Tracker Google Sheets app: tab structure, column layout, MTD formula, achievement % formula, leaderboard logic, color-coding rules. Include sample data and troubleshooting tips.'
+        }
+    },
+
+    'operations-management': {
+        icon:'⚙️', badge:'dept', title:'Operations Dashboard',
+        desc:'Track all operational metrics in one centralized place',
+        problem:['Operational managers track different metrics in their own files','Production updates arrive via phone calls and messages','Quality issues discovered during shipment, too late to fix','No one knows true operational capacity on any given day'],
+        solution:['One dashboard where all operations teams log realtime data','Daily production logged with quality in the same sheet','Quality problems visible within 2 hours of occurrence','Capacity utilization instantly visible for planning'],
+        prompts:{
+            chatgpt:'Build an Operations Dashboard in Google Sheets. Track: delivery status, production output, quality metrics, pending issues. Auto-show: on-time delivery %, production efficiency, quality score, unresolved issues count. Alert flags for delays. Make it real-time and simple to update daily.',
+            claude:'Design a comprehensive Operations Dashboard for Google Sheets. Inputs: delivery status, batch production counts, quality checks, issue tracking. Auto-calculate: on-time %, output per shift, quality score. Dashboard tab with KPIs and alert flags. Include setup guide.',
+            gemini:'Create an Operations Dashboard in Google Sheets covering delivery, production, and quality. Show: on-time %, efficiency %, quality score, open issues. Auto-update metrics. Color-coded alerts for problems. Scannable visual layout.',
+            perplexity:'Develop a Google Sheets Operations Dashboard tracking deliveries, production, quality, and issues. Metrics: on-time %, production efficiency %, quality score, open issues. Real-time alerts for problems and delays. Include setup and maintenance instructions.',
+            notebooklm:'Document an Operations Dashboard in Google Sheets: data structure, metric formulas, dashboard layout, alert rules, daily update process, troubleshooting.'
+        }
+    },
+
+    'finance-accounting': {
+        icon:'💰', badge:'dept', title:'Vendor Payment Tracker',
+        desc:'Know what\'s due, overdue, and outstanding at a glance',
+        problem:['CFO discovers missed payments only when vendor calls complaining','GST calculations done manually, leading to compliance errors','No aging report -- finance manager manually counts buckets','Cash flow surprises because no one tracks payment obligations'],
+        solution:['Due dates tracked automatically with 15-day advance warnings','GST auto-calculated and reconciled','Aging buckets auto-populate (Current/30+/60+/90+)','Cash flow forecast accurate based on scheduled payments'],
+        prompts:{
+            chatgpt:'Build a Vendor Payment Tracker in Google Sheets. Log: Vendor name, Invoice date, Amount, GST, Due date, Payment date. Auto-calculate: Net payable, payment status (Paid/Unpaid/Overdue), days overdue, aging bucket (Current/30+/60+/Critical). Dashboard showing total outstanding and due this week.',
+            claude:'Create a Vendor Payment Tracker Google Sheets app. Inputs: vendor details, invoice amount, GST %, due date, payment date. Auto-calculate: net payable, payment status, days overdue, aging classification. Aging bucket view. Dashboard: outstanding, overdue amount, due this week.',
+            gemini:'Design a Vendor Payment Tracker for Google Sheets. Track invoices with vendor, amount, GST, due date, payment date. Auto-show: paid status, days overdue, aging bucket, outstanding total. Color-code by urgency. Vendor list and aging summary view.',
+            perplexity:'Google Sheets Vendor Payment Tracker for: vendor name, amount, GST, due date, payment date. Auto-calculate payment status, days overdue, aging bucket, total outstanding. Alerts for overdue and critical amounts. Include instructions.',
+            notebooklm:'Document Vendor Payment Tracker in Google Sheets: invoice entry, GST calculation, payment status formulas, aging bucket logic, dashboard metrics, aging summary report. Examples and update procedures.'
+        }
+    },
+
+    'hr-attendance': {
+        icon:'👥', badge:'dept', title:'Attendance & Leave Tracker',
+        desc:'Daily attendance with auto leave balance calculation',
+        problem:['Attendance marked on a worn-out printed register','Leave balance miscalculated because historical data lost','HR asks employees for their balance, revealing no system control','Payroll deductions disputed because no clear leave record'],
+        solution:['Digital daily attendance with full history stored forever','Leave balance auto-calculated and always accurate','Employees see their own leave balance in the sheet','Payroll team has a single source of truth for deductions'],
+        prompts:{
+            chatgpt:'Build an Attendance & Leave Tracker for 25 employees. Mark daily attendance (P/A/Half Day/Leave). Auto-calculate: monthly attendance %, leave taken this year, leave balance (21 days starting), flag below 75% attendance. Two tabs: daily entries and employee status view.',
+            claude:'Design an Attendance and Leave Tracker for Google Sheets. 25+ employees. Daily attendance logging (P/A/HD/L). Auto-calculate: attendance %, leave balance, YTD leave used, flag low attendees. Employee summary tab and attendance alerts. Printable format.',
+            gemini:'Create an Attendance Tracker for Google Sheets. Log daily attendance (P/A/HD/L) for 25 employees. Auto-track: attendance %, leave balance from 21 days, flag below 75%. Employee summary with current status. Color-code by attendance level.',
+            perplexity:'Google Sheets Attendance Tracker for 25 employees. Daily marking (P/A/HD/L), auto attendance % calculation, leave balance tracking (21 days/year), alert for low attendance. Employee dashboard. Instructions included.',
+            notebooklm:'Document Attendance Tracker in Google Sheets: marking system, attendance % formula, leave balance calculation, annual leave cycle, threshold flags, employee summary report. Examples and monthly closing process.'
+        }
+    },
+
+    'inventory-management': {
+        icon:'📦', badge:'dept', title:'Stock Alert & Reorder Tracker',
+        desc:'Know instantly which items need reordering before stock-out',
+        problem:['Warehouse runs out of stock without warning, production stops','Purchasing team manually checks 200 SKUs daily for reorder','Excess inventory of slow-moving items ties up ₹50+ lakhs','No one knows which suppliers are fast vs slow for planning'],
+        solution:['Automatic alerts 7 days before stock-out occurs','Reorder list auto-sorted by urgency and supplier','Excess inventory identified and highlighted','Supplier lead times tracked and factored into reorder timing'],
+        prompts:{
+            chatgpt:'Build a Stock Alert & Reorder Tracker for 200 SKUs. Track: product name, current stock, reorder level, unit cost, supplier, lead time. Auto-show: stock status (OK/Low/Reorder Now/Out), stock value, days of stock left. Reorder and out-of-stock items at top. Calculate reorder qty based on 30-day sales.',
+            claude:'Create a Stock Reorder Tracker for Google Sheets. 200+ SKUs. Inputs: product, current stock, reorder level, supplier, lead time. Auto-calculate: stock status flags, days of stock remaining, reorder quantity (30-day movement). Urgent reorder view. Total inventory value.',
+            gemini:'Design a Stock Management Sheet for 200 SKUs. Track: current stock, reorder level, supplier, lead time. Auto-show: stock status (OK/Low/Reorder/Out), days remaining, reorder quantity. Highlight urgent reorders. Inventory value total.',
+            perplexity:'Stock Tracker for Google Sheets with 200 products. Track stock level, reorder point, supplier, lead time. Auto-calculate: stock status, days remaining, reorder qty. Urgent reorders list. Supplier contact and lead time info.',
+            notebooklm:'Document Stock Reorder Tracker for Google Sheets: SKU data structure, reorder level setting, stock status formulas, days of stock calculation, reorder quantity logic (30-day average), urgent reorder view. Setup and inventory audit process.'
+        }
+    },
+
+    'customer-support': {
+        icon:'🎧', badge:'dept', title:'Support Ticket Tracker',
+        desc:'Log customer issues, auto-prioritize, and track SLA',
+        problem:['Tickets logged in emails, Slack, WhatsApp, and notebooks','No one knows which tickets are overdue until customer escalates','Support agent workload completely unbalanced','CSAT scores low because slow-moving tickets forgotten'],
+        solution:['All tickets logged in one place with auto-priority','Overdue tickets highlighted in red at the top','Workload automatically distributed based on ticket count','SLA tracking prevents tickets from aging unnoticed'],
+        prompts:{
+            chatgpt:'Build a Support Ticket Tracker in Google Sheets for 6-person team. Log: Ticket number, customer name, issue type, assigned agent, date raised, resolution date, CSAT rating. Auto-calculate: ticket age, priority (Urgent/High/Normal), resolution time, avg CSAT per agent. Open count and overdue list at top.',
+            claude:'Create a Support Ticket Tracker for Google Sheets. Team of 6. Inputs: ticket ID, customer, issue type, agent, date, resolution date, CSAT. Auto-calculate: age in days, priority level, time to resolution. Priority queue view and agent workload summary. SLA tracking.',
+            gemini:'Design a Support Ticket system for Google Sheets. Log tickets: number, customer, issue, agent, dates, CSAT. Auto-show: ticket age, auto-priority (Urgent/High/Normal), time to resolve, agent performance. Open and overdue tickets. Priority queue view.',
+            perplexity:'Support Ticket Tracker for 6 agents. Track: ticket ID, customer, issue type, assigned agent, date raised, resolved date, CSAT. Auto-calculate age, priority, resolution time. Open tickets and overdue list. Workload balance view.',
+            notebooklm:'Document Support Ticket Tracker: ticket logging structure, priority rules (type + age), SLA definition, resolution tracking, CSAT capture, agent workload reporting, open vs resolved status. Examples.'
+        }
+    },
+
+    // INDUSTRIES
+
+    'manufacturing-production': {
+        icon:'🏭', badge:'ind', title:'Daily Production Quality Log',
+        desc:'Log batches and catch quality issues early',
+        problem:['Quality issues discovered after shipment, customer calls angry','Yield calculations manual, supervisor estimates from memory','Scrap and rework hidden in cost of goods -- never analyzed','No early warning system for quality decline'],
+        solution:['Yield % calculated instantly shows quality trends in real-time','Below-target batches visible on dashboard within minutes','Scrap cost tracked and linked to root causes','Quality decline detected 3-5 days early for prevention'],
+        prompts:{
+            chatgpt:'Build a Daily Production Quality Log in Google Sheets. Log each batch: Date, Shift, Product, Input qty, Good output, Rejected units, Rework units. Auto-calculate: yield rate %, rejection rate %, flag batches where yield < 95%. Daily summary: total output, avg yield, count of below-target batches.',
+            claude:'Create a Production Quality Log for Google Sheets. Daily batch tracking. Inputs: batch date, shift, product, input qty, good output, rejected, rework. Auto-calculate: yield %, rejection %, quality flag. Daily summary and trend analysis. Alert for batches below 95% yield.',
+            gemini:'Design a Production Quality sheet for Google Sheets. Track batches: date, shift, product, input, output, rejected, rework. Auto-show: yield %, rejection rate, quality alert if <95%. Daily summary and batch trend.',
+            perplexity:'Production Quality Log for Google Sheets. Track daily batches: date, shift, product, input qty, good output, rejected, rework. Auto-calculate yield %, rejection rate. Flag batches below 95%. Daily and weekly summaries.',
+            notebooklm:'Document Production Quality Log: batch data entry, yield % calculation, rejection rate formula, quality threshold (95%), daily summary metrics, trend analysis, alert rules. Shift examples and quality targets.'
+        }
+    },
+
+    'retail-ecommerce': {
+        icon:'🛒', badge:'ind', title:'Product Sales & Margin Dashboard',
+        desc:'See which products make money and which don\'t',
+        problem:['Some top-selling products actually have 5% margin, losing money','Seasonal products take up shelf space even when off-season','SKU count keeps growing, no one removes dead stock','Discount strategy applied to everything, margin eroded company-wide'],
+        solution:['Margin % calculated per product shows unprofitable items instantly','Seasonal flag marks off-season products to clear','Dead SKUs (zero sales 90+ days) highlighted for removal','Discount impact visible on total margin, prevents blind discounting'],
+        prompts:{
+            chatgpt:'Build a Product Sales & Margin Dashboard in Google Sheets. Log: Product name, category, MRP, selling price, cost price, units sold this month. Auto-calculate: revenue, gross profit, margin %, classify as High/Medium/Low margin. Top 5 products by revenue and flag products selling below cost.',
+            claude:'Create a Product Sales Dashboard for Google Sheets. Inputs: product, category, MRP, sell price, cost, monthly units sold. Auto-calculate: revenue, profit, margin %, profitability classification. Top products ranking, below-cost flagged, category margins. Margin trend.',
+            gemini:'Design a Product Performance Dashboard. Track: product, category, MRP, selling price, cost, units sold. Auto-show: revenue, profit, margin %, profit classification. Top 5 products and loss-making items. Category summary.',
+            perplexity:'Retail Product Dashboard for Google Sheets. Track: name, category, MRP, selling price, cost, units sold monthly. Auto-calculate: revenue, profit, margin %. Top sellers, below-cost items, category margins. Profitability ranking.',
+            notebooklm:'Document Product Sales Dashboard: product data structure, revenue calculation, profit formula, margin % calculation, profitability classification, top products ranking, loss-making alert. Retail examples.'
+        }
+    },
+
+    'pharma-healthcare': {
+        icon:'💊', badge:'ind', title:'Drug Expiry Alert System',
+        desc:'Never let medicines expire -- 90-day early warnings',
+        problem:['₹2-3 lakhs lost to expired medicines annually','Regulatory compliance risk from expired stock on shelf','No batch-wise tracking, destroying by product name loses control','Customer calls because expired medicine dispensed accidentally'],
+        solution:['Expiry tracked batch-wise with automated alerts 90 days before','Regulatory audit ready with complete batch expiration history','Customer refunds avoided because expired stock removed on time','Waste cost reduced from ₹2-3L to near zero'],
+        prompts:{
+            chatgpt:'Build a Drug Expiry Alert System in Google Sheets. Track: Drug name, batch number, manufacturer, expiry date, current stock, location. Auto-show: days to expiry, status (Expired/Expires 30d/Expires 90d/OK), priority restock list for near-expiry + low stock. Highlight expired at top.',
+            claude:'Create a Pharmacy Stock Tracker with expiry alerts. Inputs: drug name, batch, manufacturer, expiry date, stock, location. Auto-calculate: days to expiry, status classification. Urgent restock view. Alert rules for expired and near-expiry items.',
+            gemini:'Design a Drug Expiry Tracker for Google Sheets. Track: drug name, batch, manufacturer, expiry date, stock, location. Auto-flag: expired items, expiring <30 days, expiring <90 days. Priority restock list. Location-wise inventory.',
+            perplexity:'Pharmacy Expiry Tracker for Google Sheets. Track: drug name, batch number, expiry date, stock, location. Auto-alert for expired, 30-day, and 90-day expiry items. Priority restock list. Batch recall procedures.',
+            notebooklm:'Document Drug Expiry System: batch entry structure, expiry date tracking, days-to-expiry formula, status categories (Expired/30-day/90-day/OK), restock priority logic, location tracking. Batch disposal and recall procedures.'
+        }
+    },
+
+    'education-training': {
+        icon:'🎓', badge:'ind', title:'Student Report Card Generator',
+        desc:'Enter marks once -- get grades, ranks, and reports automatically',
+        problem:['Principal manually calculates grades, spots math errors post-printing','Parent queries about rank vs previous year reveal inconsistent logic','Report card printing delayed because formula recalculations take 4 hours','At-risk students identified only at year-end, too late to intervene'],
+        solution:['Grades auto-calculated from marks, zero human entry errors','Ranking logic consistent every report card period','Reports generated in 15 minutes, time for remedial planning','At-risk students flagged within 48 hours for intervention'],
+        prompts:{
+            chatgpt:'Build a Student Report Card Generator for 40 students with 6 subjects. Enter marks per subject. Auto-calculate: total marks, percentage, grade (A+/A/B/C/D/F), pass/fail, class rank. Flag at-risk students (< 50%). Class summary: avg marks per subject, pass rate, top 3 students.',
+            claude:'Create a Student Report Card system for Google Sheets. 40 students, 6 subjects. Inputs: marks per subject. Auto-calculate: total, percentage, grade, rank, pass/fail. Identify at-risk students. Generate class statistics and individual report cards.',
+            gemini:'Design a Student Report Card sheet. 40 students, 6 subjects. Auto-calculate: total marks, percentage, grade (A+/A/B/C/D/F), rank, pass/fail. Identify at-risk students. Class metrics and individual cards.',
+            perplexity:'Report Card Generator for 40 students and 6 subjects. Auto-calculate: percentage, grade, rank, pass/fail. Flag at-risk students. Class statistics and printable report cards.',
+            notebooklm:'Document Report Card system: student data structure, marks entry, percentage calculation, grading scale, ranking logic, pass/fail criteria, at-risk identification, class statistics, report card formatting. Examples.'
+        }
+    },
+
+    'realestate-property': {
+        icon:'🏠', badge:'ind', title:'Property Sales & Collection Tracker',
+        desc:'Track bookings, milestones, and payment collections',
+        problem:['Sales team doesn\'t know total bookings value until month-end report','Buyers don\'t know when next milestone payment is due','Finance discovers missed collections only 5 days into due date','Revenue recognition done manually, audit trails missing'],
+        solution:['Booking value visible daily to sales team and finance','Buyers receive automated SMS with payment due dates','Collections tracked daily, overdue flagged automatically','Revenue recognized automatically per accounting policy'],
+        prompts:{
+            chatgpt:'Build a Property Sales & Collection Tracker for 50 units. For each unit: Unit number, type (1BHK/2BHK/3BHK), status (Available/Booked/Sold), buyer name, total value, booking amount, milestone payments, balance. Auto-calculate: collection %, balance outstanding, flag overdue milestones. Summary: total bookings, collected, outstanding.',
+            claude:'Create a Property Sales Tracker for Google Sheets. 50 units. Inputs: unit details, buyer, total value, booking amount, milestone payments, payment dates. Auto-calculate: collection %, outstanding balance, milestone status. Collection dashboard and handover checklist.',
+            gemini:'Design a Real Estate Sales Tracker for 50 units. Log: unit, type, buyer, total value, booking, milestones, payments. Auto-show: collection %, balance, milestone status. Collection summary and handover readiness.',
+            perplexity:'Real Estate Sales Tracker for 50 units. Track: unit details, buyer, booking amount, milestone payments, payment dates. Auto-calculate collection %, outstanding, milestone status. Overdue payments and handover status.',
+            notebooklm:'Document Property Sales Tracker: unit data structure, booking details, milestone payment tracking, collection calculation, outstanding balance, payment status rules, collection dashboard, handover checklist. Examples.'
+        }
+    },
+
+    'logistics-delivery': {
+        icon:'🚚', badge:'ind', title:'Fleet Trip & Delay Monitor',
+        desc:'Know which trucks are running late before clients call',
+        problem:['Delivery delays discovered by customer service via customer complaint','Route planning done manually without considering traffic data','Driver bonus/penalty calculated wrong due to incomplete data','No visibility into which routes and drivers are consistently late'],
+        solution:['Delays detected automatically when vehicle location vs promised time diverges','Routes optimized monthly based on traffic patterns from data','Driver bonuses auto-calculated from reliable delay data','Chronic problem drivers and routes identified for retraining/redesign'],
+        prompts:{
+            chatgpt:'Build a Fleet Trip & Delay Monitor for 20 trucks. Log: Truck number, driver, route, client, dispatch date, promised delivery, actual delivery. Auto-show: days in transit, on-time status, days over promise, severity (Minor/Major/Critical). Dashboard: total trips, on-time %, currently delayed trucks.',
+            claude:'Create a Fleet Management Tracker for Google Sheets with 20 trucks. Inputs: truck ID, driver, route, client, dispatch date, promised delivery, actual delivery. Auto-calculate: days in transit, delay status, delay severity. Delay alert view and driver performance ranking.',
+            gemini:'Design a Fleet Tracker for 20 trucks. Log: truck, driver, route, client, dispatch, promised delivery, actual delivery. Auto-show: transit days, on-time status, delay severity. Delayed trucks list and driver rankings.',
+            perplexity:'Fleet Tracker for Google Sheets with 20 trucks. Track: truck ID, driver, route, client, dispatch date, promised delivery, actual delivery. Auto-calculate delay status and severity. Currently delayed trucks and driver performance.',
+            notebooklm:'Document Fleet Tracker: trip data entry, delay calculation, severity classification (Minor/Major/Critical), on-time % formula, driver performance metrics, currently delayed view. Logistics examples and SLA definitions.'
+        }
+    },
+
+    // MIS & DASHBOARDS
+
+    'mis-monthly-report': {
+        icon:'📋', badge:'mis', title:'Monthly MIS Report Builder',
+        desc:'Build a full MIS report from raw data in minutes',
+        problem:['Raw data from 8 different departments arrives in 8 different formats','MIS manager spends 3 days consolidating and recalculating','Report format changes quarterly, requiring formula rewrites','Board member asks for "same metric as last month" -- no consistent definition found'],
+        solution:['Master sheet auto-consolidates all departments in one structure','All formulas reference raw data, updates instant','Format consistent every month, zero manual rework','Metric definitions documented once, reused forever'],
+        prompts:{
+            chatgpt:'Design a Monthly MIS Report template in Google Sheets for a mid-size manufacturing company. Report should have: Executive Summary tab (top 10 KPIs), Sales MIS tab (revenue, target, achievement, region-wise), Operations MIS tab (production, capacity, downtime), Finance MIS tab (P&L summary, collections, payables). Each tab should pull data from a raw data sheet. Include month-over-month comparison and trend arrows.',
+            claude:'Create a comprehensive Monthly MIS Report system in Google Sheets. Structure: 1 Raw Data input sheet + 4 MIS tabs: Executive Summary, Sales Performance, Operations, Finance. Auto-populate all MIS tabs from raw data using formulas. Include: KPI cards at top of each tab, MOM comparison, color-coded performance indicators. Design for a 500-person manufacturing business.',
+            gemini:'Build a Monthly MIS Report template for Google Sheets. Cover: Executive summary with top KPIs, sales achievement by region and product, production and operations metrics, P&L summary. All calculated from a single raw data sheet. Include month-on-month variance and trend indicators. Make it boardroom-ready.',
+            perplexity:'How do I build a Monthly MIS Report in Google Sheets that: consolidates data from multiple departments, auto-calculates KPIs like revenue achievement %, production efficiency, collection %, and generates a boardroom-ready summary? Include best practices and formula guidance.',
+            notebooklm:'Create a complete guide for building a Monthly MIS Report system in Google Sheets. Cover: report structure (tabs and sections), raw data input format, formula dependencies between sheets, KPI definitions and calculation methods, formatting standards, how to update monthly, checklist for MIS manager. Include a sample MIS structure for a manufacturing company.'
+        }
+    },
+
+    'mis-kpi-dashboard': {
+        icon:'📊', badge:'mis', title:'KPI Dashboard -- Multi-Department',
+        desc:'One dashboard showing all department KPIs in real time',
+        problem:['Sales sends one deck, Operations sends another, Finance a third','CEO wants "just show me the one-page summary" -- doesn\'t exist','Every department uses different target numbers for same metric','KPI dashboard updated manually, always out-of-date'],
+        solution:['One master dashboard with all departments on one tab','Color-coded status (green/amber/red) at a glance','Target definitions centralized, no conflicting numbers','KPI auto-updates within 1 hour of source data entry'],
+        prompts:{
+            chatgpt:'Build a Multi-Department KPI Dashboard in Google Sheets. Departments: Sales, Operations, Finance, HR, Logistics. For each department show: 3 key KPIs, current month value, target, achievement %, status (Green/Amber/Red). Master dashboard on first tab showing all departments. Each department has its own data entry tab. Dashboard auto-updates from department tabs. Make it visually clean and executive-ready.',
+            claude:'Create an Executive KPI Dashboard for Google Sheets covering 5 departments: Sales, Operations, Finance, HR, and Logistics. Architecture: 1 Master Dashboard tab + 5 department data tabs. Master dashboard shows: department scorecards with KPI name, actual, target, achievement %, RAG status. Auto-pull data from department tabs. Include sparkline trend charts in each scorecard. Design for C-suite use -- clean, data-dense, professional.',
+            gemini:'Design a KPI Dashboard for Google Sheets that covers Sales, Operations, Finance, HR, and Logistics departments. Show 3 KPIs per department: actual vs target, achievement %, and RAG status (Red/Amber/Green). One-page master view with all departments. Auto-calculate from department input sheets. Include month and YTD view toggle.',
+            perplexity:'How to build a multi-department KPI dashboard in Google Sheets that: shows RAG status (Red/Amber/Green) for each KPI, auto-calculates from input data, has a master view and department drill-down, includes trend indicators? Give me formulas and layout recommendations.',
+            notebooklm:'Create a guide for building a Multi-Department KPI Dashboard in Google Sheets. Cover: dashboard architecture (master + department tabs), KPI selection per department, RAG status formula logic, data refresh process, how to add new departments, version control for monthly snapshots. Include KPI definitions for Sales, Operations, Finance, HR, and Logistics.'
+        }
+    },
+
+    'mis-data-consolidation': {
+        icon:'🔗', badge:'mis', title:'Multi-Source Data Consolidation',
+        desc:'Merge data from 5+ files/sheets into one master without errors',
+        problem:['8 branch managers send 8 different file formats monthly','Manual copy-paste into master sheet introduces typos and duplicates','"Which spreadsheet has the latest branch data?" -- no one knows','Monthly data audit finds 15-20 mismatches that delay reporting'],
+        solution:['All branches enter data in one standardized format automatically','IMPORTRANGE formulas pull data live, no manual copy-paste','Single master sheet is always the latest, source of truth','Data audit time drops from 4 hours to 30 minutes'],
+        prompts:{
+            chatgpt:'I receive monthly data from 8 branches in separate Google Sheets. Each sheet has the same structure: Date, Branch, Product, Qty, Revenue, Salesperson. Build a Master Consolidation Sheet that: pulls data from all 8 branch sheets using IMPORTRANGE, combines into one table, removes duplicates, adds branch code column, calculates branch-wise totals. Include step-by-step IMPORTRANGE setup.',
+            claude:'Design a Data Consolidation system in Google Sheets for a company with 8 regional branches. Each branch sends a separate sheet monthly with: Date, Branch, Product, Qty Sold, Revenue, Salesperson. Build: Master sheet using IMPORTRANGE to pull all branch data, automatic deduplication logic, consolidated pivot summary by branch/product/month, error flag for missing or inconsistent data. Include IMPORTRANGE permissions guide.',
+            gemini:'Build a Multi-Branch Data Consolidation sheet in Google Sheets. Pull data from 8 separate branch sheets using IMPORTRANGE. Auto-merge into one master table. Remove duplicates. Add branch identifier. Create pivot summary showing: branch-wise revenue, product-wise sales, month-wise trend. Include formula guide.',
+            perplexity:'How to consolidate data from 8 separate Google Sheets into one master sheet using IMPORTRANGE? Need to: merge all branch data, remove duplicates, add branch identifier, create summary pivot. What are the best formulas and data management practices?',
+            notebooklm:'Write a complete guide on consolidating data from multiple Google Sheets into a master sheet. Cover: IMPORTRANGE setup and permissions, data structure standardization, deduplication methods, master table architecture, common errors and fixes, monthly consolidation process, audit trail. Include examples for branch-wise consolidation.'
+        }
+    },
+
+    'mis-variance-analysis': {
+        icon:'📉', badge:'mis', title:'Budget vs Actual Variance Analysis',
+        desc:'Instantly see where you\'re over or under budget and by how much',
+        problem:['Finance review meeting takes 2 hours because manager reads every line item','Variance explanations written manually, inconsistent across cost heads','Budget assumptions never documented, causing historical confusion','Department heads claim "we budgeted differently" -- no record kept'],
+        solution:['One-page variance summary shows problem areas only, not 200 lines','Variance flagged automatically for investigation','Budget assumptions saved with actual budget in the sheet','Historical assumptions tracked, disputes settled by data'],
+        prompts:{
+            chatgpt:'Build a Budget vs Actual Variance Analysis sheet in Google Sheets for a company with 20 cost heads across 4 departments (Sales, Operations, HR, Admin). For each line item show: Budget amount, Actual amount, Variance (Actual - Budget), Variance %, Status (Favorable/Unfavorable). YTD columns for budget, actual, and variance. Summary dashboard at top showing total variance by department. Highlight over-budget items in red.',
+            claude:'Create a comprehensive Budget vs Actual Variance Analysis tool for Google Sheets. Structure: 20 cost heads across 4 departments. For each line: Budget, Actual, Absolute Variance, Variance %, Favorable/Unfavorable flag. Monthly columns (Jan-Dec) with YTD totals. Department rollup summary. Drill-down by cost head. Color-coded variance flags. Include variance commentary column for notes.',
+            gemini:'Design a Budget vs Actual Analysis sheet in Google Sheets. 20 cost heads, 4 departments. Show: Budget, Actual, Variance (₹ and %), Favorable/Unfavorable. Monthly view with YTD. Department-level rollup. Highlight over-budget in red, under-budget in green. Summary dashboard at top for management review.',
+            perplexity:'How to build a Budget vs Actual Variance Analysis in Google Sheets? Need: absolute variance (Actual-Budget), variance %, favorable/unfavorable classification, department rollup, YTD tracking, color-coded flags. What are the best formulas and layouts for a finance MIS?',
+            notebooklm:'Create a guide for Budget vs Actual Variance Analysis in Google Sheets. Cover: cost head structure, variance formula (absolute and %), favorable/unfavorable logic, monthly vs YTD view, department rollup, management reporting format, commentary column use, how to present variance in finance review meetings. Include sample data for a manufacturing company.'
+        }
+    },
+
+    'mis-auto-reporting': {
+        icon:'⚡', badge:'mis', title:'Automated Daily / Weekly MIS',
+        desc:'MIS that builds itself -- just update the raw data',
+        problem:['Daily MIS prepared manually takes 1-2 hours every morning','Calculations done by multiple people, inconsistent results','Deadline pressure introduces typos in critical numbers','Only data entry work done, no time for analysis or decisions'],
+        solution:['MIS auto-generates from raw data entry in under 5 minutes','All formulas consistent, recalculated by machine not human','Zero typo risk, formulas auto-round and format','Time freed for actual insights and action planning'],
+        prompts:{
+            chatgpt:'Build an Automated Daily MIS system in Google Sheets. I enter raw data daily in one tab: Date, Department, Metric name, Actual value. The system should auto-generate: Daily MIS summary showing all departments and metrics for today, Week-to-date summary, Month-to-date summary, Comparison to yesterday and last week. Output tab should be print-ready. No manual calculation needed.',
+            claude:'Create an Automated MIS Reporting system in Google Sheets. Input: one raw data tab where I enter Date, Department, Metric, Value daily. Outputs: Auto-generated Daily Dashboard (today vs yesterday vs WTD vs MTD), Weekly MIS (7-day trend per metric), Monthly MIS (daily trend + month summary). All output tabs update automatically when new data is entered. Include data validation for input tab.',
+            gemini:'Design an Auto-generating MIS system in Google Sheets. One input tab: Date, Department, Metric, Value. Auto-create: Daily snapshot comparing today vs yesterday vs WTD vs MTD. Weekly trend per department. Monthly summary. All tabs update when input data changes. Include drop-down data validation for Department and Metric.',
+            perplexity:'How to build a self-generating MIS in Google Sheets where: I only enter raw data in one tab, all other tabs auto-calculate Daily/Weekly/Monthly summaries, comparisons to prior periods are automatic? Best formulas: SUMIFS, FILTER, dynamic date references. Explain the architecture.',
+            notebooklm:'Document an Automated MIS Reporting system in Google Sheets. Cover: input tab structure (Date/Department/Metric/Value), formula logic for Daily/Weekly/Monthly auto-summaries, dynamic date references (TODAY function use), data validation setup, how to add new metrics, troubleshooting missing data, process for daily update. Include example metrics for a manufacturing MIS.'
+        }
+    },
+
+    'mis-pivot-analysis': {
+        icon:'🔄', badge:'mis', title:'Pivot & Trend Analysis Dashboard',
+        desc:'Slice and dice your data to find patterns -- no manual work',
+        problem:['Management asks "what if we slice by region and product?" every meeting','Manual pivot tables take 30 minutes to set up and break after data refresh','Trend analysis done visually looking at numbers, no rigorous math','Same analysis requested every month, redone from scratch every time'],
+        solution:['Dynamic pivot views created once, refreshed automatically','Trend calculated automatically (MOM %, QOQ %, YOY)','Trends visualized with charts, not guesswork','Templates saved and reused monthly, zero rework'],
+        prompts:{
+            chatgpt:'Build a Pivot & Trend Analysis Dashboard in Google Sheets for sales data. Raw data: Date, Region, Product Category, Product, Sales Rep, Revenue, Qty. Auto-create pivot views: Revenue by Region by Month, Revenue by Product Category, Top 10 Products by Revenue, Sales Rep performance ranking. Calculate: MOM growth %, QOQ growth %, YTD vs last year. Show trend arrows (↑↓→) for each metric.',
+            claude:'Create a comprehensive Pivot & Trend Analysis system in Google Sheets. Raw data: Date, Region, Product, Category, Sales Rep, Revenue, Qty, Returns. Build dynamic pivot summaries using SUMIFS: Region x Month matrix, Product Category x Quarter view, Sales Rep ranking with MOM growth. Auto-calculate: MOM %, QOQ %, YOY comparison. Trend indicators. Interactive month/quarter filter using data validation dropdowns.',
+            gemini:'Design a Trend Analysis Dashboard for Google Sheets. Sales raw data: Date, Region, Product, Sales Rep, Revenue, Qty. Create: Region-wise monthly pivot, Product category performance, Sales rep ranking. Auto-show: MOM growth, QOQ trend, YTD comparison. Filter by region and product using dropdowns. Trend arrows (↑↓) for each metric.',
+            perplexity:'How to build a dynamic Pivot and Trend Analysis in Google Sheets without manually refreshing pivot tables? Need: SUMIFS-based pivot by region/product/month, MOM and YOY growth formulas, dropdown filters, trend arrows. Best approach for MIS reporting?',
+            notebooklm:'Document a Pivot and Trend Analysis system for Google Sheets. Cover: raw data structure requirements, SUMIFS pivot formula patterns, MOM/QOQ/YOY growth formulas, dropdown filter setup, trend arrow logic, adding new dimensions (region/product), monthly update process. Include examples of pivot layouts used in manufacturing MIS.'
+        }
+    },
+
+    'mis-data-cleaning': {
+        icon:'🧹', badge:'mis', title:'Data Cleaning & Validation Tool',
+        desc:'Clean messy data fast -- duplicates, blanks, format errors',
+        problem:['Branch data arrives with typos ("Mumbai" vs "MUMBAI" vs "Bombay")','Same invoice entered twice by different staff, skewing totals','Blank cells in critical columns cause formulas to show errors','MIS manager spends 2 hours cleaning before analysis possible'],
+        solution:['Text inconsistencies auto-detected and highlighted','Duplicates identified and marked with alert','Blank cells in required fields highlighted red','Data quality score shows % clean, clean data ready in 15 minutes'],
+        prompts:{
+            chatgpt:'Build a Data Cleaning and Validation tool in Google Sheets. I receive raw data monthly with issues: duplicate rows, blank cells in key columns, inconsistent text formats (e.g. "Mumbai" vs "mumbai" vs "MUMBAI"), numbers stored as text, date format mismatches. Build a checker sheet that: flags all duplicates, highlights blanks in required columns, standardizes text case, converts text-numbers to actual numbers, shows a data quality score at top (% clean vs % issues).',
+            claude:'Create a Data Quality and Cleaning system for Google Sheets. Input: raw data sheet (up to 5000 rows). Build a validation tab that auto-checks: duplicate rows (highlight + count), blank cells in required columns (Name, Date, Amount, Branch), text case inconsistencies, numbers stored as text, date format errors. Output: Data Quality Summary showing issue count by type, cleaned data tab with auto-fixes applied, error log for manual review items.',
+            gemini:'Design a Data Cleaning Dashboard for Google Sheets. For a raw data sheet with up to 5000 rows, auto-detect: duplicate entries, blanks in key columns, text format inconsistencies, numbers stored as text. Show: data quality score (%), issues by type, flagged rows. Include formulas to standardize text and fix common errors.',
+            perplexity:'How to build a Data Quality Checker in Google Sheets that automatically: finds duplicate rows, highlights blanks in required columns, identifies numbers stored as text, flags date format inconsistencies? What are the best formulas (COUNTIF, ISBLANK, ISNUMBER, etc.) and layout for a MIS data cleaning tool?',
+            notebooklm:'Write a complete guide on Data Cleaning and Validation in Google Sheets for MIS teams. Cover: identifying and removing duplicates (COUNTIF method), required field blank detection, text standardization (TRIM, PROPER, LOWER), number-text conversion, date format validation, building a data quality score, common data issues from branch submissions and how to fix them. Include a data quality checklist for MIS managers.'
+        }
+    },
+
+    'mis-executive-deck': {
+        icon:'📑', badge:'mis', title:'Executive MIS Deck Preparation',
+        desc:'Turn your MIS data into a management-ready presentation',
+        problem:['After MIS done on Friday, 4 hours spent building presentation deck','Charts recreated manually, prone to formula errors in overnight numbers','Data dumped into slides without insight -- no "so what"','Board asks questions, answers not in deck because analysis not done'],
+        solution:['MIS structured for slide-ready output with built-in insights','Key insights auto-calculated and highlighted','Story-driven structure forces analysis during MIS prep','Board questions anticipated and answered in advance'],
+        prompts:{
+            chatgpt:'I have a monthly MIS report with: Revenue (actual vs target), Production output, Collection %, Vendor payables, Headcount, and Key issues. Help me structure a 10-slide Executive MIS Deck. For each slide give me: Slide title (insight-first, not just label), What chart/table to use, What data goes in it, The one key takeaway message. Make it story-driven -- what happened, why, and what action is needed.',
+            claude:'Create a framework for converting Monthly MIS data into an Executive Presentation. I have MIS data covering: Sales (revenue, target, achievement by region), Operations (production, downtime, efficiency), Finance (collections, payables, cash flow), HR (headcount, attrition). Build a 12-slide deck structure: each slide with insight-driven title, chart type, data to show, narrative guidance, and recommended action. Format as a management review deck -- focus on exceptions, trends, and decisions needed.',
+            gemini:'Design a 10-slide Monthly MIS Executive Deck structure. Data available: revenue vs target, production output, quality metrics, collections, payables, HR metrics. For each slide: insight-first headline, chart type (bar/line/table), key data points, one-line insight. Make it boardroom-ready -- no data dumps, only decisions and actions.',
+            perplexity:'How should I structure a Monthly Management MIS Presentation? I have data on: Sales performance, Production, Finance (collections and payables), HR. What is the best 10-12 slide structure? What chart types work for each section? How do I write insight-first slide titles instead of just labeling the data?',
+            notebooklm:'Create a complete guide on preparing an Executive MIS Deck from monthly data. Cover: slide structure (10-12 slides), insight-first titling (not "Sales Data" but "Revenue 8% below target -- North region under-performing"), chart type selection for different metrics, MOM comparison slide, exception reporting approach, how to present variance and action items, deck review checklist. Include slide-by-slide template for manufacturing company MIS.'
+        }
+    }
+};
+
+
+,
+'marketing-campaigns':{icon:'📣',badge:'dept',title:'Marketing Campaign ROI Tracker',desc:'Track campaign spend vs leads vs conversions',problem:['Money spent on ads with no ROI visibility'],solution:['Campaign ROI visible instantly'],prompts:{chatgpt:'Build a campaign ROI tracker with spend, leads, conversion and ROI.'}},
+'banking-finance':{icon:'🏦',badge:'ind',title:'Loan Recovery Monitor',desc:'Track overdue loans and collections',problem:['Collections team reacts late to overdue accounts'],solution:['Overdue borrowers auto-flagged'],prompts:{chatgpt:'Create loan recovery dashboard with overdue alerts.'}},
+'mis-cashflow':{icon:'💵',badge:'mis',title:'Cash Flow Dashboard',desc:'Track inflow/outflow and forecast shortages',problem:['Cash shortages discovered too late'],solution:['Forecast shows shortage weeks early'],prompts:{chatgpt:'Build cash flow dashboard with inflow, outflow, forecast.'}}
+
+// - AI Tool Profiles -
+const aiToolDB = {
+    'ai-chatgpt': {
+        icon:'🟢', badge:'ai', title:'ChatGPT',
+        headline:'Best all-rounder for building and designing Google Sheets tools',
+        link:'https://chat.openai.com',
+        strengths:['Step-by-step Google Sheets setup guides','Formula design and explanation','Dashboard layout and structure','Iterating and fixing errors'],
+        bestFor:'Building new Google Sheets tools from scratch, designing formulas, and getting clear step-by-step instructions.',
+        tip:'After ChatGPT gives you the design, ask: "Now explain each formula in simple language like I\'m a beginner." This helps you understand -- not just copy blindly.',
+        when:['You need a new Google Sheets tool designed','You want step-by-step formula explanation','You\'re a beginner or intermediate user','You want to iterate and refine']
+    },
+    'ai-claude': {
+        icon:'🟠', badge:'ai', title:'Claude',
+        headline:'Best for complex logic, documentation, and formula accuracy',
+        link:'https://claude.ai',
+        strengths:['Complex multi-condition formulas','Detailed documentation and guides','Data architecture and structure design','Best practices and edge case handling'],
+        bestFor:'Complex formula logic, documenting MIS systems, designing data structures, and getting detailed explanations.',
+        tip:'Claude is excellent for asking: "Review this formula and tell me if there are any edge cases or errors I should know about."',
+        when:['You have complex multi-condition logic','You\'re documenting an MIS system','You want formula accuracy reviewed','You need detailed guides for your team']
+    },
+    'ai-gemini': {
+        icon:'🔵', badge:'ai', title:'Google Gemini',
+        headline:'Native Google Workspace integration -- works directly in Sheets',
+        link:'https://gemini.google.com',
+        strengths:['Native Google Sheets knowledge','Works inside Google Workspace','Quick formula optimization','Google-native feature awareness'],
+        bestFor:'Quick Google Sheets tasks, especially when integrated directly into Google Workspace.',
+        tip:'Gemini can be accessed directly inside Google Sheets via the "Help me organize" feature -- no copy-paste needed for simple tasks.',
+        when:['You want AI directly inside Google Sheets','You need quick formula suggestions','You work heavily in Google Workspace','You want Google-native feature tips']
+    },
+    'ai-perplexity': {
+        icon:'⚡', badge:'ai', title:'Perplexity',
+        headline:'Best for finding current best practices and comparing methods',
+        link:'https://perplexity.ai',
+        strengths:['Current Google Sheets best practices','Comparing different approaches','Cited and verifiable information','How-to guides with sources'],
+        bestFor:'Research, best practice validation, and understanding the "why" behind methods -- not just the "how".',
+        tip:'Use Perplexity to ask "What is the current best practice for [MIS task]?" It will cite sources so you can verify.',
+        when:['You want to verify best practices','You\'re comparing two approaches','You need cited information','You\'re researching a new MIS topic']
+    },
+    'ai-notebooklm': {
+        icon:'📓', badge:'ai', title:'NotebookLM',
+        headline:'Best for creating team guides and documenting MIS processes',
+        link:'https://notebooklm.google.com',
+        strengths:['Creating detailed how-to guides','Synthesizing uploaded documents','Building team SOPs','Organizing complex information'],
+        bestFor:'After your MIS is built -- create training guides, SOPs, and documentation for your team using NotebookLM.',
+        tip:'Upload your MIS design document or formula guide into NotebookLM and ask it to create a training guide for new team members.',
+        when:['You need to document an MIS process','You\'re training a new team member','You want a SOP from existing documents','You need organized knowledge from multiple sources']
+    }
+};
+
+// ---
+//  BADGE LABELS
+// ---
+const badgeLabels = {
+    dept: { label:'Department', css:'badge-dept' },
+    ind:  { label:'Industry',   css:'badge-ind'  },
+    mis:  { label:'MIS & Dashboard', css:'badge-mis' },
+    ai:   { label:'AI Tool',    css:'badge-ai'   },
+    tool: { label:'Resource',   css:'badge-tool' }
+};
+
+// ---
+//  RENDER FUNCTIONS
+// ---
+function setHeader(icon, title, badge) {
+    document.getElementById('titleIcon').textContent = icon;
+    document.getElementById('titleText').textContent = title;
+    const b = document.getElementById('headerBadge');
+    if (badge) {
+        const bd = badgeLabels[badge] || { label: badge, css:'badge-tool' };
+        b.textContent = bd.label;
+        b.className = `header-badge ${bd.css}`;
+        b.style.display = 'inline-flex';
+    } else {
+        b.style.display = 'none';
+    }
+}
+
+function showView(name) {
+    ['welcome','usecases','tools'].forEach(v => {
+        document.getElementById(`${v}-view`).classList.remove('active');
+    });
+    document.getElementById(`${name}-view`).classList.add('active');
+}
+
+function setActive(el) {
+    document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+    if (el) el.classList.add('active');
+}
+
+// - Load Use Case -
+function loadUseCase(caseId, el) {
+    const uc = useCasesDB[caseId];
+    if (!uc) return;
+    setActive(el);
+    setHeader(uc.icon, uc.title, uc.badge);
+
+    const aiTools = {
+        chatgpt:    { name:'ChatGPT',      icon:'🟢', link:'https://chat.openai.com' },
+        claude:     { name:'Claude',       icon:'🟠', link:'https://claude.ai' },
+        gemini:     { name:'Gemini',       icon:'🔵', link:'https://gemini.google.com' },
+        perplexity: { name:'Perplexity',   icon:'⚡', link:'https://perplexity.ai' },
+        notebooklm: { name:'NotebookLM',   icon:'📓', link:'https://notebooklm.google.com' }
+    };
+
+    let allPromptsHTML = `
+        <div class="tool-header" style="margin-top:1.2rem;margin-bottom:0.5rem;">
+            <div class="tool-icon">💡</div>
+            <div class="tool-name">Recommended Solution (No Repetition)</div>
+        </div>
+        <div class="prompt-box">
+            <div class="prompt-text" id="prompt-${caseId}-single">${uc.prompts.chatgpt || Object.values(uc.prompts)[0]}</div>
+            <div class="btn-row">
+                <button class="copy-btn" onclick="copyPrompt('${caseId}-single', this)">📋 Copy Solution</button>
+            </div>
+        </div>`;
+
+document.getElementById('usecases-view').innerHTML = `
+        <div class="usecase-card">
+            <div class="usecase-header">
+                <div class="usecase-icon">${uc.icon}</div>
+                <div>
+                    <div class="usecase-title">${uc.title}</div>
+                    <div class="usecase-desc">${uc.desc}</div>
+                </div>
+            </div>
+            <div class="problem-solution">
+                <div class="problem">
+                    <h4>❌ Current Situation</h4>
+                    <ul class="problem-list">${uc.problem.map(p=>`<li>${p}</li>`).join('')}</ul>
+                </div>
+                <div class="solution">
+                    <h4>✅ With AI Solution</h4>
+                    <ul class="benefit-list">${uc.solution.map(s=>`<li>${s}</li>`).join('')}</ul>
+                </div>
+            </div>
+        </div>
+        <div class="ai-tools-section">
+            <h3>📋 Copy Prompts For All AI Tools</h3>
+            <div class="ai-tool-card">
+                ${allPromptsHTML}
+            </div>
+        </div>`;
+
+    showView('usecases');
+}
+
+// - Load AI Tool Profile -
+function loadTool(toolId, el) {
+    setActive(el);
+
+    if (aiToolDB[toolId]) {
+        const ai = aiToolDB[toolId];
+        setHeader(ai.icon, ai.title, ai.badge);
+
+        document.getElementById('tools-view').innerHTML = `
+            <div class="ai-profile-section">
+                <div class="ai-profile-header">
+                    <div class="ai-profile-icon">${ai.icon}</div>
+                    <div>
+                        <div class="ai-profile-title">${ai.title}</div>
+                        <div class="ai-profile-desc">${ai.headline}</div>
+                    </div>
+                </div>
+
+                <div class="problem-solution">
+                    <div class="solution" style="border-left-color:var(--accent)">
+                        <h4 style="color:var(--accent)">💪 Strengths</h4>
+                        <ul class="benefit-list">${ai.strengths.map(s=>`<li>${s}</li>`).join('')}</ul>
+                    </div>
+                    <div class="solution" style="border-left-color:var(--mis)">
+                        <h4 style="color:#a78bfa">🎯 Use When</h4>
+                        <ul class="benefit-list">${ai.when.map(w=>`<li>${w}</li>`).join('')}</ul>
+                    </div>
+                </div>
+
+                <div class="info-block" style="border-left-color:var(--success)">
+                    <h4>Best For</h4>
+                    <p>${ai.bestFor}</p>
+                </div>
+
+                <div class="info-block" style="border-left-color:var(--warning)">
+                    <h4>💡 Pro Tip</h4>
+                    <p>${ai.tip}</p>
+                </div>
+
+                <div class="ai-profile-link">
+                    <a href="${ai.link}" target="_blank">Open ${ai.title} →</a>
+                </div>
+            </div>`;
+        showView('tools');
+    }
+}
+
+// - Copy Prompt -
+function copyPrompt(promptId, btn) {
+    const el = document.getElementById(`prompt-${promptId}`);
+    if (!el) return;
+    navigator.clipboard.writeText(el.innerText).then(() => {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '✅ Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+    });
+}
+
+// - Search -
+document.getElementById('searchInput').addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+        item.style.display = item.innerText.toLowerCase().includes(q) ? 'flex' : 'none';
+    });
+    document.querySelectorAll('.sidebar-section').forEach(sec => {
+        const visible = [...sec.querySelectorAll('.sidebar-item')].some(i => i.style.display !== 'none');
+        sec.style.display = visible ? 'block' : 'none';
+    });
+    if (!q) {
+        document.querySelectorAll('.sidebar-section').forEach(s => s.style.display = 'block');
+    }
+});
+</script>
+</body>
+</html>
