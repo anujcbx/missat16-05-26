@@ -452,7 +452,7 @@
             <div class="sidebar-item" onclick="loadUseCase('finance-accounting',this)"><span class="sidebar-item-icon">💰</span>Finance</div>
             <div class="sidebar-item" onclick="loadUseCase('hr-attendance',this)"><span class="sidebar-item-icon">👥</span>HR & Payroll</div>
             <div class="sidebar-item" onclick="loadUseCase('inventory-management',this)"><span class="sidebar-item-icon">📦</span>Inventory</div>
-            <div class="sidebar-item" onclick="loadUseCase('customer-support',this)"><span class="sidebar-item-icon">🎧</span>Customer Support</div><div class='sidebar-item' onclick="loadUseCase('marketing-campaigns',this)"><span class='sidebar-item-icon'>📣</span>Marketing</div>
+            <div class="sidebar-item" onclick="loadUseCase('customer-support',this)"><span class="sidebar-item-icon">🎧</span>Customer Support</div>
         </div>
 
         <!-- Industries -->
@@ -463,7 +463,7 @@
             <div class="sidebar-item" onclick="loadUseCase('pharma-healthcare',this)"><span class="sidebar-item-icon">💊</span>Pharma</div>
             <div class="sidebar-item" onclick="loadUseCase('education-training',this)"><span class="sidebar-item-icon">🎓</span>Education</div>
             <div class="sidebar-item" onclick="loadUseCase('realestate-property',this)"><span class="sidebar-item-icon">🏠</span>Real Estate</div>
-            <div class="sidebar-item" onclick="loadUseCase('logistics-delivery',this)"><span class="sidebar-item-icon">🚚</span>Logistics</div><div class='sidebar-item' onclick="loadUseCase('banking-finance',this)"><span class='sidebar-item-icon'>🏦</span>Banking</div>
+            <div class="sidebar-item" onclick="loadUseCase('logistics-delivery',this)"><span class="sidebar-item-icon">🚚</span>Logistics</div>
         </div>
 
         <!-- MIS & Dashboards -->
@@ -476,7 +476,7 @@
             <div class="sidebar-item mis-item" onclick="loadUseCase('mis-auto-reporting',this)"><span class="sidebar-item-icon">⚡</span>Automated Reporting</div>
             <div class="sidebar-item mis-item" onclick="loadUseCase('mis-pivot-analysis',this)"><span class="sidebar-item-icon">🔄</span>Pivot & Trend Analysis</div>
             <div class="sidebar-item mis-item" onclick="loadUseCase('mis-data-cleaning',this)"><span class="sidebar-item-icon">🧹</span>Data Cleaning</div>
-            <div class="sidebar-item mis-item" onclick="loadUseCase('mis-executive-deck',this)"><span class="sidebar-item-icon">📑</span>Executive Deck</div><div class='sidebar-item mis-item' onclick="loadUseCase('mis-cashflow',this)"><span class='sidebar-item-icon'>💵</span>Cash Flow Dashboard</div>
+            <div class="sidebar-item mis-item" onclick="loadUseCase('mis-executive-deck',this)"><span class="sidebar-item-icon">📑</span>Executive Deck</div>
         </div>
 
         <!-- AI Tools -->
@@ -818,12 +818,6 @@ const useCasesDB = {
         }
     }
 };
-
-
-,
-'marketing-campaigns':{icon:'📣',badge:'dept',title:'Marketing Campaign ROI Tracker',desc:'Track campaign spend vs leads vs conversions',problem:['Money spent on ads with no ROI visibility'],solution:['Campaign ROI visible instantly'],prompts:{chatgpt:'Build a campaign ROI tracker with spend, leads, conversion and ROI.'}},
-'banking-finance':{icon:'🏦',badge:'ind',title:'Loan Recovery Monitor',desc:'Track overdue loans and collections',problem:['Collections team reacts late to overdue accounts'],solution:['Overdue borrowers auto-flagged'],prompts:{chatgpt:'Create loan recovery dashboard with overdue alerts.'}},
-'mis-cashflow':{icon:'💵',badge:'mis',title:'Cash Flow Dashboard',desc:'Track inflow/outflow and forecast shortages',problem:['Cash shortages discovered too late'],solution:['Forecast shows shortage weeks early'],prompts:{chatgpt:'Build cash flow dashboard with inflow, outflow, forecast.'}}
 
 // - AI Tool Profiles -
 const aiToolDB = {
