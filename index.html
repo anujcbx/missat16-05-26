@@ -34,10 +34,8 @@
             height: 100vh;
         }
 
-        /* Layout */
         .container { display: flex; height: 100vh; }
 
-        /* Sidebar */
         .sidebar {
             width: 270px;
             background: var(--secondary);
@@ -145,7 +143,6 @@
 
         .sidebar-item-icon { font-size: 1rem; flex-shrink: 0; width: 20px; text-align: center; }
 
-        /* Main */
         .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
         .content-header {
@@ -182,7 +179,6 @@
         .badge-ai   { background: rgba(16,185,129,0.12); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
         .badge-tool { background: rgba(148,163,184,0.1); color: var(--text-muted); border: 1px solid var(--border); }
 
-        /* Content Area */
         .content-area { flex: 1; overflow-y: auto; padding: 1.8rem 2rem; }
 
         .content-view { display: none; animation: fadeIn 0.25s ease forwards; }
@@ -193,7 +189,6 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* Welcome */
         .welcome-screen {
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
@@ -220,7 +215,6 @@
         .step-num { font-size: 1.3rem; font-weight: 700; color: var(--accent); margin-bottom: 0.4rem; }
         .step-card p { color: var(--text-muted); font-size: 0.88rem; }
 
-        /* Cards */
         .usecase-card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -273,31 +267,56 @@
         .problem-list li::before { content: '✗'; position: absolute; left: 0; color: var(--danger); font-weight: bold; }
         .benefit-list li::before { content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: bold; }
 
-        /* AI Tool Cards */
         .ai-tools-section { margin-top: 1.5rem; }
-        .ai-tools-section h3 { margin-bottom: 1.2rem; font-size: 1.1rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.75rem; }
-
-        .ai-tool-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 1.4rem;
-            border-radius: 10px;
+        .ai-tools-section h3 {
             margin-bottom: 1.2rem;
-            transition: border-color 0.2s;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
-        .ai-tool-card:hover { border-color: var(--border-hover); }
+        .prompt-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 1.2rem;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+        .prompt-block:hover { border-color: var(--border-hover); }
 
-        .tool-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem; }
-        .tool-icon { font-size: 1.6rem; }
-        .tool-name { font-weight: 600; font-size: 1rem; }
+        .prompt-block-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.4rem 0.6rem;
+        }
+
+        .prompt-number {
+            background: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .prompt-block-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
 
         .prompt-box {
             background: rgba(15,23,42,0.8);
-            border: 1px solid rgba(59,130,246,0.2);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 0.8rem;
+            border-top: 1px solid rgba(59,130,246,0.15);
+            padding: 1rem 1.4rem;
         }
 
         .prompt-label {
@@ -315,10 +334,10 @@
             border-radius: 6px;
             font-family: 'DM Mono', monospace;
             font-size: 0.8rem;
-            line-height: 1.5;
+            line-height: 1.6;
             word-break: break-word;
             margin-bottom: 0.8rem;
-            max-height: 140px;
+            max-height: 180px;
             overflow-y: auto;
             border: 1px solid var(--border);
             color: #93c5fd;
@@ -343,28 +362,11 @@
         .copy-btn:hover { background: #2563eb; transform: translateY(-1px); }
         .copy-btn.copied { background: var(--success); }
 
-        .use-btn {
-            background: transparent;
-            color: var(--text-muted);
-            border: 1px solid var(--border);
-            padding: 0.45rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.82rem;
-            font-family: 'DM Sans', sans-serif;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        .use-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.25); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(59,130,246,0.45); }
 
-        /* Info blocks */
         .info-block {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -393,22 +395,10 @@
         }
 
         .ai-profile-icon { font-size: 2.5rem; }
+        .ai-profile-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.2rem; }
+        .ai-profile-desc { color: var(--text-muted); font-size: 0.9rem; }
 
-        .ai-profile-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-        }
-
-        .ai-profile-desc {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .ai-profile-link {
-            margin-top: 1rem;
-        }
-
+        .ai-profile-link { margin-top: 1rem; }
         .ai-profile-link a {
             display: inline-block;
             background: var(--accent);
@@ -419,10 +409,7 @@
             font-weight: 500;
             transition: background 0.2s;
         }
-
-        .ai-profile-link a:hover {
-            background: #2563eb;
-        }
+        .ai-profile-link a:hover { background: #2563eb; }
 
         @media (max-width: 900px) {
             .problem-solution { grid-template-columns: 1fr; }
@@ -433,7 +420,7 @@
 <body>
 <div class="container">
 
-    <!-- ══ SIDEBAR ══ -->
+    <!-- SIDEBAR -->
     <div class="sidebar">
         <div class="sidebar-header">
             <div class="sidebar-logo">🤖 MIS Saturday</div>
@@ -444,7 +431,6 @@
             <input type="text" id="searchInput" class="search-input" placeholder="Search use cases…" />
         </div>
 
-        <!-- Departments -->
         <div class="sidebar-section">
             <div class="sidebar-section-title">📊 Departments</div>
             <div class="sidebar-item" onclick="loadUseCase('sales-tracking',this)"><span class="sidebar-item-icon">📈</span>Sales Tracking</div>
@@ -455,7 +441,6 @@
             <div class="sidebar-item" onclick="loadUseCase('customer-support',this)"><span class="sidebar-item-icon">🎧</span>Customer Support</div>
         </div>
 
-        <!-- Industries -->
         <div class="sidebar-section">
             <div class="sidebar-section-title">🏭 Industries</div>
             <div class="sidebar-item" onclick="loadUseCase('manufacturing-production',this)"><span class="sidebar-item-icon">🏭</span>Manufacturing</div>
@@ -466,7 +451,6 @@
             <div class="sidebar-item" onclick="loadUseCase('logistics-delivery',this)"><span class="sidebar-item-icon">🚚</span>Logistics</div>
         </div>
 
-        <!-- MIS & Dashboards -->
         <div class="sidebar-section">
             <div class="sidebar-section-title">🗄️ MIS & Dashboards</div>
             <div class="sidebar-item mis-item" onclick="loadUseCase('mis-monthly-report',this)"><span class="sidebar-item-icon">📋</span>Monthly MIS Report</div>
@@ -479,7 +463,6 @@
             <div class="sidebar-item mis-item" onclick="loadUseCase('mis-executive-deck',this)"><span class="sidebar-item-icon">📑</span>Executive Deck</div>
         </div>
 
-        <!-- AI Tools -->
         <div class="sidebar-section">
             <div class="sidebar-section-title">🤖 AI Tools</div>
             <div class="sidebar-item ai-item" onclick="loadTool('ai-chatgpt',this)"><span class="sidebar-item-icon">🟢</span>ChatGPT</div>
@@ -490,7 +473,7 @@
         </div>
     </div>
 
-    <!-- ══ MAIN ══ -->
+    <!-- MAIN -->
     <div class="main-content">
         <div class="content-header">
             <div class="content-title">
@@ -501,51 +484,95 @@
         </div>
 
         <div class="content-area">
-            <!-- Welcome -->
             <div id="welcome-view" class="content-view active">
                 <div class="welcome-screen">
                     <div class="welcome-icon">📊</div>
                     <div class="welcome-title">AI for Every MIS Problem</div>
                     <div class="welcome-desc">
-                        Choose a department, industry, or MIS use case from the sidebar. Get ready-to-use prompts for ChatGPT, Claude, Gemini, Perplexity, and NotebookLM.
+                        Choose a department, industry, or MIS use case from the sidebar. Get 3 ready-to-use detailed prompts you can copy and paste into any AI tool.
                     </div>
                     <div class="welcome-steps">
                         <div class="step-card"><div class="step-num">1</div><p>Pick a use case</p></div>
-                        <div class="step-card"><div class="step-num">2</div><p>Copy the prompt</p></div>
+                        <div class="step-card"><div class="step-num">2</div><p>Copy a prompt</p></div>
                         <div class="step-card"><div class="step-num">3</div><p>Paste into any AI</p></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Use Cases -->
             <div id="usecases-view" class="content-view"></div>
-
-            <!-- Tools / AI Info -->
             <div id="tools-view" class="content-view"></div>
         </div>
     </div>
 </div>
 
 <script>
-// ---
-//  DATABASE
-// ---
 const useCasesDB = {
-
-    // DEPARTMENTS
 
     'sales-tracking': {
         icon:'📈', badge:'dept', title:'Sales Target Tracker',
-        desc:'Track daily sales vs target -- auto-flag underperformers',
+        desc:'Track daily sales vs target — auto-flag underperformers',
         problem:['Sales reps submit handwritten daily sales on WhatsApp','Target data stored in manager\'s notebook, not accessible to team','No visibility into who\'s actually hitting monthly goals','Payouts calculated wrong because numbers not tracked consistently'],
         solution:['All sales entered in one Google Sheet with timestamps','Target visibility built into the sheet for every rep','Real-time achievement % shows who\'s winning','Payouts calculated automatically from tracked data'],
-        prompts:{
-            chatgpt:'Build a Google Sheets Sales Target Tracker for 10 sales reps. Each rep has a monthly target. I log daily sales. Auto-show: MTD per rep, achievement %, status flag (Target Hit / On Track / Behind). Real-time leaderboard sorted by achievement %. Color-coded flags for performance levels.',
-            claude:'Create a Google Sheets Sales Target Tracker. Team of 10 reps, each with monthly targets. Inputs: daily sales by rep. Auto-calculate: MTD total, achievement %, performance status (Hit/On Track/Behind). Output: Dynamic leaderboard sorted by achievement %, color-coded performance flags. Include full setup guide.',
-            gemini:'Design a Sales Target Tracker in Google Sheets for 10 reps with monthly targets. Auto-track: daily sales, MTD, achievement %, status flags. Show sorted leaderboard and team summary dashboard at the top. Use color alerts for performance levels.',
-            perplexity:'I need a Google Sheets tool to track 10 sales reps against monthly targets. Features: daily sales logging, MTD totals, achievement %, status indicator (Hit/On Track/Behind), real-time leaderboard. Include setup instructions and formula explanations.',
-            notebooklm:'Document a Sales Tracker Google Sheets app: tab structure, column layout, MTD formula, achievement % formula, leaderboard logic, color-coding rules. Include sample data and troubleshooting tips.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Sales Tracker',
+                text:`I want to build a Sales Target Tracker in Google Sheets for a team of 10 sales representatives. Here is the exact structure I need:
+
+TAB STRUCTURE:
+- X Tab (Raw Data): Columns = Date, Sales Rep Name, Product Category, Units Sold, Revenue (₹), Region
+- Y Tab (Targets): Columns = Sales Rep Name, Monthly Target (₹), Product Category Target, Region
+- Z Tab (Reference): Columns = Rep ID, Name, Region, Manager, Joining Date
+
+OUTPUT (Auto-calculated Dashboard Tab):
+1. For each rep: MTD Revenue, Monthly Target, Achievement %, Performance Status (Target Hit = >100% / On Track = 80–100% / Behind = <80%)
+2. Real-time leaderboard sorted highest to lowest achievement %
+3. Color-coding: Green = Target Hit, Amber = On Track, Red = Behind
+4. Team summary row at bottom: Total MTD, Total Target, Team Achievement %
+
+FORMULAS NEEDED:
+- MTD Revenue: SUMIFS pulling from X tab by rep name and current month
+- Achievement %: MTD/Target*100
+- Status flag: Nested IF or IFS formula
+- Leaderboard: SORT or LARGE-based dynamic ranking
+
+Please give me the complete setup: tab layout, all formulas with cell references, and conditional formatting rules. Assume data starts from Row 2 in each tab.`
+            },
+            {
+                title:'Add Forecasting & Payout Calculator',
+                text:`I have a Sales Tracker in Google Sheets with daily sales logged in X Tab (Date, Rep Name, Revenue), targets in Y Tab (Rep Name, Monthly Target), and rep details in Z Tab. Now I want to extend it with two advanced features:
+
+FEATURE 1 — SALES FORECAST:
+- Based on MTD daily average, project end-of-month revenue for each rep
+- Formula logic: (MTD Revenue / Days Elapsed) × Total Days in Month
+- Show: Projected Revenue, Projected Achievement %, Gap to Target (₹)
+- Flag reps who are projected to miss target even with full remaining days
+
+FEATURE 2 — INCENTIVE PAYOUT CALCULATOR:
+- Payout slabs: <80% achievement = ₹0 | 80–90% = ₹5,000 | 90–100% = ₹10,000 | >100% = ₹15,000 + 2% of revenue above target
+- Auto-calculate payout for each rep based on MTD achievement
+- Show: Achievement %, Payout Tier, Calculated Payout (₹), Projected Month-End Payout
+
+OUTPUT: Add a new "Forecast & Payout" tab that pulls live from X and Y tabs. Show all 10 reps in one table with forecast and payout columns side by side. Include a team total row for total projected payout.
+
+Give me all formulas with exact cell references and any helper columns needed.`
+            },
+            {
+                title:'Regional Comparison & Manager MIS',
+                text:`My Sales Tracker has daily data in X Tab (Date, Rep Name, Revenue, Region, Product Category) and targets in Y Tab. I want to build a Regional Performance MIS for my managers with the following:
+
+REGIONAL DASHBOARD (auto-calculated from X and Y tabs):
+1. Region-wise table: Columns = Region, Total MTD Revenue, Target, Achievement %, No. of Reps, Reps on Track, Reps Behind
+2. Product Category breakdown: Which category is driving revenue vs lagging — show Category, Revenue, % of Total Revenue
+3. Week-on-Week trend: Compare this week's revenue vs last week for each region (use current date to auto-calculate week boundaries)
+4. Bottom 3 reps by achievement % — flag them for intervention with name, region, MTD, target, gap
+5. Top 3 reps — leaderboard with rep name, region, revenue, achievement %
+
+MANAGER SUMMARY (single row per manager pulling from Z Tab manager mapping):
+- Manager Name, Team Size, Team MTD Revenue, Team Target, Team Achievement %, Reps Behind Count
+
+All data must pull live from X Tab using SUMIFS, COUNTIFS. Use TODAY() and WEEKNUM() for dynamic date calculations. Provide complete formula set and tab layout.`
+            }
+        ]
     },
 
     'operations-management': {
@@ -553,27 +580,150 @@ const useCasesDB = {
         desc:'Track all operational metrics in one centralized place',
         problem:['Operational managers track different metrics in their own files','Production updates arrive via phone calls and messages','Quality issues discovered during shipment, too late to fix','No one knows true operational capacity on any given day'],
         solution:['One dashboard where all operations teams log realtime data','Daily production logged with quality in the same sheet','Quality problems visible within 2 hours of occurrence','Capacity utilization instantly visible for planning'],
-        prompts:{
-            chatgpt:'Build an Operations Dashboard in Google Sheets. Track: delivery status, production output, quality metrics, pending issues. Auto-show: on-time delivery %, production efficiency, quality score, unresolved issues count. Alert flags for delays. Make it real-time and simple to update daily.',
-            claude:'Design a comprehensive Operations Dashboard for Google Sheets. Inputs: delivery status, batch production counts, quality checks, issue tracking. Auto-calculate: on-time %, output per shift, quality score. Dashboard tab with KPIs and alert flags. Include setup guide.',
-            gemini:'Create an Operations Dashboard in Google Sheets covering delivery, production, and quality. Show: on-time %, efficiency %, quality score, open issues. Auto-update metrics. Color-coded alerts for problems. Scannable visual layout.',
-            perplexity:'Develop a Google Sheets Operations Dashboard tracking deliveries, production, quality, and issues. Metrics: on-time %, production efficiency %, quality score, open issues. Real-time alerts for problems and delays. Include setup and maintenance instructions.',
-            notebooklm:'Document an Operations Dashboard in Google Sheets: data structure, metric formulas, dashboard layout, alert rules, daily update process, troubleshooting.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Operations Dashboard',
+                text:`I want to build an Operations Dashboard in Google Sheets for a manufacturing company. Here is the exact structure:
+
+TAB STRUCTURE:
+- X Tab (Raw Data): Date, Shift (Morning/Afternoon/Night), Department, Machine/Line ID, Planned Output (units), Actual Output (units), Downtime (minutes), Downtime Reason, Quality Passed (units), Quality Rejected (units)
+- Y Tab (Targets): Department, Daily Target Output, Max Allowed Downtime (mins), Min Quality Pass Rate (%), Capacity (units/shift)
+- Z Tab (Reference): Machine ID, Machine Name, Department, Operator Name, Maintenance Schedule
+
+OUTPUT DASHBOARD (auto-calculated):
+1. Today's Operations Summary: Total Planned vs Actual Output, Efficiency % (Actual/Planned×100), Total Downtime (mins), Quality Pass Rate %
+2. Department-wise table: Each dept showing Actual Output, Efficiency %, Downtime, Quality Rate, Status (On Track / At Risk / Critical)
+3. Downtime Analysis: Top 3 reasons for downtime today using COUNTIFS/SUMIFS
+4. Shift Comparison: Morning vs Afternoon vs Night output and efficiency
+5. Alerts panel: Flag any department with efficiency <85% or quality rate <95% in red
+
+All metrics must auto-calculate from X Tab. Use TODAY() for daily filtering. Give complete formula set with cell references and conditional formatting rules.`
+            },
+            {
+                title:'Weekly Efficiency & Downtime Trend Report',
+                text:`I have an Operations data sheet (X Tab) with daily entries: Date, Shift, Department, Planned Output, Actual Output, Downtime (mins), Downtime Reason, Quality Passed, Quality Rejected. Targets are in Y Tab by department.
+
+I want to build a Weekly Operations Trend Report with:
+
+WEEK-ON-WEEK COMPARISON:
+- For each department: This Week Output, Last Week Output, WOW Change %, This Week Efficiency %, Last Week Efficiency %
+- Use WEEKNUM() and SUMIFS to auto-calculate without manual date entry
+- Trend arrow: ↑ if this week > last week, ↓ if lower
+
+DOWNTIME DEEP-DIVE:
+- Downtime by reason (use Z Tab reference for reason categories): Table showing Reason, Total Minutes This Week, % of Total Downtime, Affected Departments
+- MTBF (Mean Time Between Failures) per machine: Total Uptime / Number of Downtime Events — use machine data from Z Tab
+- Flag machines with >3 downtime events this week
+
+CAPACITY UTILIZATION:
+- Capacity Utilization % = Actual Output / (Capacity per shift × Shifts worked) × 100
+- Show utilization by department and flag over/under-utilized lines
+- Forecast: At current efficiency, will this week's target be met? Yes/No flag with gap
+
+Provide all SUMIFS, COUNTIFS formulas with dynamic week references. Layout the report in a clean, printable format.`
+            },
+            {
+                title:'Operations MIS for Management Review',
+                text:`I run a manufacturing plant and need a monthly Operations MIS report in Google Sheets that I can present to management. My raw data (X Tab) has: Date, Department, Planned Output, Actual Output, Downtime Minutes, Quality Passed, Quality Rejected, Shift. Targets are in Y Tab.
+
+BUILD ME A MANAGEMENT-READY MIS WITH:
+
+1. EXECUTIVE SUMMARY TAB (top-line KPIs):
+   - Overall Plant Efficiency % (MTD)
+   - Total Output vs Target (MTD)
+   - Overall Quality Pass Rate % (MTD)
+   - Total Downtime Hours (MTD)
+   - Best Performing Department (highest efficiency)
+   - Worst Performing Department (lowest efficiency)
+   - All with MOM comparison arrows (↑↓) using prior month data
+
+2. DEPARTMENT SCORECARD TAB:
+   - One row per department: MTD Output, Target, Achievement %, Downtime Hours, Quality Rate %, Status (Green/Amber/Red)
+   - Add a RANK column (1 = best performing)
+
+3. DAILY TREND TAB:
+   - Date-wise plant efficiency % for the full month (for line chart)
+   - Date-wise quality rate % (for line chart)
+   - Highlight dates where efficiency dropped below 85%
+
+4. PROBLEM LOG TAB:
+   - List all days where any department triggered an alert (efficiency <85% or quality <95%)
+   - Columns: Date, Department, Metric, Actual Value, Target, Gap, Action Required
+
+All auto-calculated from X Tab. Provide formulas, tab structure, and chart recommendations.`
+            }
+        ]
     },
 
     'finance-accounting': {
         icon:'💰', badge:'dept', title:'Vendor Payment Tracker',
         desc:'Know what\'s due, overdue, and outstanding at a glance',
-        problem:['CFO discovers missed payments only when vendor calls complaining','GST calculations done manually, leading to compliance errors','No aging report -- finance manager manually counts buckets','Cash flow surprises because no one tracks payment obligations'],
+        problem:['CFO discovers missed payments only when vendor calls complaining','GST calculations done manually, leading to compliance errors','No aging report — finance manager manually counts buckets','Cash flow surprises because no one tracks payment obligations'],
         solution:['Due dates tracked automatically with 15-day advance warnings','GST auto-calculated and reconciled','Aging buckets auto-populate (Current/30+/60+/90+)','Cash flow forecast accurate based on scheduled payments'],
-        prompts:{
-            chatgpt:'Build a Vendor Payment Tracker in Google Sheets. Log: Vendor name, Invoice date, Amount, GST, Due date, Payment date. Auto-calculate: Net payable, payment status (Paid/Unpaid/Overdue), days overdue, aging bucket (Current/30+/60+/Critical). Dashboard showing total outstanding and due this week.',
-            claude:'Create a Vendor Payment Tracker Google Sheets app. Inputs: vendor details, invoice amount, GST %, due date, payment date. Auto-calculate: net payable, payment status, days overdue, aging classification. Aging bucket view. Dashboard: outstanding, overdue amount, due this week.',
-            gemini:'Design a Vendor Payment Tracker for Google Sheets. Track invoices with vendor, amount, GST, due date, payment date. Auto-show: paid status, days overdue, aging bucket, outstanding total. Color-code by urgency. Vendor list and aging summary view.',
-            perplexity:'Google Sheets Vendor Payment Tracker for: vendor name, amount, GST, due date, payment date. Auto-calculate payment status, days overdue, aging bucket, total outstanding. Alerts for overdue and critical amounts. Include instructions.',
-            notebooklm:'Document Vendor Payment Tracker in Google Sheets: invoice entry, GST calculation, payment status formulas, aging bucket logic, dashboard metrics, aging summary report. Examples and update procedures.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Vendor Payment Tracker',
+                text:`I want to build a Vendor Payment Tracker in Google Sheets for my finance team. Here is the exact structure needed:
+
+TAB STRUCTURE:
+- X Tab (Raw Data): Invoice No, Vendor Name, Invoice Date, Invoice Amount (₹), GST % (5/12/18/28), GST Amount (₹), Total Payable (₹), Due Date, Payment Date (blank if unpaid), Payment Amount (₹), Payment Reference
+- Y Tab (Vendor Master): Vendor Name, Vendor Code, Category (Raw Material/Services/Logistics), Credit Days (30/45/60), Bank Details, GST Number
+- Z Tab (Reference): Category, Payment Priority (High/Medium/Low), Payment Mode
+
+OUTPUT DASHBOARD (auto-calculated):
+1. For each invoice: Net Payable = Invoice Amount + GST Amount, Payment Status (Paid / Unpaid / Overdue / Due This Week), Days Overdue (if unpaid and past due date), Aging Bucket (Current = not yet due / 1–30 days / 31–60 days / 61–90 days / Critical = 90+ days)
+2. Summary panel at top: Total Outstanding (₹), Total Overdue (₹), Due This Week (₹), Critical Overdue Count
+3. Aging summary table: Count and value of invoices in each aging bucket
+4. Vendor-wise outstanding: Total payable per vendor sorted by amount
+
+FORMULAS: Use TODAY() for status and aging calculations. Give complete setup with all formulas and conditional formatting (red = Overdue/Critical, amber = Due This Week, green = Paid).`
+            },
+            {
+                title:'GST Reconciliation & Cash Flow Forecast',
+                text:`I have a Vendor Payment Tracker in Google Sheets with invoice data in X Tab (Invoice No, Vendor Name, Invoice Date, Amount, GST %, GST Amount, Total Payable, Due Date, Payment Date) and vendor master in Y Tab.
+
+Now I need two extensions:
+
+FEATURE 1 — GST RECONCILIATION MODULE:
+- Separate GST by rate: 5%, 12%, 18%, 28% — show total input GST claimed at each rate for the month
+- Monthly GST summary: Total Input GST (amount paid to vendors as GST), Total invoices by GST slab, ITC (Input Tax Credit) claimable this month
+- Flag invoices where GST number is missing in Y Tab (cannot claim ITC without vendor GST number)
+- GSTR-2A check column: Mark invoices as Matched / Unmatched / Pending (manual entry) and count total matched vs unmatched
+
+FEATURE 2 — 90-DAY CASH FLOW FORECAST:
+- Based on unpaid invoices and their due dates, show weekly payment obligations for next 13 weeks
+- Table: Week Starting Date, Total Payments Due (₹), Vendor Count, Cumulative Obligation
+- Flag weeks where total payments exceed ₹5 lakh (set as threshold in Y Tab) — cash crunch alert
+- Separate by payment priority (High/Medium/Low from Z Tab)
+
+Use SUMIFS with date range logic for weekly buckets. Give all formulas, layout design, and ITC calculation methodology.`
+            },
+            {
+                title:'Finance MIS for CFO Review',
+                text:`I manage vendor payments for a mid-size company. My data is in Google Sheets: X Tab has all invoices (Invoice No, Vendor, Amount, GST, Due Date, Payment Date, Status), Y Tab has vendor master and credit terms, Z Tab has category and priority reference.
+
+Build me a CFO-level Finance MIS with these sections:
+
+1. PAYABLES HEALTH DASHBOARD:
+   - Total Outstanding Payables (₹) — current month and YTD
+   - Overdue Payables (₹) and % of total outstanding
+   - On-Time Payment Rate % (invoices paid on or before due date / total invoices paid)
+   - Average Days to Pay (actual payment date − invoice date, average across all paid invoices)
+   - Vendor-wise Top 5 Outstanding with aging status
+
+2. PAYMENT PERFORMANCE TRACKER:
+   - Month-wise table (Jan to current month): Total Invoices Received, Total Paid, Total Outstanding, Overdue Count, On-Time Payment %
+   - MOM trend: Is on-time payment rate improving or declining? Trend arrow
+   - Category-wise payment analysis: Raw Material vs Services vs Logistics — which category has most overdue?
+
+3. RISK FLAGS FOR CFO:
+   - Vendors not paid in 60+ days with relationship risk flag (mark High-value vendors from Y Tab)
+   - Invoices without GST numbers that may cause ITC loss — total ITC at risk (₹)
+   - Duplicate invoice check: Flag any vendor + amount + date combination appearing more than once
+
+Provide all formulas, MOM comparison logic using month-year grouping, and a recommended layout for printing as a 1-page CFO report.`
+            }
+        ]
     },
 
     'hr-attendance': {
@@ -581,13 +731,76 @@ const useCasesDB = {
         desc:'Daily attendance with auto leave balance calculation',
         problem:['Attendance marked on a worn-out printed register','Leave balance miscalculated because historical data lost','HR asks employees for their balance, revealing no system control','Payroll deductions disputed because no clear leave record'],
         solution:['Digital daily attendance with full history stored forever','Leave balance auto-calculated and always accurate','Employees see their own leave balance in the sheet','Payroll team has a single source of truth for deductions'],
-        prompts:{
-            chatgpt:'Build an Attendance & Leave Tracker for 25 employees. Mark daily attendance (P/A/Half Day/Leave). Auto-calculate: monthly attendance %, leave taken this year, leave balance (21 days starting), flag below 75% attendance. Two tabs: daily entries and employee status view.',
-            claude:'Design an Attendance and Leave Tracker for Google Sheets. 25+ employees. Daily attendance logging (P/A/HD/L). Auto-calculate: attendance %, leave balance, YTD leave used, flag low attendees. Employee summary tab and attendance alerts. Printable format.',
-            gemini:'Create an Attendance Tracker for Google Sheets. Log daily attendance (P/A/HD/L) for 25 employees. Auto-track: attendance %, leave balance from 21 days, flag below 75%. Employee summary with current status. Color-code by attendance level.',
-            perplexity:'Google Sheets Attendance Tracker for 25 employees. Daily marking (P/A/HD/L), auto attendance % calculation, leave balance tracking (21 days/year), alert for low attendance. Employee dashboard. Instructions included.',
-            notebooklm:'Document Attendance Tracker in Google Sheets: marking system, attendance % formula, leave balance calculation, annual leave cycle, threshold flags, employee summary report. Examples and monthly closing process.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Attendance & Leave Tracker',
+                text:`I want to build an Attendance and Leave Tracker in Google Sheets for 25 employees. Here is the exact structure:
+
+TAB STRUCTURE:
+- X Tab (Raw Data): Date, Employee Name, Employee ID, Attendance Status (P = Present / A = Absent / HD = Half Day / CL = Casual Leave / SL = Sick Leave / EL = Earned Leave / WO = Week Off / PH = Public Holiday)
+- Y Tab (Employee Master): Employee ID, Name, Department, Designation, Date of Joining, Annual Leave Entitlement (default 21 Earned Leave, 12 Sick Leave, 12 Casual Leave per year), Probation Status
+- Z Tab (Holiday List): Date, Holiday Name, Type (Public Holiday / Optional)
+
+OUTPUT (Auto-calculated Dashboard):
+1. For each employee (current month view): Working Days in Month, Days Present, Days Absent, Half Days, Total EL Used, Total SL Used, Total CL Used, Attendance % (Present+Half Days÷Working Days×100)
+2. Leave Balance Table: EL Balance, SL Balance, CL Balance (entitlement minus used YTD)
+3. Status flags: Flag employees below 75% attendance in red
+4. Monthly payable days = Present + HD×0.5 + Paid Leave days (for payroll)
+
+FORMULAS: Use COUNTIFS for attendance status by employee and month. Exclude Week Off and Public Holidays from working days count. Give complete tab layout with all formulas and a printable monthly attendance summary.`
+            },
+            {
+                title:'Leave Application & Approval Tracker',
+                text:`I have an Attendance Tracker in Google Sheets with attendance marked in X Tab (Date, Employee ID, Status) and employee master in Y Tab. Now I need a Leave Management Module added:
+
+LEAVE APPLICATION LOG (new tab):
+- Columns: Application ID (auto), Employee ID, Employee Name, Leave Type (EL/SL/CL), From Date, To Date, No. of Days, Reason, Applied On, Approved By, Approval Status (Pending/Approved/Rejected), Rejection Reason
+
+LEAVE BALANCE VALIDATION:
+- Before approving, system should show: Available Balance for that leave type (pull from Y Tab entitlement minus X Tab usage so far)
+- Warning flag: If applied days > available balance — show "INSUFFICIENT BALANCE" in red
+- Formula to auto-count leave days excluding Sundays and Public Holidays (use Z Tab holiday list)
+
+HR DASHBOARD FOR LEAVE MANAGEMENT:
+1. Pending approvals list (filter applications where Status = Pending)
+2. Leave utilization by department: Average EL/SL/CL used per employee, by department
+3. Leave pattern analysis: Which days of week have most leaves? (use WEEKDAY formula on leave dates)
+4. Employees with zero leave in last 6 months (EL leave encashment eligibility flag)
+5. Monthly leave cost: Absent days × (CTC/26) per employee for unpaid absences
+
+Give all formulas, dropdown validation setup for Status column, and NETWORKDAYS usage for accurate day counting.`
+            },
+            {
+                title:'HR MIS Report for Management',
+                text:`I manage HR for a 25-person company. My Google Sheets has: X Tab (daily attendance: Date, Employee ID, Status), Y Tab (employee master: ID, Name, Dept, Designation, DOJ, Leave Entitlement), Z Tab (Holiday calendar). I need a monthly HR MIS for management review.
+
+BUILD A COMPLETE HR MIS WITH:
+
+1. WORKFORCE SUMMARY:
+   - Total headcount (from Y Tab)
+   - Active vs On Leave vs Absent today (using TODAY() to pull today's X Tab data)
+   - Department-wise headcount table
+   - New joiners this month (DOJ in current month from Y Tab)
+
+2. ATTENDANCE MIS:
+   - Company-wide attendance % for the month
+   - Department-wise attendance %: Ranked best to worst
+   - Chronic absentees: Employees with attendance <75% this month — name, dept, attendance %
+   - Trend: Monthly attendance % for last 6 months (for management review chart)
+
+3. LEAVE MIS:
+   - Total leave days taken this month company-wide: Split by EL, SL, CL
+   - Leave encashment liability: EL balance × (CTC/26) per employee — total company liability
+   - Employees with very high SL (possible health issues) — flag >4 SL in last 3 months
+   - Leave balance summary: How many employees have <5 EL remaining?
+
+4. PAYROLL INPUT SUMMARY:
+   - Per employee: Payable Days, LOP Days (Loss of Pay = Absent without approved leave), Leave Deduction Days
+   - Department-wise total LOP days and cost impact (₹)
+
+All auto-calculated from X Tab. Provide formulas, MOM comparison logic, and a one-page printable format.`
+            }
+        ]
     },
 
     'inventory-management': {
@@ -595,13 +808,77 @@ const useCasesDB = {
         desc:'Know instantly which items need reordering before stock-out',
         problem:['Warehouse runs out of stock without warning, production stops','Purchasing team manually checks 200 SKUs daily for reorder','Excess inventory of slow-moving items ties up ₹50+ lakhs','No one knows which suppliers are fast vs slow for planning'],
         solution:['Automatic alerts 7 days before stock-out occurs','Reorder list auto-sorted by urgency and supplier','Excess inventory identified and highlighted','Supplier lead times tracked and factored into reorder timing'],
-        prompts:{
-            chatgpt:'Build a Stock Alert & Reorder Tracker for 200 SKUs. Track: product name, current stock, reorder level, unit cost, supplier, lead time. Auto-show: stock status (OK/Low/Reorder Now/Out), stock value, days of stock left. Reorder and out-of-stock items at top. Calculate reorder qty based on 30-day sales.',
-            claude:'Create a Stock Reorder Tracker for Google Sheets. 200+ SKUs. Inputs: product, current stock, reorder level, supplier, lead time. Auto-calculate: stock status flags, days of stock remaining, reorder quantity (30-day movement). Urgent reorder view. Total inventory value.',
-            gemini:'Design a Stock Management Sheet for 200 SKUs. Track: current stock, reorder level, supplier, lead time. Auto-show: stock status (OK/Low/Reorder/Out), days remaining, reorder quantity. Highlight urgent reorders. Inventory value total.',
-            perplexity:'Stock Tracker for Google Sheets with 200 products. Track stock level, reorder point, supplier, lead time. Auto-calculate: stock status, days remaining, reorder qty. Urgent reorders list. Supplier contact and lead time info.',
-            notebooklm:'Document Stock Reorder Tracker for Google Sheets: SKU data structure, reorder level setting, stock status formulas, days of stock calculation, reorder quantity logic (30-day average), urgent reorder view. Setup and inventory audit process.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Stock Reorder Tracker',
+                text:`I want to build a Stock Alert and Reorder Tracker in Google Sheets for 200 SKUs. Here is the exact structure:
+
+TAB STRUCTURE:
+- X Tab (Raw Data): Date, SKU Code, SKU Name, Transaction Type (IN/OUT/ADJUST), Quantity, Unit, Reference (PO/Sale Order No), Warehouse Location
+- Y Tab (SKU Master): SKU Code, SKU Name, Category, Unit, Reorder Level (units), Reorder Quantity (units), Unit Cost (₹), Supplier Code, Lead Time (days), Min Order Quantity, ABC Classification (A/B/C)
+- Z Tab (Supplier Master): Supplier Code, Supplier Name, Contact Person, Phone, Email, Average Lead Time (days), Reliability Rating (1–5)
+
+OUTPUT DASHBOARD (auto-calculated):
+1. Current Stock per SKU: Sum of all IN transactions minus all OUT transactions from X Tab using SUMIFS
+2. For each SKU: Current Stock, Reorder Level, Stock Status (OK / Low / Reorder Now / Out of Stock), Stock Value (Current Stock × Unit Cost), Days of Stock Remaining (Current Stock ÷ 30-day average consumption)
+3. URGENT ACTION LIST at top: All SKUs with status "Reorder Now" or "Out of Stock" sorted by urgency, with supplier name and lead time pulled from Z Tab
+4. Total Inventory Value and breakdown by Category
+5. Slow-moving flag: SKUs with zero OUT transactions in last 30 days
+
+Give complete formulas for current stock calculation (running balance using SUMIFS), status flags, days of stock remaining, and conditional formatting rules.`
+            },
+            {
+                title:'Purchase Order & Supplier Performance Tracker',
+                text:`I have a Stock Tracker in Google Sheets with transaction data in X Tab (Date, SKU Code, Transaction Type IN/OUT, Quantity), SKU master in Y Tab (SKU, Reorder Level, Supplier Code, Lead Time), and supplier details in Z Tab.
+
+Now I need two extensions:
+
+FEATURE 1 — PURCHASE ORDER TRACKER:
+- New Tab: PO Log with columns: PO Number, PO Date, Supplier Code, SKU Code, Ordered Quantity, Expected Delivery Date, Actual Delivery Date, Received Quantity, PO Status (Open/Partially Received/Closed/Overdue)
+- Auto-calculate: Delivery Delay (Actual − Expected delivery days), Quantity Shortage (Ordered − Received), PO Value (Qty × Unit Cost from Y Tab)
+- Flag overdue POs: POs where Expected Delivery < TODAY() and Status is still Open
+- Pending delivery value (₹): Sum of open PO values
+
+FEATURE 2 — SUPPLIER PERFORMANCE DASHBOARD:
+- Per supplier: Total POs placed (last 6 months), On-Time Delivery Rate % (POs delivered on or before expected date), Average Delay Days, Fill Rate % (Total Received Qty / Total Ordered Qty × 100)
+- Supplier Scorecard: Rank suppliers by overall performance (equal weight to On-Time Rate and Fill Rate)
+- Flag underperforming suppliers: On-Time Rate <80% or Fill Rate <90% — highlight for review
+- Recommended supplier for each SKU category based on performance score from Z Tab
+
+Use COUNTIFS, SUMIFS, AVERAGEIFS across PO Log and Z Tab. Provide all formulas, PO status logic with TODAY(), and supplier ranking formula.`
+            },
+            {
+                title:'Inventory MIS for Management Review',
+                text:`I manage inventory for a manufacturing company. My Google Sheets has: X Tab (stock transactions: Date, SKU, IN/OUT, Qty), Y Tab (SKU master: SKU, Category, Unit Cost, Reorder Level, ABC Class), Z Tab (Supplier master). I need a monthly Inventory MIS for management.
+
+BUILD A COMPLETE INVENTORY MIS WITH:
+
+1. INVENTORY HEALTH SUMMARY:
+   - Total Inventory Value (₹) — current stock × unit cost per SKU, summed
+   - Inventory by ABC Classification: A-class value (top 20% SKUs = 80% value), B-class, C-class — value and % of total
+   - Stockout events this month: Count of days any SKU hit zero stock (flag in X Tab where stock = 0)
+   - Reorder alerts triggered this month: How many times did stock fall below reorder level?
+
+2. CONSUMPTION ANALYSIS:
+   - Monthly consumption by Category: Total units OUT per category
+   - Top 10 fastest moving SKUs (highest OUT quantity this month)
+   - Top 10 slowest moving SKUs (lowest OUT quantity — potential dead stock)
+   - Inventory Turnover Ratio: Monthly consumption ÷ Average stock for the month
+
+3. PROCUREMENT MIS:
+   - Total POs raised this month, Total PO Value (₹)
+   - On-time delivery rate % this month
+   - GRN (Goods Received) vs PO quantity — shortage/excess comparison
+   - Supplier-wise procurement value this month (top 5 suppliers by ₹ value)
+
+4. COST & VARIANCE:
+   - Inventory value change: Opening stock value vs Closing stock value this month
+   - Shrinkage / adjustment quantity and value (ADJUST transactions from X Tab)
+   - Month-on-month inventory value trend (last 6 months) for chart
+
+All formulas and layout provided. Format as a printable management report.`
+            }
+        ]
     },
 
     'customer-support': {
@@ -609,29 +886,166 @@ const useCasesDB = {
         desc:'Log customer issues, auto-prioritize, and track SLA',
         problem:['Tickets logged in emails, Slack, WhatsApp, and notebooks','No one knows which tickets are overdue until customer escalates','Support agent workload completely unbalanced','CSAT scores low because slow-moving tickets forgotten'],
         solution:['All tickets logged in one place with auto-priority','Overdue tickets highlighted in red at the top','Workload automatically distributed based on ticket count','SLA tracking prevents tickets from aging unnoticed'],
-        prompts:{
-            chatgpt:'Build a Support Ticket Tracker in Google Sheets for 6-person team. Log: Ticket number, customer name, issue type, assigned agent, date raised, resolution date, CSAT rating. Auto-calculate: ticket age, priority (Urgent/High/Normal), resolution time, avg CSAT per agent. Open count and overdue list at top.',
-            claude:'Create a Support Ticket Tracker for Google Sheets. Team of 6. Inputs: ticket ID, customer, issue type, agent, date, resolution date, CSAT. Auto-calculate: age in days, priority level, time to resolution. Priority queue view and agent workload summary. SLA tracking.',
-            gemini:'Design a Support Ticket system for Google Sheets. Log tickets: number, customer, issue, agent, dates, CSAT. Auto-show: ticket age, auto-priority (Urgent/High/Normal), time to resolve, agent performance. Open and overdue tickets. Priority queue view.',
-            perplexity:'Support Ticket Tracker for 6 agents. Track: ticket ID, customer, issue type, assigned agent, date raised, resolved date, CSAT. Auto-calculate age, priority, resolution time. Open tickets and overdue list. Workload balance view.',
-            notebooklm:'Document Support Ticket Tracker: ticket logging structure, priority rules (type + age), SLA definition, resolution tracking, CSAT capture, agent workload reporting, open vs resolved status. Examples.'
-        }
-    },
+        prompts:[
+            {
+                title:'Build the Core Support Ticket Tracker',
+                text:`I want to build a Support Ticket Tracker in Google Sheets for a 6-person support team. Here is the exact structure:
 
-    // INDUSTRIES
+TAB STRUCTURE:
+- X Tab (Raw Data): Ticket ID (auto-numbered), Customer Name, Customer Tier (Gold/Silver/Standard), Issue Type (Technical/Billing/Delivery/Product/Account), Issue Description, Assigned Agent, Date Raised, Date Resolved (blank if open), Resolution Notes, CSAT Rating (1–5, blank if not yet rated)
+- Y Tab (SLA Master): Customer Tier, Issue Type, SLA Hours (response SLA and resolution SLA), Priority Level (Urgent/High/Normal/Low)
+- Z Tab (Agent Master): Agent Name, Agent ID, Team, Max Daily Tickets (capacity)
+
+OUTPUT DASHBOARD (auto-calculated):
+1. For each ticket: Ticket Age (days since raised), Auto-Priority (pull from Y Tab based on Tier + Issue Type), SLA Status (Within SLA / SLA Breached / At Risk = 80% of SLA time elapsed), Resolution Time (hours, for resolved tickets)
+2. OPEN TICKETS VIEW at top: All unresolved tickets sorted by Priority then Age — oldest urgent tickets first
+3. OVERDUE LIST: All tickets where SLA is breached — highlighted red with escalation flag
+4. Agent workload: Open ticket count per agent vs their capacity from Z Tab
+5. Summary: Total Open, Total Resolved Today, SLA Breach Rate %, Avg CSAT this month
+
+Give all formulas using TODAY(), IF, VLOOKUP/INDEX-MATCH for SLA lookup, and conditional formatting for priority colors.`
+            },
+            {
+                title:'Agent Performance & CSAT Analytics',
+                text:`I have a Support Ticket Tracker in Google Sheets. X Tab has ticket data (Ticket ID, Customer Tier, Issue Type, Assigned Agent, Date Raised, Date Resolved, CSAT Rating 1–5), Y Tab has SLA definitions, Z Tab has agent master.
+
+Build an Agent Performance and CSAT Analytics module:
+
+AGENT PERFORMANCE DASHBOARD:
+- Per agent (this month): Total Tickets Assigned, Total Resolved, Open Count, Resolution Rate %, Average Resolution Time (hours), SLA Breach Count, SLA Breach Rate %
+- CSAT per agent: Average CSAT score, % tickets rated 4 or 5 (satisfied), % tickets rated 1 or 2 (dissatisfied)
+- Agent Ranking: Sort agents by composite score (50% Resolution Rate + 30% CSAT + 20% SLA Compliance)
+- Workload Balance Check: Who has the most open tickets right now? Flag agents over capacity (>Max Daily Tickets from Z Tab)
+
+CSAT DEEP DIVE:
+- Overall CSAT this month vs last month (MOM comparison)
+- CSAT by Issue Type: Which type of issues get lowest scores?
+- CSAT by Customer Tier: Do Gold customers rate higher/lower than Standard?
+- Low CSAT tickets (rating ≤ 2): List them with customer name, agent, issue type, resolution notes — for quality review
+- CSAT trend: Weekly average CSAT for last 8 weeks (use WEEKNUM grouping)
+
+ESCALATION RISK ANALYSIS:
+- Tickets open >48 hours without update (age calculation using TODAY())
+- Tickets from Gold-tier customers open >24 hours — priority escalation list
+- Repeat customers: Customers who raised >2 tickets in last 30 days — retention risk flag
+
+All formulas using AVERAGEIFS, COUNTIFS, date arithmetic. Provide complete layout.`
+            },
+            {
+                title:'Support MIS for Management Review',
+                text:`I run a 6-person support team. My Google Sheets has: X Tab (all tickets: Ticket ID, Customer, Tier, Issue Type, Agent, Date Raised, Date Resolved, CSAT), Y Tab (SLA definitions by Tier and Issue Type), Z Tab (agent master with capacity). I need a monthly Support MIS for management.
+
+BUILD A COMPLETE SUPPORT MIS WITH:
+
+1. SUPPORT HEALTH SUMMARY:
+   - Total tickets this month: Received, Resolved, Pending, Escalated
+   - First Response Rate: % tickets where first response was within SLA
+   - Resolution SLA Compliance: % tickets resolved within SLA time
+   - Overall CSAT: Average score + % Satisfied (≥4) + % Dissatisfied (≤2)
+   - MOM comparison for all above metrics with trend arrows (↑↓)
+
+2. ISSUE ANALYSIS:
+   - Ticket volume by Issue Type (bar chart data): Which category has most tickets?
+   - Top 5 recurring issue descriptions (group similar issues using keyword matching or manual category)
+   - Peak ticket days: Which day of week receives most tickets? (WEEKDAY formula)
+   - Resolution time by Issue Type: Which issues take longest to resolve?
+
+3. CUSTOMER IMPACT REPORT:
+   - Repeat complainants: Customers with 2+ tickets this month — name, count, CSAT, risk level
+   - Gold-tier SLA performance: Separate SLA compliance for Gold vs Silver vs Standard
+   - Unrated tickets: % tickets without CSAT response — follow-up needed
+
+4. TEAM PRODUCTIVITY:
+   - Tickets resolved per agent-day (total resolved ÷ working days ÷ team size)
+   - Agent-wise monthly scorecard: Assigned, Resolved, Avg Resolution Time, CSAT, SLA Rate
+   - Capacity utilization: Actual tickets vs Max capacity per agent from Z Tab
+
+Format as printable management report with formulas for all calculations.`
+            }
+        ]
+    },
 
     'manufacturing-production': {
         icon:'🏭', badge:'ind', title:'Daily Production Quality Log',
         desc:'Log batches and catch quality issues early',
-        problem:['Quality issues discovered after shipment, customer calls angry','Yield calculations manual, supervisor estimates from memory','Scrap and rework hidden in cost of goods -- never analyzed','No early warning system for quality decline'],
-        solution:['Yield % calculated instantly shows quality trends in real-time','Below-target batches visible on dashboard within minutes','Scrap cost tracked and linked to root causes','Quality decline detected 3-5 days early for prevention'],
-        prompts:{
-            chatgpt:'Build a Daily Production Quality Log in Google Sheets. Log each batch: Date, Shift, Product, Input qty, Good output, Rejected units, Rework units. Auto-calculate: yield rate %, rejection rate %, flag batches where yield < 95%. Daily summary: total output, avg yield, count of below-target batches.',
-            claude:'Create a Production Quality Log for Google Sheets. Daily batch tracking. Inputs: batch date, shift, product, input qty, good output, rejected, rework. Auto-calculate: yield %, rejection %, quality flag. Daily summary and trend analysis. Alert for batches below 95% yield.',
-            gemini:'Design a Production Quality sheet for Google Sheets. Track batches: date, shift, product, input, output, rejected, rework. Auto-show: yield %, rejection rate, quality alert if <95%. Daily summary and batch trend.',
-            perplexity:'Production Quality Log for Google Sheets. Track daily batches: date, shift, product, input qty, good output, rejected, rework. Auto-calculate yield %, rejection rate. Flag batches below 95%. Daily and weekly summaries.',
-            notebooklm:'Document Production Quality Log: batch data entry, yield % calculation, rejection rate formula, quality threshold (95%), daily summary metrics, trend analysis, alert rules. Shift examples and quality targets.'
-        }
+        problem:['Quality issues discovered after shipment, customer calls angry','Yield calculations manual, supervisor estimates from memory','Scrap and rework hidden in cost of goods — never analyzed','No early warning system for quality decline'],
+        solution:['Yield % calculated instantly shows quality trends in real-time','Below-target batches visible on dashboard within minutes','Scrap cost tracked and linked to root causes','Quality decline detected 3–5 days early for prevention'],
+        prompts:[
+            {
+                title:'Build the Core Production Quality Log',
+                text:`I want to build a Daily Production Quality Log in Google Sheets for a manufacturing plant. Here is the exact structure:
+
+TAB STRUCTURE:
+- X Tab (Raw Data): Date, Shift (Morning/Afternoon/Night), Line/Machine ID, Product Code, Batch Number, Input Quantity (units), Good Output (units), Rejected Units, Rework Units, Scrap Units, Rejection Reason Code, Operator ID
+- Y Tab (Targets): Product Code, Product Name, Target Yield % (minimum acceptable), Target Rejection Rate % (maximum allowed), Rework Tolerance %, Standard Batch Size, Line/Machine ID assignment
+- Z Tab (Reference): Rejection Reason Code, Reason Description, Category (Material/Machine/Human Error/Process), Corrective Action Standard
+
+OUTPUT DASHBOARD (auto-calculated):
+1. Per batch: Yield % = Good Output/Input×100, Rejection Rate % = Rejected/Input×100, Rework Rate %, Quality Status (Pass = yield ≥ target / Warning = within 2% of target / Fail = below target)
+2. Daily Summary: Total Input, Total Good Output, Total Rejected, Total Rework, Plant-level Yield %, Plant-level Rejection Rate %
+3. ALERT LIST: All batches where Yield < target — shown at top with batch no, product, line, operator, gap from target
+4. Rejection reason breakdown: COUNTIFS by reason code — which reason is causing most rejections today?
+5. Shift comparison: Yield % and rejection rate by shift
+
+All auto-calculated using SUMIFS, COUNTIFS. Use conditional formatting: red = Fail, amber = Warning, green = Pass. Provide all formulas and tab layout.`
+            },
+            {
+                title:'Scrap Cost & Root Cause Analysis',
+                text:`I have a Production Quality Log in Google Sheets. X Tab has: Date, Shift, Line ID, Product Code, Input Qty, Good Output, Rejected Units, Rework Units, Scrap Units, Rejection Reason Code, Operator ID. Y Tab has product targets. Z Tab has rejection reason codes and categories (Material/Machine/Human Error/Process).
+
+Build a Scrap Cost and Root Cause Analysis module:
+
+SCRAP COST CALCULATOR:
+- Add Unit Cost (₹) column to Y Tab per product
+- Calculate per batch: Scrap Value = Scrap Units × Unit Cost, Rework Cost = Rework Units × Rework Cost Rate (set in Y Tab, e.g., 15% of unit cost), Total Quality Loss (₹) = Scrap Value + Rework Cost
+- Daily quality loss: Total ₹ lost to scrap and rework per day
+- Monthly cumulative: MTD scrap cost, MTD rework cost, Total MTD quality loss
+- Projection: At current loss rate, what will month-end quality cost be?
+
+ROOT CAUSE ANALYSIS DASHBOARD:
+- Rejection by Category (Material/Machine/Human/Process): Count, Rejected Units, % of Total Rejections
+- Pareto Analysis: Top 5 rejection reasons by volume — which 3 reasons cause 80% of rejections?
+- Machine-wise quality: Yield % per Line/Machine — which machine has worst quality?
+- Operator-wise quality: Rejection rate per Operator ID — who needs retraining?
+- Time-of-day pattern: Do rejections spike in a particular shift? COUNTIFS by shift
+- Weekly trend: Week-on-week rejection rate — is quality improving or declining?
+
+Provide all cost formulas, Pareto ranking logic using LARGE/INDEX, and trend calculation with WEEKNUM grouping.`
+            },
+            {
+                title:'Production Quality MIS for Plant Manager',
+                text:`I manage a manufacturing plant. My Google Sheets has: X Tab (daily batch data: Date, Shift, Line, Product, Input Qty, Good Output, Rejected, Rework, Scrap, Reason Code, Operator), Y Tab (product targets and unit costs), Z Tab (rejection reason codes and categories). I need a monthly Quality MIS for plant management review.
+
+BUILD A COMPLETE QUALITY MIS WITH:
+
+1. QUALITY PERFORMANCE SUMMARY:
+   - Plant-level Yield % this month (Total Good Output ÷ Total Input × 100)
+   - Plant-level Rejection Rate % and Rework Rate %
+   - Total Scrap Cost (₹) MTD and total Rework Cost (₹) MTD
+   - vs Target: Compare actual yield vs target yield — gap in % and cost impact
+   - MOM comparison: Yield %, Rejection Rate, Scrap Cost vs last month with trend arrows
+
+2. PRODUCT-WISE QUALITY ANALYSIS:
+   - Per product: Input Qty, Yield %, Rejection Rate %, Scrap Units, Scrap Cost — ranked worst to best
+   - Products consistently below target: Flag products failing in 3+ consecutive weeks
+   - Best and worst performing products this month
+
+3. SHIFT & LINE ANALYSIS:
+   - Shift-wise quality: Morning vs Afternoon vs Night — which shift has best/worst yield?
+   - Line/Machine-wise quality: Which production line has highest rejection rate?
+   - Operator quality ranking: Top 5 and bottom 5 operators by yield % (using Operator ID from X Tab)
+
+4. TREND & PROJECTION:
+   - Daily yield % trend for the month (data for line chart)
+   - Week-on-week rejection rate for last 8 weeks
+   - At current MTD rejection rate, projected month-end scrap cost
+
+5. ACTION ITEMS:
+   - Top 3 rejection reasons this month with count, units, cost impact, and standard corrective action from Z Tab
+
+Provide all formulas, chart data layout, and MOM comparison methodology.`
+            }
+        ]
     },
 
     'retail-ecommerce': {
@@ -639,41 +1053,251 @@ const useCasesDB = {
         desc:'See which products make money and which don\'t',
         problem:['Some top-selling products actually have 5% margin, losing money','Seasonal products take up shelf space even when off-season','SKU count keeps growing, no one removes dead stock','Discount strategy applied to everything, margin eroded company-wide'],
         solution:['Margin % calculated per product shows unprofitable items instantly','Seasonal flag marks off-season products to clear','Dead SKUs (zero sales 90+ days) highlighted for removal','Discount impact visible on total margin, prevents blind discounting'],
-        prompts:{
-            chatgpt:'Build a Product Sales & Margin Dashboard in Google Sheets. Log: Product name, category, MRP, selling price, cost price, units sold this month. Auto-calculate: revenue, gross profit, margin %, classify as High/Medium/Low margin. Top 5 products by revenue and flag products selling below cost.',
-            claude:'Create a Product Sales Dashboard for Google Sheets. Inputs: product, category, MRP, sell price, cost, monthly units sold. Auto-calculate: revenue, profit, margin %, profitability classification. Top products ranking, below-cost flagged, category margins. Margin trend.',
-            gemini:'Design a Product Performance Dashboard. Track: product, category, MRP, selling price, cost, units sold. Auto-show: revenue, profit, margin %, profit classification. Top 5 products and loss-making items. Category summary.',
-            perplexity:'Retail Product Dashboard for Google Sheets. Track: name, category, MRP, selling price, cost, units sold monthly. Auto-calculate: revenue, profit, margin %. Top sellers, below-cost items, category margins. Profitability ranking.',
-            notebooklm:'Document Product Sales Dashboard: product data structure, revenue calculation, profit formula, margin % calculation, profitability classification, top products ranking, loss-making alert. Retail examples.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Product Sales & Margin Tracker',
+                text:`I want to build a Product Sales and Margin Dashboard in Google Sheets for a retail/e-commerce business with 100+ SKUs. Here is the exact structure:
+
+TAB STRUCTURE:
+- X Tab (Raw Data): Date, Invoice No, Product Code, Product Name, Category, Units Sold, MRP (₹), Selling Price (₹), Discount % (if any), Cost Price (₹), Channel (Online/Offline/Wholesale), Sales Rep/Store
+- Y Tab (Product Master): Product Code, Product Name, Category, Sub-Category, MRP, Standard Cost Price, Minimum Selling Price (floor price), Season (All Year/Summer/Winter/Festive), Status (Active/Clearance/Discontinued)
+- Z Tab (Reference): Category, Target Margin % (minimum acceptable), Commission %, Return Rate benchmark %
+
+OUTPUT DASHBOARD (auto-calculated):
+1. Per product (this month): Revenue (Selling Price × Units), COGS (Cost Price × Units), Gross Profit (₹), Gross Margin % = Gross Profit/Revenue×100, Units Sold, Avg Selling Price vs MRP, Discount Impact (MRP − Selling Price) × Units
+2. Profitability classification: High Margin (>30%), Medium (15–30%), Low (5–15%), Loss Making (<5% or negative)
+3. TOP 10 by Revenue and TOP 10 by Margin % — separate rankings
+4. PROBLEM FLAGS: Products selling below cost price (Selling Price < Cost Price), Products with margin below category target from Z Tab
+5. Category-wise summary: Revenue, Margin %, Units — ranked
+
+All formulas using SUMIFS. Conditional formatting: red = Loss Making or below floor price, amber = Low Margin.`
+            },
+            {
+                title:'Discount Impact & Dead Stock Analysis',
+                text:`I have a Product Sales sheet in Google Sheets. X Tab: Date, Product Code, Units Sold, MRP, Selling Price, Discount %, Cost Price, Channel. Y Tab: Product master with Season, Status, Min Selling Price. Z Tab: Category target margins.
+
+Build two analytical modules:
+
+MODULE 1 — DISCOUNT IMPACT ANALYZER:
+- Per product: Average Discount % given (AVERAGEIFS), Revenue Lost to Discount = (MRP − Avg Selling Price) × Units Sold, Margin Without Discount (if sold at MRP), Margin With Discount (actual), Margin Erosion (₹ and % points)
+- Category-wise discount analysis: Which category gets most discounts? Average discount % per category
+- Channel discount comparison: Online vs Offline vs Wholesale — average discount % and margin % by channel
+- Discount threshold alert: Products where average discount % > 20% (set in Z Tab) — flag for price policy review
+- Revenue recovery opportunity: If bottom 20% discounted products were sold at 5% lower discount, what would margin gain be? (scenario calculation)
+
+MODULE 2 — DEAD STOCK & INVENTORY HEALTH:
+- Dead stock identification: Products with zero units sold in last 30 days, 60 days, 90 days (use today's date and min date of last sale using MINIFS)
+- Seasonal mismatch: Products marked Summer/Winter/Festive in Y Tab that are selling in off-season — flag for markdown
+- Discontinued products (Status = Discontinued in Y Tab) still being sold — data entry error flag
+- Slow mover analysis: Bottom 20 products by units sold this month — candidate for clearance
+- Clearance recommendation: Products with Dead Stock status AND margin >15% — can afford to discount and still profitable
+
+Use MINIFS for last sale date, SUMIFS for channel/category breakdowns. Provide all formulas.`
+            },
+            {
+                title:'Retail MIS for Management Review',
+                text:`I manage retail operations with 100+ SKUs. My Google Sheets has: X Tab (sales transactions: Date, Product, Units, MRP, Selling Price, Discount %, Cost Price, Channel), Y Tab (product master: Category, Season, Status, Min Price), Z Tab (category targets and references). I need a monthly Retail MIS for management.
+
+BUILD A COMPLETE RETAIL MIS WITH:
+
+1. SALES PERFORMANCE SUMMARY:
+   - Total Revenue (₹) this month and MOM comparison
+   - Total Gross Profit (₹) and Overall Margin % — MOM trend
+   - Units Sold and Average Order Value
+   - Total Discount Given (₹) — margin leak from discounts
+   - Channel breakdown: Online vs Offline vs Wholesale — Revenue and Margin % each
+
+2. PRODUCT PORTFOLIO HEALTH:
+   - Profitability mix: Count and Revenue from High/Medium/Low/Loss-Making products
+   - How many products are selling below cost? (Critical — needs immediate action)
+   - Top 5 profit contributors (highest gross profit ₹)
+   - Top 5 margin drains (loss-making or lowest margin products)
+   - New products (added in last 90 days from Y Tab DOA field) — early performance check
+
+3. CATEGORY PERFORMANCE:
+   - Category-wise table: Revenue, Units, Margin %, Target Margin % (from Z Tab), Gap, Trend (vs last month)
+   - Best and worst performing category this month
+   - Category-wise discount: Which category is over-discounted?
+
+4. PRICING & COMPLIANCE:
+   - Below-floor-price transactions: Invoices where Selling Price < Min Selling Price from Y Tab
+   - MRP compliance: Transactions where Selling Price > MRP (pricing error)
+   - Average realized price vs MRP by category (price realization %)
+
+5. INVENTORY SIGNAL:
+   - Top 10 fast movers (flag for reorder — link to stock tracker)
+   - Top 10 slow movers (flag for clearance or discontinuation)
+
+Provide all formulas and printable report format.`
+            }
+        ]
     },
 
     'pharma-healthcare': {
         icon:'💊', badge:'ind', title:'Drug Expiry Alert System',
-        desc:'Never let medicines expire -- 90-day early warnings',
-        problem:['₹2-3 lakhs lost to expired medicines annually','Regulatory compliance risk from expired stock on shelf','No batch-wise tracking, destroying by product name loses control','Customer calls because expired medicine dispensed accidentally'],
-        solution:['Expiry tracked batch-wise with automated alerts 90 days before','Regulatory audit ready with complete batch expiration history','Customer refunds avoided because expired stock removed on time','Waste cost reduced from ₹2-3L to near zero'],
-        prompts:{
-            chatgpt:'Build a Drug Expiry Alert System in Google Sheets. Track: Drug name, batch number, manufacturer, expiry date, current stock, location. Auto-show: days to expiry, status (Expired/Expires 30d/Expires 90d/OK), priority restock list for near-expiry + low stock. Highlight expired at top.',
-            claude:'Create a Pharmacy Stock Tracker with expiry alerts. Inputs: drug name, batch, manufacturer, expiry date, stock, location. Auto-calculate: days to expiry, status classification. Urgent restock view. Alert rules for expired and near-expiry items.',
-            gemini:'Design a Drug Expiry Tracker for Google Sheets. Track: drug name, batch, manufacturer, expiry date, stock, location. Auto-flag: expired items, expiring <30 days, expiring <90 days. Priority restock list. Location-wise inventory.',
-            perplexity:'Pharmacy Expiry Tracker for Google Sheets. Track: drug name, batch number, expiry date, stock, location. Auto-alert for expired, 30-day, and 90-day expiry items. Priority restock list. Batch recall procedures.',
-            notebooklm:'Document Drug Expiry System: batch entry structure, expiry date tracking, days-to-expiry formula, status categories (Expired/30-day/90-day/OK), restock priority logic, location tracking. Batch disposal and recall procedures.'
-        }
+        desc:'Never let medicines expire — 90-day early warnings',
+        problem:['₹2–3 lakhs lost to expired medicines annually','Regulatory compliance risk from expired stock on shelf','No batch-wise tracking, destroying by product name loses control','Customer calls because expired medicine dispensed accidentally'],
+        solution:['Expiry tracked batch-wise with automated alerts 90 days before','Regulatory audit ready with complete batch expiration history','Customer refunds avoided because expired stock removed on time','Waste cost reduced from ₹2–3L to near zero'],
+        prompts:[
+            {
+                title:'Build the Core Drug Expiry Alert System',
+                text:`I want to build a Drug Expiry Alert System in Google Sheets for a pharmacy or hospital store with 500+ drug batches. Here is the exact structure:
+
+TAB STRUCTURE:
+- X Tab (Raw Data): Batch Entry Date, Drug Code, Drug Name, Batch Number, Manufacturer, Manufacturing Date, Expiry Date, Quantity Received, Current Quantity (updated on dispensing), Location (Shelf/Rack/Cold Storage), Supplier Name, Purchase Price (₹/unit)
+- Y Tab (Drug Master): Drug Code, Drug Name, Category (Tablet/Injection/Syrup/Topical/Cold Chain), Schedule (H/H1/X/OTC), Minimum Stock Level, Reorder Quantity, Preferred Supplier
+- Z Tab (Reference): Supplier Code, Supplier Name, Contact, Lead Time (days), Reliability Rating
+
+OUTPUT DASHBOARD (auto-calculated):
+1. Per batch: Days to Expiry = Expiry Date − TODAY(), Expiry Status (Expired = ≤0 days / Critical = 1–30 days / Warning = 31–90 days / OK = 91+ days), Batch Value at Risk = Current Quantity × Purchase Price
+2. URGENT ACTION LIST at top: All Expired and Critical batches — sorted by days to expiry, showing Drug Name, Batch No, Location, Qty, Value at Risk
+3. Near-expiry summary: Count and value of Warning batches (31–90 days) — plan for liquidation
+4. Low stock alert: Drugs where Current Quantity < Minimum Stock Level from Y Tab
+5. Total inventory value and expired/at-risk value as % of total
+
+All formulas using TODAY() for dynamic expiry calculation. Conditional formatting: Red = Expired/Critical, Amber = Warning, Green = OK.`
+            },
+            {
+                title:'Batch Recall & Dispensing Tracker',
+                text:`I have a Drug Expiry tracker in Google Sheets. X Tab: Drug batches with Batch Number, Drug Code, Drug Name, Expiry Date, Quantity Received, Current Quantity, Location. Y Tab: Drug master. Z Tab: Supplier master.
+
+Build two critical modules:
+
+MODULE 1 — DISPENSING & STOCK MOVEMENT LOG:
+- New Tab: Dispensing Log with columns: Date, Batch Number (must match X Tab), Drug Code, Drug Name, Quantity Dispensed, Dispensed To (Patient/Ward/Department), Dispensed By (pharmacist name), Prescription/IPD Reference
+- Stock auto-update: When a dispensing entry is logged, Current Quantity in X Tab should reduce (using SUMIF: Received − Total Dispensed)
+- FIFO compliance check: Flag if a batch with later expiry is being dispensed while an earlier-expiry batch of the same drug still has stock (using MINIFS to find earliest expiry per drug)
+- Daily dispensing summary: Total units dispensed per drug today, total value dispensed
+
+MODULE 2 — BATCH RECALL & REGULATORY READINESS:
+- Recall search: When a batch number or manufacturer name is entered, instantly show all quantities of that batch received, current quantity remaining, all dispensing records for that batch (for patient tracing)
+- Regulatory report generator: For any date range, show all expired drugs destroyed with batch details, quantity, destruction date (manual entry), destruction method, authorized by — in format suitable for Drug Inspector audit
+- Expiry compliance report: Month-wise count of expired batches found, value destroyed, value recovered (returned to supplier), net loss
+- Near-expiry action log: Batches in Warning zone (31–90 days) with planned action (Return to Supplier / Dispense Priority / Hold) — manual entry column with auto-reminder if no action taken in 7 days
+
+Provide all formulas including SUMIF for stock deduction, MINIFS for FIFO check, and report layout.`
+            },
+            {
+                title:'Pharmacy Inventory MIS for Management',
+                text:`I manage a hospital pharmacy. My Google Sheets has: X Tab (drug batches: Drug Code, Batch No, Expiry Date, Qty Received, Current Qty, Location, Purchase Price), Y Tab (drug master: Category, Schedule, Reorder Level), Z Tab (supplier master). I need a monthly Pharmacy Inventory MIS for management and compliance.
+
+BUILD A COMPLETE PHARMACY MIS WITH:
+
+1. INVENTORY HEALTH SUMMARY:
+   - Total drugs in stock: Count of active batches, Total inventory value (₹)
+   - Expiry risk analysis: Value of Expired stock (₹), Value of Critical (≤30 days) stock (₹), Value of Warning (31–90 days) stock (₹)
+   - Expiry risk as % of total inventory value — management alert if >5%
+   - Stockout drugs: Drugs with Current Qty = 0 — count and list
+
+2. EXPIRY MANAGEMENT REPORT:
+   - Month-wise expired batches: How many batches expired this month, total value lost
+   - Expiry by category: Which category (Tablet/Injection/Cold Chain) has most expiry events?
+   - Supplier-wise expiry: Which supplier's drugs expire most — quality or shelf-life issue?
+   - Recovery rate: Value returned to supplier vs total value of near-expiry batches
+
+3. PROCUREMENT & CONSUMPTION MIS:
+   - Total purchase value this month (from X Tab batch entries for current month)
+   - Average consumption rate per drug (units dispensed per day from Dispensing Log)
+   - Days of stock remaining per high-value drug (Current Qty ÷ daily avg consumption)
+   - Purchase vs Consumption ratio: Are we over-procuring certain drugs?
+
+4. REGULATORY COMPLIANCE SUMMARY:
+   - Schedule H/H1/X drugs: Special count of controlled substance inventory
+   - Batch traceability: % of dispenses with complete batch reference (compliance metric)
+   - Expired drug destruction records this month: Count, value, method
+
+Provide all formulas, compliance report format, and a one-page executive summary layout.`
+            }
+        ]
     },
 
     'education-training': {
         icon:'🎓', badge:'ind', title:'Student Report Card Generator',
-        desc:'Enter marks once -- get grades, ranks, and reports automatically',
+        desc:'Enter marks once — get grades, ranks, and reports automatically',
         problem:['Principal manually calculates grades, spots math errors post-printing','Parent queries about rank vs previous year reveal inconsistent logic','Report card printing delayed because formula recalculations take 4 hours','At-risk students identified only at year-end, too late to intervene'],
         solution:['Grades auto-calculated from marks, zero human entry errors','Ranking logic consistent every report card period','Reports generated in 15 minutes, time for remedial planning','At-risk students flagged within 48 hours for intervention'],
-        prompts:{
-            chatgpt:'Build a Student Report Card Generator for 40 students with 6 subjects. Enter marks per subject. Auto-calculate: total marks, percentage, grade (A+/A/B/C/D/F), pass/fail, class rank. Flag at-risk students (< 50%). Class summary: avg marks per subject, pass rate, top 3 students.',
-            claude:'Create a Student Report Card system for Google Sheets. 40 students, 6 subjects. Inputs: marks per subject. Auto-calculate: total, percentage, grade, rank, pass/fail. Identify at-risk students. Generate class statistics and individual report cards.',
-            gemini:'Design a Student Report Card sheet. 40 students, 6 subjects. Auto-calculate: total marks, percentage, grade (A+/A/B/C/D/F), rank, pass/fail. Identify at-risk students. Class metrics and individual cards.',
-            perplexity:'Report Card Generator for 40 students and 6 subjects. Auto-calculate: percentage, grade, rank, pass/fail. Flag at-risk students. Class statistics and printable report cards.',
-            notebooklm:'Document Report Card system: student data structure, marks entry, percentage calculation, grading scale, ranking logic, pass/fail criteria, at-risk identification, class statistics, report card formatting. Examples.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Report Card Generator',
+                text:`I want to build a Student Report Card Generator in Google Sheets for a school with 40 students and 6 subjects. Here is the exact structure:
+
+TAB STRUCTURE:
+- X Tab (Raw Data): Student Roll No, Student Name, Class/Section, Subject 1 Marks, Subject 2 Marks, Subject 3 Marks, Subject 4 Marks, Subject 5 Marks, Subject 6 Marks (all out of 100)
+- Y Tab (Master): Subject Name, Subject Code, Full Marks, Pass Marks (default 35), Weightage % (if different subjects carry different weights), Subject Teacher
+- Z Tab (Reference): Grade boundaries: 90–100 = A+, 75–89 = A, 60–74 = B, 45–59 = C, 35–44 = D, <35 = F (configurable in Z Tab)
+
+OUTPUT (Auto-calculated):
+1. Per student: Total Marks (sum of all 6), Percentage, Overall Grade (based on Z Tab boundaries), Class Rank (RANK formula), Pass/Fail status (Fail if any subject < 35 marks), Count of subjects failed
+2. Subject-wise grade for each student using nested IF or IFS formula
+3. AT-RISK FLAGS: Students with percentage <50% — amber flag; Students with any subject fail — red flag; Students who failed 2+ subjects — critical flag
+4. CLASS STATISTICS: Class Average per subject, Highest and Lowest marks per subject, Pass rate % per subject, Class topper and bottom-ranker
+5. Individual Report Card Tab: Enter Roll No in a cell, auto-populate full report card for that student (VLOOKUP/INDEX-MATCH based)
+
+Give complete formula set, rank formula (handling ties), grade formula, and conditional formatting rules.`
+            },
+            {
+                title:'Term Comparison & Progress Tracker',
+                text:`I have a Student Report Card sheet in Google Sheets with student marks in X Tab (Roll No, Name, Subject 1–6 marks), grade boundaries in Z Tab, subject master in Y Tab. I run 3 terms per year and want to track student progress across terms.
+
+BUILD A MULTI-TERM PROGRESS TRACKER:
+
+TERM DATA STRUCTURE:
+- Add 3 separate raw data tabs: Term 1 Marks, Term 2 Marks, Term 3 Marks (same structure as X Tab)
+- Each term auto-calculates: Total, Percentage, Grade, Rank independently
+
+PROGRESS ANALYSIS TAB:
+- Per student across all 3 terms: Term 1 %, Term 2 %, Term 3 %, Overall Trend (Improving/Declining/Stable)
+- Trend formula: Compare Term 3 vs Term 1 — Improvement = +5% or more, Declining = −5% or more, Stable = within 5%
+- Subject-wise progress: For each subject, marks in Term 1 vs 2 vs 3 — subject where student improved most and declined most
+- Rank movement: Term 1 Rank vs Term 3 Rank — students who jumped/dropped most in class rank
+
+AT-RISK EARLY WARNING SYSTEM:
+- Students consistently below 50% across all 3 terms — chronic underperformers needing remediation
+- Students who were passing in Term 1 but failing in Term 3 — sudden decline alert (parent meeting flag)
+- Subject-wise: Any subject where >30% of class failed in Term 3 — teaching effectiveness review flag
+- Improvement tracking: Students who improved by >15% from Term 1 to Term 3 — recognition list
+
+PARENT REPORT FORMAT:
+- Enter Roll No → auto-generate a parent-friendly progress report showing all 3 terms, grade trend, strongest subject, weakest subject, and teacher remarks column (manual entry)
+
+Provide all formulas including VLOOKUP across multiple term tabs, trend logic, and rank comparison.`
+            },
+            {
+                title:'School Academic MIS for Principal Review',
+                text:`I run a school with 40 students across one class. My Google Sheets has: X Tab (student marks: Roll No, Name, 6 subject marks), Y Tab (subject master: names, pass marks, teacher), Z Tab (grade boundaries). I need a monthly/termly Academic MIS for principal and management review.
+
+BUILD A COMPLETE ACADEMIC MIS WITH:
+
+1. CLASS PERFORMANCE SUMMARY:
+   - Class average percentage and overall class grade
+   - Pass rate %: Students passed all subjects / total students
+   - Grade distribution: How many students in each grade (A+/A/B/C/D/F) — for pie chart
+   - Distinction count (>75%), First class (60–74%), Second class (50–59%), Pass (<50%), Fail
+   - Comparison to previous term (if prior term data available): Class average MOM, pass rate MOM
+
+2. SUBJECT-WISE ANALYSIS:
+   - Per subject: Class Average, Highest Mark, Lowest Mark, Pass Rate %, Count of A+ grades
+   - Subject difficulty ranking: Lowest average = hardest subject — ranked
+   - Subject teacher performance indicator: Pass rate and average per teacher (from Y Tab)
+   - Subjects where >20% students failed — curriculum/teaching review flag
+
+3. STUDENT SEGMENTATION:
+   - High achievers (>85%): Count, names, average — recognition list
+   - Average students (50–85%): Count — stable group
+   - At-risk students (<50%): Detailed list with name, %, subjects failed, recommended action
+   - Special attention (failed 3+ subjects): Urgent intervention list with parent contact flag
+
+4. ATTENDANCE CORRELATION (if attendance data linked):
+   - Students with <75% attendance and academic performance — correlation between absence and marks
+
+5. REPORT CARD READINESS CHECKLIST:
+   - All marks entered? (COUNTA check per row — flag incomplete entries)
+   - Any data entry errors? (Marks >100 or negative — validation flag)
+   - Rank ties — how handled? (RANK.AVG vs RANK formula note)
+
+Provide formulas, grade distribution table for charting, and a one-page Principal Summary report format.`
+            }
+        ]
     },
 
     'realestate-property': {
@@ -681,13 +1305,85 @@ const useCasesDB = {
         desc:'Track bookings, milestones, and payment collections',
         problem:['Sales team doesn\'t know total bookings value until month-end report','Buyers don\'t know when next milestone payment is due','Finance discovers missed collections only 5 days into due date','Revenue recognition done manually, audit trails missing'],
         solution:['Booking value visible daily to sales team and finance','Buyers receive automated SMS with payment due dates','Collections tracked daily, overdue flagged automatically','Revenue recognized automatically per accounting policy'],
-        prompts:{
-            chatgpt:'Build a Property Sales & Collection Tracker for 50 units. For each unit: Unit number, type (1BHK/2BHK/3BHK), status (Available/Booked/Sold), buyer name, total value, booking amount, milestone payments, balance. Auto-calculate: collection %, balance outstanding, flag overdue milestones. Summary: total bookings, collected, outstanding.',
-            claude:'Create a Property Sales Tracker for Google Sheets. 50 units. Inputs: unit details, buyer, total value, booking amount, milestone payments, payment dates. Auto-calculate: collection %, outstanding balance, milestone status. Collection dashboard and handover checklist.',
-            gemini:'Design a Real Estate Sales Tracker for 50 units. Log: unit, type, buyer, total value, booking, milestones, payments. Auto-show: collection %, balance, milestone status. Collection summary and handover readiness.',
-            perplexity:'Real Estate Sales Tracker for 50 units. Track: unit details, buyer, booking amount, milestone payments, payment dates. Auto-calculate collection %, outstanding, milestone status. Overdue payments and handover status.',
-            notebooklm:'Document Property Sales Tracker: unit data structure, booking details, milestone payment tracking, collection calculation, outstanding balance, payment status rules, collection dashboard, handover checklist. Examples.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Property Sales & Collection Tracker',
+                text:`I want to build a Property Sales and Collection Tracker in Google Sheets for a real estate project with 50 units. Here is the exact structure:
+
+TAB STRUCTURE:
+- X Tab (Collections): Unit Number, Milestone Name (Booking/10%/20%/.../Possession), Milestone Amount (₹), Due Date, Payment Date (blank if unpaid), Amount Received (₹), Payment Mode (Cheque/RTGS/NEFT), Reference Number, Collected By
+- Y Tab (Unit Master): Unit Number, Tower, Floor, Type (1BHK/2BHK/3BHK/Penthouse), Area (sq ft), Base Price (₹), BSP (₹/sq ft), Total Agreement Value (₹), Booking Date, Buyer Name, Buyer Phone, Buyer Email, Co-applicant, Registration Status (Registered/Pending/NA), Handover Date (target), Sales Executive
+- Z Tab (Milestone Schedule): Unit Type, Milestone Name, % of Total Value, Standard Due Date Trigger (e.g., 30 days from booking / on slab completion)
+
+OUTPUT DASHBOARD (auto-calculated):
+1. Per unit: Total Agreement Value, Total Collected (sum of X Tab payments for that unit), Collection % = Total Collected/Agreement Value×100, Balance Outstanding, Next Due Milestone (name, amount, due date), Payment Status (Current / Due This Week / Overdue / All Milestones Paid)
+2. PROJECT SUMMARY: Total Agreement Value (all units), Total Collected (₹), Collection %, Outstanding (₹), Overdue Collections (₹), Units Fully Paid, Units Available, Units Booked, Units Registered
+3. OVERDUE LIST at top: All units with overdue milestones — Unit No, Buyer Name, Phone, Overdue Amount, Days Overdue
+4. Weekly collection forecast: Milestones due in next 7 days — unit, milestone, amount, buyer contact
+
+All formulas using SUMIFS for unit-wise collection totals, TODAY() for overdue/due soon calculations.`
+            },
+            {
+                title:'Milestone-wise Collection & Cash Flow Tracker',
+                text:`I have a Property Sales tracker in Google Sheets. X Tab: Collection entries (Unit No, Milestone, Milestone Amount, Due Date, Payment Date, Amount Received). Y Tab: Unit master with buyer details and total agreement value. Z Tab: Milestone schedule by unit type.
+
+Build a Milestone Collection and Cash Flow Module:
+
+MILESTONE COLLECTION DASHBOARD:
+- Per milestone across all 50 units: Milestone Name, Total Expected (₹) = sum of all units' milestone amounts, Total Collected (₹), Collection Rate %, Pending count and value
+- Milestone-wise aging: For each overdue milestone — how many days overdue? Bucket: 1–15 days / 16–30 days / 31–60 days / 60+ days
+- Collection efficiency trend: Month-wise total collections for last 6 months (for chart)
+- Top 5 highest outstanding buyers: Buyer name, unit, total outstanding, oldest overdue milestone
+
+CASH FLOW FORECAST (12-week):
+- For each upcoming week (next 12 weeks), show: Expected Collections from due milestones (sum of milestone amounts due that week from X Tab), Actual Collected so far (for past weeks), Collection Rate if past week
+- Flag cash-light weeks: Weeks where expected collections < ₹10 lakh (set threshold in Z Tab)
+- Cumulative cash inflow projection: Running total of expected collections for next 12 weeks
+- Scenario: If collection rate drops to 70%, what is 12-week cash inflow?
+
+FOLLOW-UP PRIORITY LIST:
+- Generate a daily follow-up list: Units overdue >7 days, sorted by overdue amount (highest first)
+- Include: Buyer Name, Phone, Unit No, Milestone, Amount, Days Overdue, Last Contact Date (manual entry column)
+- Auto-status: Hot (>60 days overdue), Warm (30–60 days), Follow-up (7–30 days)
+
+Provide all SUMIFS formulas, week-bucket logic using WEEKNUM and TODAY(), and forecast calculation methodology.`
+            },
+            {
+                title:'Real Estate MIS for Builder Management',
+                text:`I run a real estate project with 50 units. My Google Sheets has: X Tab (collection entries: Unit, Milestone, Amount Due, Due Date, Payment Date, Amount Received), Y Tab (unit master: Buyer, Type, Agreement Value, Booking Date, Sales Executive), Z Tab (milestone schedule). I need a monthly Real Estate MIS for promoter/management review.
+
+BUILD A COMPLETE REAL ESTATE MIS WITH:
+
+1. PROJECT SALES SUMMARY:
+   - Total units: Available / Booked / Sold / Registered
+   - Booking velocity: Units booked this month vs last month
+   - Sales value: New bookings value this month (₹), Cancellations value (if any)
+   - Type-wise sales: 1BHK vs 2BHK vs 3BHK — units sold and revenue
+   - Sales executive performance: Bookings per executive this month — ranked
+
+2. COLLECTION PERFORMANCE:
+   - Total collections this month (₹) and MOM comparison
+   - Cumulative project collection vs total project GDV (Gross Development Value)
+   - Collection % by unit type: Which buyer segment pays faster?
+   - Overdue collections: Total overdue amount, count of units with overdue, aging breakdown
+   - Collection efficiency: Collected vs Expected for milestones that were due this month
+
+3. OUTSTANDING & RISK ANALYSIS:
+   - High-risk buyers: Outstanding >₹10 lakh and >45 days overdue — name, unit, amount, contact
+   - Registration pending: Units where possession date is approaching but registration not done (from Y Tab)
+   - Unsold inventory: Units available for >90 days — flag for pricing review
+   - Revenue recognition: Milestone-based revenue booked this month per accounting standard (milestone % × agreement value)
+
+4. POSSESSION READINESS:
+   - Units where target handover date is within 90 days — collection status and registration status
+   - Pre-possession collection target: How much needs to be collected before possession from each buyer?
+
+5. BANKER & INVESTOR SUMMARY (1-page):
+   - Project GDV, % sold, total collected, outstanding, project collection % — for bank reporting
+
+Provide all formulas and a one-page promoter-level executive summary format.`
+            }
+        ]
     },
 
     'logistics-delivery': {
@@ -695,131 +1391,847 @@ const useCasesDB = {
         desc:'Know which trucks are running late before clients call',
         problem:['Delivery delays discovered by customer service via customer complaint','Route planning done manually without considering traffic data','Driver bonus/penalty calculated wrong due to incomplete data','No visibility into which routes and drivers are consistently late'],
         solution:['Delays detected automatically when vehicle location vs promised time diverges','Routes optimized monthly based on traffic patterns from data','Driver bonuses auto-calculated from reliable delay data','Chronic problem drivers and routes identified for retraining/redesign'],
-        prompts:{
-            chatgpt:'Build a Fleet Trip & Delay Monitor for 20 trucks. Log: Truck number, driver, route, client, dispatch date, promised delivery, actual delivery. Auto-show: days in transit, on-time status, days over promise, severity (Minor/Major/Critical). Dashboard: total trips, on-time %, currently delayed trucks.',
-            claude:'Create a Fleet Management Tracker for Google Sheets with 20 trucks. Inputs: truck ID, driver, route, client, dispatch date, promised delivery, actual delivery. Auto-calculate: days in transit, delay status, delay severity. Delay alert view and driver performance ranking.',
-            gemini:'Design a Fleet Tracker for 20 trucks. Log: truck, driver, route, client, dispatch, promised delivery, actual delivery. Auto-show: transit days, on-time status, delay severity. Delayed trucks list and driver rankings.',
-            perplexity:'Fleet Tracker for Google Sheets with 20 trucks. Track: truck ID, driver, route, client, dispatch date, promised delivery, actual delivery. Auto-calculate delay status and severity. Currently delayed trucks and driver performance.',
-            notebooklm:'Document Fleet Tracker: trip data entry, delay calculation, severity classification (Minor/Major/Critical), on-time % formula, driver performance metrics, currently delayed view. Logistics examples and SLA definitions.'
-        }
-    },
+        prompts:[
+            {
+                title:'Build the Core Fleet Trip & Delay Tracker',
+                text:`I want to build a Fleet Trip and Delay Monitor in Google Sheets for a fleet of 20 trucks. Here is the exact structure:
 
-    // MIS & DASHBOARDS
+TAB STRUCTURE:
+- X Tab (Raw Data): Trip ID, Truck Number, Driver Name, Driver ID, Route Code, Origin, Destination, Client Name, Dispatch Date, Dispatch Time, Promised Delivery Date, Actual Delivery Date, Actual Delivery Time, Delivery Status (Delivered/In Transit/Failed), Delay Reason (if delayed)
+- Y Tab (Route Master): Route Code, Origin, Destination, Standard Transit Days, Distance (km), Route Type (Local/Regional/National), SLA Hours
+- Z Tab (Driver Master): Driver ID, Driver Name, License Number, Phone, Assigned Truck, Base Location, Experience (years)
+
+OUTPUT DASHBOARD (auto-calculated):
+1. Per trip: Days in Transit = Actual Delivery Date − Dispatch Date (or TODAY() if still in transit), Delay Days = Actual − Promised Delivery (negative = early, positive = delayed), On-Time Status (Early / On Time / Delayed / Critical Delay = >3 days late), Delivery Status
+2. CURRENTLY DELAYED TRUCKS at top: All trips where Promised Delivery < TODAY() and Status = In Transit — truck number, driver, client, days overdue
+3. TODAY'S SUMMARY: Trips dispatched today, Expected deliveries today, Deliveries completed today, Currently delayed count
+4. Route performance: Per route — total trips, on-time %, average delay days
+5. Driver performance: Per driver — total trips, on-time %, average delay, on-time rank
+
+All formulas using TODAY(), IF for delay calculation, COUNTIFS/SUMIFS for summaries. Conditional formatting: Red = Critical Delay, Amber = Delayed, Green = On Time.`
+            },
+            {
+                title:'Driver Performance & Route Optimization Analytics',
+                text:`I have a Fleet Tracker in Google Sheets. X Tab: trip data (Trip ID, Driver ID, Route Code, Client, Dispatch Date, Promised Delivery, Actual Delivery, Status, Delay Reason). Y Tab: Route master (Route Code, Standard Transit Days, Distance, SLA Hours). Z Tab: Driver master (Driver ID, Name, Experience).
+
+Build Driver Performance and Route Analytics:
+
+DRIVER PERFORMANCE DASHBOARD:
+- Per driver (this month): Total Trips, Delivered on Time, On-Time Rate %, Average Delay Days, Critical Delays (>3 days) Count, Client Complaints linked to their trips (manual column in X Tab)
+- Driver Bonus/Penalty Calculator: On-Time Rate >90% = Bonus ₹2,000 / 80–90% = Bonus ₹500 / 70–80% = No bonus / <70% = Penalty ₹1,000 (set slabs in Z Tab — configurable)
+- Driver Scorecard Ranking: Rank all 20 drivers by on-time rate
+- Experienced vs New comparison: Average on-time rate for drivers with >5 years experience vs <5 years (use Experience column from Z Tab)
+
+ROUTE PERFORMANCE ANALYSIS:
+- Per route (last 3 months): Total Trips, On-Time Rate %, Average Actual Transit Days vs Standard Days (from Y Tab), Delay Reason breakdown (which reason causes most delays on this route)
+- Route difficulty index: Routes with >30% delay rate — flag for route redesign or SLA revision
+- Client-wise delivery performance: Per client — on-time rate, average delay, critical delay count
+- Peak delay periods: Which day of week and which week of month has most delays? (WEEKDAY, WEEKNUM analysis)
+
+DELAY ROOT CAUSE ANALYSIS:
+- Delay by reason (from X Tab Delay Reason column): Count, % of total delays, affected routes
+- Controllable vs uncontrollable delays: Categorize reasons (Traffic/Breakdown = external / Late Dispatch/Wrong Loading = internal)
+- Cost of delays: Estimated cost per delay day (set in Z Tab) × total delay days this month = ₹ impact
+
+Provide all COUNTIFS, AVERAGEIFS formulas, bonus calculation logic, and driver ranking formula.`
+            },
+            {
+                title:'Logistics MIS for Management Review',
+                text:`I manage logistics for a company with 20 trucks. My Google Sheets has: X Tab (trip data: Driver, Route, Client, Dispatch Date, Promised Delivery, Actual Delivery, Status, Delay Reason), Y Tab (route master: standard transit days, distance, SLA), Z Tab (driver master: name, experience, assigned truck). I need a monthly Logistics MIS for management.
+
+BUILD A COMPLETE LOGISTICS MIS WITH:
+
+1. FLEET PERFORMANCE SUMMARY:
+   - Total Trips this month: Completed, In Transit, Failed/Returned
+   - On-Time Delivery Rate % (OTD): Delivered on or before promised date / total deliveries
+   - Average Delay Days (for delayed trips only)
+   - Critical Delays (>3 days): Count and % of total trips
+   - MOM comparison: OTD %, Average Delay, Critical Delays — trend arrows
+   - Fleet utilization: Average trips per truck per month (Total trips / 20 trucks)
+
+2. ROUTE & CLIENT ANALYSIS:
+   - Top 5 worst-performing routes by delay rate — route code, origin, destination, on-time %, avg delay
+   - Top 5 clients with most delays — client name, trips, on-time %, avg delay, critical delays
+   - Client SLA compliance: OTD rate per client vs their contracted SLA % (from Y Tab if SLA field added)
+   - Regional analysis: Which delivery zones (National/Regional/Local from Y Tab) perform best/worst?
+
+3. DRIVER PERFORMANCE MIS:
+   - Driver scorecard this month: All 20 drivers ranked by on-time rate
+   - Best 3 drivers: Name, trips, on-time %, recognition
+   - Worst 3 drivers: Name, trips, on-time %, intervention recommended
+   - Driver bonus/penalty summary: Total bonus payable (₹), total penalty deductions (₹) this month
+   - Trend: Each driver's on-time rate for last 3 months — improving or declining?
+
+4. DELAY ANALYSIS:
+   - Delay by reason: Table with reason, count, % of total delays, estimated ₹ cost impact
+   - Controllable delay rate: What % of delays are internal (fixable)?
+   - Weekly delay trend: Week-on-week OTD % for the month (for chart)
+
+5. COST & EFFICIENCY:
+   - Average cost per km per route (add fuel cost column to X Tab if available)
+   - Total delay cost this month: Delay days × cost per day (from Z Tab config)
+   - Empty runs / failed deliveries: Count and cost
+
+Format as a printable management report with all formulas provided.`
+            }
+        ]
+    },
 
     'mis-monthly-report': {
         icon:'📋', badge:'mis', title:'Monthly MIS Report Builder',
         desc:'Build a full MIS report from raw data in minutes',
-        problem:['Raw data from 8 different departments arrives in 8 different formats','MIS manager spends 3 days consolidating and recalculating','Report format changes quarterly, requiring formula rewrites','Board member asks for "same metric as last month" -- no consistent definition found'],
+        problem:['Raw data from 8 different departments arrives in 8 different formats','MIS manager spends 3 days consolidating and recalculating','Report format changes quarterly, requiring formula rewrites','Board member asks for "same metric as last month" — no consistent definition found'],
         solution:['Master sheet auto-consolidates all departments in one structure','All formulas reference raw data, updates instant','Format consistent every month, zero manual rework','Metric definitions documented once, reused forever'],
-        prompts:{
-            chatgpt:'Design a Monthly MIS Report template in Google Sheets for a mid-size manufacturing company. Report should have: Executive Summary tab (top 10 KPIs), Sales MIS tab (revenue, target, achievement, region-wise), Operations MIS tab (production, capacity, downtime), Finance MIS tab (P&L summary, collections, payables). Each tab should pull data from a raw data sheet. Include month-over-month comparison and trend arrows.',
-            claude:'Create a comprehensive Monthly MIS Report system in Google Sheets. Structure: 1 Raw Data input sheet + 4 MIS tabs: Executive Summary, Sales Performance, Operations, Finance. Auto-populate all MIS tabs from raw data using formulas. Include: KPI cards at top of each tab, MOM comparison, color-coded performance indicators. Design for a 500-person manufacturing business.',
-            gemini:'Build a Monthly MIS Report template for Google Sheets. Cover: Executive summary with top KPIs, sales achievement by region and product, production and operations metrics, P&L summary. All calculated from a single raw data sheet. Include month-on-month variance and trend indicators. Make it boardroom-ready.',
-            perplexity:'How do I build a Monthly MIS Report in Google Sheets that: consolidates data from multiple departments, auto-calculates KPIs like revenue achievement %, production efficiency, collection %, and generates a boardroom-ready summary? Include best practices and formula guidance.',
-            notebooklm:'Create a complete guide for building a Monthly MIS Report system in Google Sheets. Cover: report structure (tabs and sections), raw data input format, formula dependencies between sheets, KPI definitions and calculation methods, formatting standards, how to update monthly, checklist for MIS manager. Include a sample MIS structure for a manufacturing company.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Monthly MIS Structure',
+                text:`I want to build a Monthly MIS Report system in Google Sheets for a mid-size manufacturing company. Here is the complete architecture I need:
+
+TAB STRUCTURE:
+- X Tab (Raw Data Input): Date, Department (Sales/Operations/Finance/HR/Logistics), Metric Name, Actual Value, Unit, Data Entry Person
+- Y Tab (Targets/Master): Department, Metric Name, Monthly Target, YTD Target, Unit, Metric Definition, Formula/Calculation Method, Responsible Person
+- Z Tab (Reference): Department Code, Department Head, Reporting Frequency, MIS Category (Revenue/Cost/Efficiency/Quality/People)
+
+OUTPUT TABS (all auto-calculated from X Tab):
+1. EXECUTIVE SUMMARY TAB: Top 10 company-level KPIs — each showing: Metric Name, Actual (MTD), Target (MTD), Achievement %, Status (Green/Amber/Red), MOM change %. Designed for 5-minute board review.
+2. SALES MIS TAB: Revenue (total and by region/product), Target, Achievement %, Sales team headcount, Revenue per sales person, New customers added, Lost customers, Pipeline value
+3. OPERATIONS MIS TAB: Production output vs target, Capacity utilization %, Downtime hours, Quality pass rate, On-time delivery %, Scrap cost
+4. FINANCE MIS TAB: Revenue (P&L), EBITDA (manual input), Collections this month, Payables outstanding, Overdue payables, Cash balance (manual), Working capital days
+
+All tabs pull from X Tab using SUMIFS with department and metric name filters. Y Tab provides targets. Include MOM comparison using prior month data column in X Tab. Give complete setup with all formulas.`
+            },
+            {
+                title:'HR & Logistics MIS Tabs + MOM Automation',
+                text:`I have an MIS system in Google Sheets with X Tab (raw data: Date, Department, Metric Name, Actual Value), Y Tab (targets per metric), Z Tab (reference). I already have Executive Summary, Sales, Operations, and Finance tabs. Now I need:
+
+HR MIS TAB (auto-calculated from X Tab):
+- Metrics to track: Total Headcount, New Joiners this month, Attrition (exits), Attrition Rate % = Exits/Avg Headcount×100, Absenteeism Rate %, Training hours completed, Open positions, Cost per hire (manual), Engagement score (manual survey input)
+- MOM comparison for all metrics
+- HR risk flags: Attrition Rate >10% = Red, Absenteeism >8% = Amber
+
+LOGISTICS MIS TAB:
+- Metrics: Total deliveries, On-Time Delivery Rate %, Average delivery delay (days), Freight cost this month, Freight cost per unit, Customer complaints related to delivery, Damaged goods % of total shipped
+- MOM comparison for all metrics
+
+MONTH-ON-MONTH AUTOMATION:
+- Current design has a single "Actual Value" column in X Tab. Modify to handle historical months: Change X Tab structure to Date, Department, Metric Name, Actual Value — and use month/year from Date column to auto-separate months
+- MOM formula: For each metric, Current Month Actual = SUMIFS(X Tab, Department=dept, Metric=metric, MONTH(Date)=current month), Prior Month Actual = SUMIFS with prior month filter
+- MOM Change % = (Current − Prior) / Prior × 100
+- Trend arrow logic: ↑ if positive change, ↓ if negative, → if within ±2%
+
+Build this as a reusable formula template I can extend to any new department. Provide complete formula structure for SUMIFS with dynamic month filtering.`
+            },
+            {
+                title:'Board-Ready Monthly MIS with YTD & Trends',
+                text:`I manage MIS for a manufacturing company. My Google Sheets has: X Tab (raw data: Date, Department, Metric Name, Actual Value — 12 months of data), Y Tab (targets: Department, Metric, Monthly Target, Annual Target), Z Tab (reference and definitions). I need a complete board-ready MIS with YTD tracking and trend analysis.
+
+BUILD THE FINAL BOARD MIS WITH:
+
+1. ANNUAL PERFORMANCE TRACKER:
+   - For each key metric: Jan to Dec columns showing Actual vs Target per month, YTD Actual, YTD Target, YTD Achievement %, Full-year Projected (at current run rate × 12/months elapsed)
+   - Color-code each month cell: Green = met target, Red = missed, Amber = within 5% of target
+   - Use SUMIFS with MONTH() and YEAR() to pull correct month actuals from X Tab dynamically
+
+2. TREND DASHBOARD:
+   - Sparkline trends for top 10 KPIs — 6-month mini trend using SPARKLINE formula
+   - Trend direction: Is each metric improving or declining? (Compare last 3 months avg vs prior 3 months avg)
+   - Best month and worst month this year for each metric
+
+3. VARIANCE DEEP-DIVE:
+   - Months where actual < 90% of target — list with: Month, Metric, Department, Actual, Target, Gap, % miss
+   - Pattern detection: Same metric missing target 3+ months in a row — escalation flag
+   - Variance by department: Which department has most consistent target misses?
+
+4. EXECUTIVE ONE-PAGER:
+   - Design a single-tab summary showing all departments (Sales/Ops/Finance/HR/Logistics) in a compact grid: 3 KPIs per department, current month status (RAG), YTD status, MOM trend arrow
+   - This single tab should be printable on one A4 page for board meeting
+
+5. DATA COMPLETENESS CHECK:
+   - For current month, how many metrics have been updated vs total expected metrics (from Y Tab count)? Show data completeness % — flag incomplete before board meeting
+
+Provide all formulas including dynamic SUMIFS with MONTH/YEAR, SPARKLINE syntax, YTD calculation, and print-ready layout tips.`
+            }
+        ]
     },
 
     'mis-kpi-dashboard': {
-        icon:'📊', badge:'mis', title:'KPI Dashboard -- Multi-Department',
+        icon:'📊', badge:'mis', title:'KPI Dashboard — Multi-Department',
         desc:'One dashboard showing all department KPIs in real time',
-        problem:['Sales sends one deck, Operations sends another, Finance a third','CEO wants "just show me the one-page summary" -- doesn\'t exist','Every department uses different target numbers for same metric','KPI dashboard updated manually, always out-of-date'],
+        problem:['Sales sends one deck, Operations sends another, Finance a third','CEO wants "just show me the one-page summary" — doesn\'t exist','Every department uses different target numbers for same metric','KPI dashboard updated manually, always out-of-date'],
         solution:['One master dashboard with all departments on one tab','Color-coded status (green/amber/red) at a glance','Target definitions centralized, no conflicting numbers','KPI auto-updates within 1 hour of source data entry'],
-        prompts:{
-            chatgpt:'Build a Multi-Department KPI Dashboard in Google Sheets. Departments: Sales, Operations, Finance, HR, Logistics. For each department show: 3 key KPIs, current month value, target, achievement %, status (Green/Amber/Red). Master dashboard on first tab showing all departments. Each department has its own data entry tab. Dashboard auto-updates from department tabs. Make it visually clean and executive-ready.',
-            claude:'Create an Executive KPI Dashboard for Google Sheets covering 5 departments: Sales, Operations, Finance, HR, and Logistics. Architecture: 1 Master Dashboard tab + 5 department data tabs. Master dashboard shows: department scorecards with KPI name, actual, target, achievement %, RAG status. Auto-pull data from department tabs. Include sparkline trend charts in each scorecard. Design for C-suite use -- clean, data-dense, professional.',
-            gemini:'Design a KPI Dashboard for Google Sheets that covers Sales, Operations, Finance, HR, and Logistics departments. Show 3 KPIs per department: actual vs target, achievement %, and RAG status (Red/Amber/Green). One-page master view with all departments. Auto-calculate from department input sheets. Include month and YTD view toggle.',
-            perplexity:'How to build a multi-department KPI dashboard in Google Sheets that: shows RAG status (Red/Amber/Green) for each KPI, auto-calculates from input data, has a master view and department drill-down, includes trend indicators? Give me formulas and layout recommendations.',
-            notebooklm:'Create a guide for building a Multi-Department KPI Dashboard in Google Sheets. Cover: dashboard architecture (master + department tabs), KPI selection per department, RAG status formula logic, data refresh process, how to add new departments, version control for monthly snapshots. Include KPI definitions for Sales, Operations, Finance, HR, and Logistics.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Multi-Department KPI Dashboard',
+                text:`I want to build a Multi-Department KPI Dashboard in Google Sheets for 5 departments: Sales, Operations, Finance, HR, and Logistics. Here is the complete structure:
+
+TAB STRUCTURE:
+- X Tab (Raw Data): Date, Department, KPI Name, Actual Value — all departments enter data here daily/weekly
+- Y Tab (KPI Master): Department, KPI Name, KPI Definition, Unit, Monthly Target, Amber Threshold (% of target below which = Amber), Red Threshold (% below which = Red), Higher is Better (Yes/No — for KPIs where lower = better like cost or defect rate), KPI Owner
+- Z Tab (Reference): Department, Department Head, KPI Category (Revenue/Cost/Efficiency/Quality/People), Reporting Frequency
+
+MASTER DASHBOARD TAB (auto-calculated):
+For each department, show 3 KPIs in a scorecard format:
+- KPI Name | Actual (this month) | Target | Achievement % | RAG Status | MOM Change %
+
+RAG Logic from Y Tab:
+- Green: Achievement % ≥ 100% (or ≤ 100% for lower-is-better KPIs like cost)
+- Amber: Achievement % between Amber Threshold and 99%
+- Red: Achievement % below Red Threshold
+
+Department scorecards arranged in a 5-column grid (one per department). Each cell color-coded by RAG status. Summary row: Company Overall KPI Health (% of KPIs in Green / Amber / Red).
+
+All data pulled from X Tab using SUMIFS with Department and KPI Name filters and current month. Give complete formula set and conditional formatting rules for RAG coloring.`
+            },
+            {
+                title:'Drill-Down Department Views & KPI Trend Charts',
+                text:`I have a KPI Dashboard in Google Sheets. Master Dashboard shows all 5 departments. X Tab has daily KPI data (Date, Department, KPI Name, Actual Value), Y Tab has KPI definitions and targets, Z Tab has department reference.
+
+Now I need individual department drill-down tabs and trend charts:
+
+DEPARTMENT DRILL-DOWN TABS (one per department: Sales, Operations, Finance, HR, Logistics):
+Each tab shows all KPIs for that department:
+- KPI Name, KPI Definition (from Y Tab), Unit, Daily/Weekly actual entries for current month, MTD Actual (SUMIFS or AVERAGE depending on KPI type — sum for revenue, average for % metrics), Monthly Target, Achievement %, RAG Status, MOM comparison, YTD actual vs annual target
+
+TREND DATA FOR CHARTS (auto-generated):
+- For each KPI, auto-populate a 12-month trend table: Month (Jan–Dec), Actual, Target, Achievement %
+- This table powers line charts showing actual vs target over time
+- Trend direction: Is the KPI trending up or down over last 3 months? (Compare last 3 months avg vs prior 3 months avg) — show ↑↓→
+
+KPI HEALTH HISTORY:
+- Month-wise RAG status history for each KPI: Create a heatmap-style table where rows = KPIs and columns = Jan–Dec, each cell colored Green/Amber/Red based on that month's status
+- This instantly shows which KPIs are chronically Red vs occasionally missing
+
+DYNAMIC FILTER:
+- Add a dropdown at top of Master Dashboard for: Filter by Department (show only selected dept's KPIs), Filter by RAG Status (show only Red KPIs across all departments)
+- Use data validation for dropdowns and IF/FILTER formulas for dynamic display
+
+Provide all formulas, chart data table structure, and dropdown filter formula logic.`
+            },
+            {
+                title:'CEO-Level KPI Command Center',
+                text:`I manage KPIs for a 500-person manufacturing company. My Google Sheets has: X Tab (KPI actuals: Date, Department, KPI Name, Value), Y Tab (KPI master: targets, RAG thresholds, KPI definitions), Z Tab (department reference). I need a CEO-level command center for weekly and monthly reviews.
+
+BUILD A CEO KPI COMMAND CENTER WITH:
+
+1. LIVE COMPANY HEALTH SCORE:
+   - Overall Company KPI Score: % of all KPIs currently Green × 100 = Health Score out of 100
+   - Department-wise health score: % of that dept's KPIs in Green
+   - Rank departments by health score (best to worst)
+   - Change from last week: Which departments improved/declined?
+
+2. EXCEPTION DASHBOARD (CEO only wants problems):
+   - RED KPIs this month: List all KPIs in Red with: Department, KPI Name, Actual, Target, Gap, How many consecutive months Red?, Responsible Owner from Y Tab
+   - NEW RED this month: KPIs that were Green last month but Red this month — sudden decline alert
+   - IMPROVING: KPIs that moved from Red to Green this month — wins to celebrate
+
+3. WEEKLY CEO BRIEFING TAB:
+   - Designed for a 10-minute Monday morning review
+   - Shows: This week vs last week for top 5 company KPIs
+   - 3 things going well (top 3 Green KPIs with biggest positive gap to target)
+   - 3 things needing attention (top 3 Red KPIs with biggest negative gap)
+   - One action per Red KPI with owner (manual entry column)
+
+4. QUARTERLY BUSINESS REVIEW (QBR) VIEW:
+   - Q1/Q2/Q3/Q4 actual vs target for each KPI
+   - Quarter-wise achievement % and RAG
+   - Best quarter and worst quarter per KPI
+   - Full-year projection at current run rate
+
+5. BOARD REPORTING FORMAT:
+   - One-page tab with company logo placeholder, date, 15 key KPIs in a board-style grid
+   - Each KPI: Name, Actual, Target, Status icon (●Green ●Amber ●Red), MOM trend
+   - Print-ready with page setup for A4
+
+Provide all formulas, health score calculation, dynamic exception filtering, and board format layout.`
+            }
+        ]
     },
 
     'mis-data-consolidation': {
         icon:'🔗', badge:'mis', title:'Multi-Source Data Consolidation',
         desc:'Merge data from 5+ files/sheets into one master without errors',
-        problem:['8 branch managers send 8 different file formats monthly','Manual copy-paste into master sheet introduces typos and duplicates','"Which spreadsheet has the latest branch data?" -- no one knows','Monthly data audit finds 15-20 mismatches that delay reporting'],
+        problem:['8 branch managers send 8 different file formats monthly','Manual copy-paste into master sheet introduces typos and duplicates','"Which spreadsheet has the latest branch data?" — no one knows','Monthly data audit finds 15–20 mismatches that delay reporting'],
         solution:['All branches enter data in one standardized format automatically','IMPORTRANGE formulas pull data live, no manual copy-paste','Single master sheet is always the latest, source of truth','Data audit time drops from 4 hours to 30 minutes'],
-        prompts:{
-            chatgpt:'I receive monthly data from 8 branches in separate Google Sheets. Each sheet has the same structure: Date, Branch, Product, Qty, Revenue, Salesperson. Build a Master Consolidation Sheet that: pulls data from all 8 branch sheets using IMPORTRANGE, combines into one table, removes duplicates, adds branch code column, calculates branch-wise totals. Include step-by-step IMPORTRANGE setup.',
-            claude:'Design a Data Consolidation system in Google Sheets for a company with 8 regional branches. Each branch sends a separate sheet monthly with: Date, Branch, Product, Qty Sold, Revenue, Salesperson. Build: Master sheet using IMPORTRANGE to pull all branch data, automatic deduplication logic, consolidated pivot summary by branch/product/month, error flag for missing or inconsistent data. Include IMPORTRANGE permissions guide.',
-            gemini:'Build a Multi-Branch Data Consolidation sheet in Google Sheets. Pull data from 8 separate branch sheets using IMPORTRANGE. Auto-merge into one master table. Remove duplicates. Add branch identifier. Create pivot summary showing: branch-wise revenue, product-wise sales, month-wise trend. Include formula guide.',
-            perplexity:'How to consolidate data from 8 separate Google Sheets into one master sheet using IMPORTRANGE? Need to: merge all branch data, remove duplicates, add branch identifier, create summary pivot. What are the best formulas and data management practices?',
-            notebooklm:'Write a complete guide on consolidating data from multiple Google Sheets into a master sheet. Cover: IMPORTRANGE setup and permissions, data structure standardization, deduplication methods, master table architecture, common errors and fixes, monthly consolidation process, audit trail. Include examples for branch-wise consolidation.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Multi-Branch Consolidation System',
+                text:`I receive monthly sales and operations data from 8 branches in separate Google Sheets. I need to build a Master Consolidation system. Here is the architecture:
+
+BRANCH SHEET STRUCTURE (all 8 branches use identical format):
+- Each branch sheet has one tab with: Date, Branch Code (auto-filled), Product Code, Product Name, Units Sold, Revenue (₹), Customer Name (optional), Sales Rep Name, Expense Category (if any), Expense Amount (₹)
+
+MASTER CONSOLIDATION SHEET STRUCTURE:
+- Y Tab (Branch Master): Branch Code, Branch Name, Branch Head, Branch Google Sheet URL, IMPORTRANGE Formula (for each branch), State/Region, Status (Active/Inactive)
+- Z Tab (Product Master): Product Code, Product Name, Category, Unit Cost
+- X Tab (Consolidated Raw Data): Auto-populated from all 8 branches using IMPORTRANGE — combines all branch data into one table with Branch Code added
+
+CONSOLIDATION SETUP:
+1. IMPORTRANGE setup for each of 8 branch sheets — exact formula structure and how to grant access permissions
+2. Combine all 8 IMPORTRANGE outputs into one master table using VSTACK (Google Sheets 2023+) or INDIRECT + ARRAYFORMULA approach
+3. Add Branch Name column: VLOOKUP(Branch Code, Y Tab, Branch Name column)
+4. Add Product Category column: VLOOKUP(Product Code, Z Tab, Category column)
+5. Deduplication check: COUNTIFS to flag if same Date + Branch + Product appears more than once (duplicate entry alert)
+
+MASTER SUMMARY (auto-generated from X Tab):
+- Branch-wise revenue and units (SUMIFS)
+- Product-wise revenue across all branches (SUMIFS)
+- Region-wise summary (SUMIFS using State from Y Tab)
+
+Provide complete IMPORTRANGE formulas, VSTACK syntax, and VLOOKUP enrichment formulas.`
+            },
+            {
+                title:'Data Validation & Standardization Engine',
+                text:`I have a Master Consolidation Sheet in Google Sheets where X Tab pulls data from 8 branch sheets using IMPORTRANGE. The consolidated data has quality issues: inconsistent branch codes ("MUM01" vs "Mumbai01" vs "MUM-01"), product codes with typos, missing dates, duplicate rows. Y Tab has branch master, Z Tab has product master.
+
+Build a Data Validation and Standardization Engine:
+
+VALIDATION LAYER (new tab: "Data Quality"):
+1. Schema validation: For each row in X Tab, check:
+   - Date column: Is it a valid date format? (ISNUMBER(DATEVALUE) check) — flag text stored as date
+   - Branch Code: Does it exist in Y Tab? (COUNTIF check) — flag unrecognized branch codes
+   - Product Code: Does it exist in Z Tab? (COUNTIF check) — flag unrecognized product codes
+   - Revenue: Is it a number and > 0? (ISNUMBER + IF check) — flag zero or text revenue entries
+   - Units Sold: Is it a positive integer? — flag negative or fractional units
+
+2. Duplicate detection: Flag rows where Date + Branch Code + Product Code + Revenue all match (COUNTIFS = 2 means duplicate)
+
+3. Text standardization:
+   - Branch code cleaner: TRIM + UPPER to standardize
+   - Product code cleaner: TRIM to remove spaces
+   - Revenue cleaner: If stored as text "₹1,23,456" — formula to extract numeric value
+
+DATA QUALITY SCORECARD:
+- Total rows consolidated from all 8 branches
+- Rows with date errors, branch code errors, product code errors, duplicate rows, revenue errors — count each
+- Data Quality Score = (Valid rows / Total rows) × 100
+- Per-branch quality score: Which branch submits cleanest data? Rankings
+
+CLEAN DATA OUTPUT TAB:
+- Filtered view showing only validated, clean rows (exclude flagged rows)
+- Ready for analysis and MIS reporting
+
+Provide all validation formulas, COUNTIFS for duplicates, and quality score calculation.`
+            },
+            {
+                title:'Monthly Consolidation Process & Audit Trail',
+                text:`I manage a consolidation system for 8 branches. My Google Sheets has: X Tab (consolidated raw data from all branches via IMPORTRANGE), Y Tab (branch master: Branch Code, Name, Region, URL), Z Tab (product master: Product Code, Name, Category). I need a complete monthly consolidation process with audit trail.
+
+BUILD A MONTHLY CONSOLIDATION SYSTEM WITH:
+
+1. MONTHLY SNAPSHOT AUTOMATION:
+   - Problem: IMPORTRANGE always shows live data. I need to lock/snapshot each month's data.
+   - Solution design: A "Monthly Archive" tab structure where I can paste values (not formulas) for each closed month — step-by-step process for how to do this correctly
+   - Archive tab structure: Month, Branch Code, Product Code, Date, Revenue, Units — all historical data stacked
+   - Current month pulls live from IMPORTRANGE; prior months pull from Archive tab
+   - MOM comparison formula: This month SUMIFS on X Tab vs prior month SUMIFS on Archive tab
+
+2. BRANCH SUBMISSION TRACKER:
+   - New Tab: Track which branches have submitted data for current month
+   - Branch Name, Submission Status (Submitted/Not Submitted/Partial), Last Data Date in X Tab (MAXIFS to find most recent date per branch), Row Count this month per branch, Completeness Flag
+   - Auto-detect: If branch has zero rows for current month in X Tab → Not Submitted
+   - Reminder list: Branches not yet submitted by 5th of month — shown at top with branch head contact from Y Tab
+
+3. AUDIT TRAIL:
+   - Every consolidation should be traceable: For any revenue number in the MIS, you should be able to trace back to: Branch + Date + Product + Sales Rep + Original Branch Sheet
+   - Design a TRACE function using FILTER formula: Enter a revenue figure or branch/product combination → show all matching raw rows from X Tab
+   - Reconciliation check: MIS summary total revenue = SUM of X Tab revenue — flag if they don't match (formula audit)
+
+4. ERROR CORRECTION PROCESS:
+   - If a branch submits wrong data and corrects it, how does the correction flow into the master? — Process documentation and formula approach
+   - Override column: Manual correction column in X Tab with override flag — when override exists, use override value instead of IMPORTRANGE value
+
+Provide complete process documentation, MAXIFS formula for last submission date, FILTER formula for audit trace, and monthly snapshot procedure.`
+            }
+        ]
     },
 
     'mis-variance-analysis': {
         icon:'📉', badge:'mis', title:'Budget vs Actual Variance Analysis',
         desc:'Instantly see where you\'re over or under budget and by how much',
-        problem:['Finance review meeting takes 2 hours because manager reads every line item','Variance explanations written manually, inconsistent across cost heads','Budget assumptions never documented, causing historical confusion','Department heads claim "we budgeted differently" -- no record kept'],
+        problem:['Finance review meeting takes 2 hours because manager reads every line item','Variance explanations written manually, inconsistent across cost heads','Budget assumptions never documented, causing historical confusion','Department heads claim "we budgeted differently" — no record kept'],
         solution:['One-page variance summary shows problem areas only, not 200 lines','Variance flagged automatically for investigation','Budget assumptions saved with actual budget in the sheet','Historical assumptions tracked, disputes settled by data'],
-        prompts:{
-            chatgpt:'Build a Budget vs Actual Variance Analysis sheet in Google Sheets for a company with 20 cost heads across 4 departments (Sales, Operations, HR, Admin). For each line item show: Budget amount, Actual amount, Variance (Actual - Budget), Variance %, Status (Favorable/Unfavorable). YTD columns for budget, actual, and variance. Summary dashboard at top showing total variance by department. Highlight over-budget items in red.',
-            claude:'Create a comprehensive Budget vs Actual Variance Analysis tool for Google Sheets. Structure: 20 cost heads across 4 departments. For each line: Budget, Actual, Absolute Variance, Variance %, Favorable/Unfavorable flag. Monthly columns (Jan-Dec) with YTD totals. Department rollup summary. Drill-down by cost head. Color-coded variance flags. Include variance commentary column for notes.',
-            gemini:'Design a Budget vs Actual Analysis sheet in Google Sheets. 20 cost heads, 4 departments. Show: Budget, Actual, Variance (₹ and %), Favorable/Unfavorable. Monthly view with YTD. Department-level rollup. Highlight over-budget in red, under-budget in green. Summary dashboard at top for management review.',
-            perplexity:'How to build a Budget vs Actual Variance Analysis in Google Sheets? Need: absolute variance (Actual-Budget), variance %, favorable/unfavorable classification, department rollup, YTD tracking, color-coded flags. What are the best formulas and layouts for a finance MIS?',
-            notebooklm:'Create a guide for Budget vs Actual Variance Analysis in Google Sheets. Cover: cost head structure, variance formula (absolute and %), favorable/unfavorable logic, monthly vs YTD view, department rollup, management reporting format, commentary column use, how to present variance in finance review meetings. Include sample data for a manufacturing company.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Budget vs Actual Variance Sheet',
+                text:`I want to build a Budget vs Actual Variance Analysis in Google Sheets for a company with 20 cost heads across 4 departments: Sales, Operations, HR, and Admin. Here is the exact structure:
+
+TAB STRUCTURE:
+- X Tab (Raw Data - Actuals): Month (Jan–Dec), Department, Cost Head Name, Cost Head Code, Actual Amount (₹)
+- Y Tab (Budget Master): Department, Cost Head Code, Cost Head Name, Cost Category (Fixed/Variable/Semi-Variable), Annual Budget (₹), Monthly Budget (annual/12 or seasonally adjusted — enter monthly budget Jan–Dec in separate columns), Budget Owner
+- Z Tab (Reference): Department, Cost Head Code, Cost Category, Variance Threshold % (above which = flag for investigation), Nature (Revenue/Expenditure)
+
+OUTPUT VARIANCE ANALYSIS TAB:
+For each Cost Head, for current month:
+- Budget (₹), Actual (₹), Variance = Actual − Budget (₹), Variance % = Variance/Budget×100
+- Flag: Favorable (actual < budget for costs) or Unfavorable (actual > budget)
+- Investigation flag: If |Variance %| > threshold from Z Tab → "Review Required"
+- YTD columns: YTD Budget, YTD Actual, YTD Variance (₹ and %)
+
+DEPARTMENT ROLLUP:
+- Subtotal rows for each department: Sum of all cost heads in that department
+- Grand Total row
+
+MANAGEMENT SUMMARY at top:
+- Total Budget this month, Total Actual, Total Variance %, Favorable cost heads count, Unfavorable count, Under investigation count
+- Conditional formatting: Red = Unfavorable + exceeds threshold, Amber = Unfavorable within threshold, Green = Favorable
+
+All formulas using SUMIFS from X Tab with department and cost head code filters. Give complete setup.`
+            },
+            {
+                title:'YTD Trend Analysis & Variance Commentary System',
+                text:`I have a Budget vs Actual sheet in Google Sheets. X Tab: monthly actuals (Month, Department, Cost Head Code, Actual Amount). Y Tab: budget master (Cost Head, Monthly Budget Jan–Dec, Annual Budget). Z Tab: variance thresholds and cost categories.
+
+Build two extensions:
+
+EXTENSION 1 — FULL YEAR YTD TREND ANALYSIS:
+- 12-month grid: One tab showing all 20 cost heads with columns Jan through Dec + Full Year Total
+- Each cell: Actual vs Budget in format "₹X.X L / ₹X.X L" and color-coded (red = over budget, green = under budget)
+- Running YTD columns: YTD Actual, YTD Budget, YTD Variance %, YTD Variance Flag
+- Full-year projection: At current YTD run rate, what will year-end actual be? = (YTD Actual / Months elapsed) × 12
+- Projected vs Annual Budget: Will we finish over or under budget for the year?
+- Cost Head run-rate analysis: Which costs are accelerating (spending more per month over time) vs decelerating?
+
+EXTENSION 2 — VARIANCE COMMENTARY SYSTEM:
+- For each cost head with "Review Required" flag, add a structured commentary column:
+  - Auto-prompt: "Variance is X% unfavorable. [Department] [Cost Head] is ₹X above budget. Please explain."
+  - Commentary input field (manual text entry by budget owner)
+  - Commentary date and submitted by (manual)
+  - Resolution status: Explained / Under Review / Approved Override / Escalated
+- Management tracking: How many variances are "Explained" vs still under review?
+- History: Keep prior months' commentary on separate archive rows — don't overwrite
+
+BUDGET REFORECAST TOOL:
+- If actuals deviate significantly, allow budget owner to enter a Revised Budget for remaining months
+- Show: Original Budget, Revised Budget, Actual, Variance vs Original, Variance vs Revised
+- Reforecast accuracy: Actual vs revised budget % — is reforecast improving accuracy?
+
+Provide all YTD formulas with dynamic month count (months elapsed = count of months with actual data), projection formula, and commentary tracking layout.`
+            },
+            {
+                title:'Finance MIS Variance Report for CFO',
+                text:`I manage budgets and financials for a company. My Google Sheets has: X Tab (monthly actuals: Month, Department, Cost Head, Actual Amount), Y Tab (budget master: monthly budgets, annual budgets, budget owner), Z Tab (cost categories and variance thresholds). I need a monthly Variance MIS for CFO review.
+
+BUILD A CFO-LEVEL VARIANCE MIS WITH:
+
+1. EXECUTIVE VARIANCE SUMMARY:
+   - This month: Total Expenditure Budget, Total Actual, Net Variance (₹ and %), favorable vs unfavorable count
+   - YTD: Total Budget, Total Actual, Net YTD Variance, Year-end projection
+   - Top 3 Unfavorable variances this month: Cost head, department, variance ₹, variance %, reason (from commentary)
+   - Top 3 Favorable variances: Where are we saving vs budget?
+   - Overall budget health: Are we on track to finish within annual budget? Yes/No with gap amount
+
+2. DEPARTMENT P&L VARIANCE:
+   - Department-wise summary table: Budget, Actual, Variance ₹, Variance %, Status
+   - Which department is most over-budget? Most under-budget?
+   - Fixed cost variance vs Variable cost variance (separate using Cost Category from Z Tab)
+   - Fixed costs should be near zero variance — flag fixed costs with >5% variance (should not happen)
+
+3. TREND ANALYSIS:
+   - Monthly variance trend for last 6 months: Are variances improving or worsening?
+   - Chronically over-budget cost heads: Cost heads that exceeded budget in 3+ of last 6 months — list with average overage %
+   - Seasonal patterns: Which months historically have highest overruns? (for next year budgeting)
+
+4. BUDGET UTILIZATION RATE:
+   - How much of the annual budget has been consumed YTD? = YTD Actual / Annual Budget × 100
+   - Expected utilization at this point in year = Months elapsed / 12 × 100
+   - If utilization > expected: Risk of overshooting annual budget
+   - Remaining budget: Annual Budget − YTD Actual — how many months can it last at current run rate?
+
+5. CFO ACTION LIST:
+   - Auto-generate: Cost heads with "Escalated" commentary status — needs CFO decision
+   - Budget revision requests: Cost heads where reforecast was submitted — show original vs revised
+   - Capital vs Revenue expenditure split (if CapEx/RevEx category in Z Tab)
+
+Provide all formulas, trend calculation using AVERAGEIFS with month filters, and one-page CFO summary format.`
+            }
+        ]
     },
 
     'mis-auto-reporting': {
         icon:'⚡', badge:'mis', title:'Automated Daily / Weekly MIS',
-        desc:'MIS that builds itself -- just update the raw data',
-        problem:['Daily MIS prepared manually takes 1-2 hours every morning','Calculations done by multiple people, inconsistent results','Deadline pressure introduces typos in critical numbers','Only data entry work done, no time for analysis or decisions'],
+        desc:'MIS that builds itself — just update the raw data',
+        problem:['Daily MIS prepared manually takes 1–2 hours every morning','Calculations done by multiple people, inconsistent results','Deadline pressure introduces typos in critical numbers','Only data entry work done, no time for analysis or decisions'],
         solution:['MIS auto-generates from raw data entry in under 5 minutes','All formulas consistent, recalculated by machine not human','Zero typo risk, formulas auto-round and format','Time freed for actual insights and action planning'],
-        prompts:{
-            chatgpt:'Build an Automated Daily MIS system in Google Sheets. I enter raw data daily in one tab: Date, Department, Metric name, Actual value. The system should auto-generate: Daily MIS summary showing all departments and metrics for today, Week-to-date summary, Month-to-date summary, Comparison to yesterday and last week. Output tab should be print-ready. No manual calculation needed.',
-            claude:'Create an Automated MIS Reporting system in Google Sheets. Input: one raw data tab where I enter Date, Department, Metric, Value daily. Outputs: Auto-generated Daily Dashboard (today vs yesterday vs WTD vs MTD), Weekly MIS (7-day trend per metric), Monthly MIS (daily trend + month summary). All output tabs update automatically when new data is entered. Include data validation for input tab.',
-            gemini:'Design an Auto-generating MIS system in Google Sheets. One input tab: Date, Department, Metric, Value. Auto-create: Daily snapshot comparing today vs yesterday vs WTD vs MTD. Weekly trend per department. Monthly summary. All tabs update when input data changes. Include drop-down data validation for Department and Metric.',
-            perplexity:'How to build a self-generating MIS in Google Sheets where: I only enter raw data in one tab, all other tabs auto-calculate Daily/Weekly/Monthly summaries, comparisons to prior periods are automatic? Best formulas: SUMIFS, FILTER, dynamic date references. Explain the architecture.',
-            notebooklm:'Document an Automated MIS Reporting system in Google Sheets. Cover: input tab structure (Date/Department/Metric/Value), formula logic for Daily/Weekly/Monthly auto-summaries, dynamic date references (TODAY function use), data validation setup, how to add new metrics, troubleshooting missing data, process for daily update. Include example metrics for a manufacturing MIS.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Automated Daily MIS',
+                text:`I want to build an Automated Daily MIS system in Google Sheets that generates itself from raw data. Here is the complete structure:
+
+TAB STRUCTURE:
+- X Tab (Raw Data Input): Date, Department (drop-down: Sales/Operations/Finance/HR/Logistics), Metric Name (drop-down from Y Tab list), Actual Value, Unit, Entered By, Entry Timestamp
+- Y Tab (Metric Master): Department, Metric Name, Metric Code, Unit, Daily Target, Weekly Target, Monthly Target, Metric Type (Sum = add daily values / Average = average daily values / Last = use most recent entry), Higher is Better (Yes/No)
+- Z Tab (Reference): Department, Working Days this month (count), Reporting cutoff time, Escalation contacts
+
+OUTPUT TABS (all auto-generate when X Tab is updated):
+
+DAILY MIS TAB (today's view):
+- For each metric with data for TODAY(): Metric Name, Today's Actual, Daily Target, Achievement % = Actual/Target×100, Status (Green/Amber/Red), vs Yesterday (change %)
+- Use TODAY() to filter X Tab: only show rows where Date = TODAY()
+- Blank if metric not yet entered today — with "Pending" placeholder
+- Summary at top: Total metrics, Reported today, Pending today, Overall green count
+
+Data Validation setup for X Tab: Department and Metric Name dropdowns linked to Y Tab to prevent free-text errors. Give complete formula set for Daily MIS tab using SUMIFS with TODAY() and metric type logic from Y Tab.`
+            },
+            {
+                title:'Auto-Generate Weekly & Monthly MIS Views',
+                text:`I have an Automated MIS in Google Sheets with X Tab (Date, Department, Metric Name, Actual Value), Y Tab (Metric Master: targets, metric type), Z Tab (reference). Daily MIS tab is working. Now I need Weekly and Monthly auto-generated views.
+
+WEEKLY MIS TAB (auto-generated):
+- Current week definition: Monday to Sunday (use WEEKNUM and WEEKDAY formulas)
+- For each metric: WTD Actual (SUMIFS or AVERAGEIFS based on Metric Type from Y Tab, filtered by current week dates), Weekly Target, Achievement %, vs Last Week WTD (same calculation for prior week dates), WOW Change %
+- 7-day daily breakdown table: Metric vs Day (Mon–Sun) grid showing each day's value — for spotting day-of-week patterns
+- Week summary: Which metrics hit weekly target, which missed?
+- Dynamic week display: Show "Week of [Monday date] to [Sunday date]" using formula
+
+MONTHLY MIS TAB (auto-generated):
+- MTD Actual for each metric (SUMIFS with MONTH(Date) = current month and YEAR = current year)
+- Monthly Target (from Y Tab), Achievement %, Days elapsed vs working days (pace indicator)
+- Run rate projection: (MTD Actual / Days elapsed) × Working days in month = Projected month-end
+- Will we hit target? Projected vs Monthly Target — Yes/No with gap
+- MOM comparison: Current MTD vs prior full month actuals
+- MTD daily trend: Table of Date vs Actual for current month (for sparkline chart input)
+
+AUTOMATED REPORTING FLOW:
+- How to set up a named range or trigger so that when X Tab is updated, all other tabs instantly refresh (no manual F5 needed — explain Google Sheets automatic recalculation)
+- Input validation rules that prevent: future dates in X Tab, invalid metric names not in Y Tab, duplicate entries (same date + department + metric)
+
+Give all formulas for WTD calculation with dynamic week dates and MTD projection logic.`
+            },
+            {
+                title:'Exception Alerts & MIS Distribution System',
+                text:`I have a fully automated MIS in Google Sheets with X Tab (daily raw data), Y Tab (metric targets and definitions), Z Tab (reference), and auto-generated Daily/Weekly/Monthly MIS tabs. Now I need the final layer: exception alerts and distribution system.
+
+BUILD THE EXCEPTION & ALERT SYSTEM:
+
+EXCEPTION ALERT TAB:
+- Auto-scan all metrics daily and flag: Missing data (metric in Y Tab but no entry in X Tab for today), Metric below threshold (actual < 80% of daily target = Red alert), Metric significantly off-track (if continued at current pace, will miss monthly target by >15%), Sudden drop (today's value < 70% of yesterday's value — abnormal change), Repeated miss (metric has been Red for 3+ consecutive days)
+- Alert list format: Alert Type, Department, Metric, Actual, Target, Gap, Consecutive Red Days (COUNTIFS check), Responsible Person from Y Tab
+- Priority scoring: Combine severity (how far off target) × frequency (how many days Red) = Priority Score — sort by priority
+- Resolved alerts: When a metric returns to Green, mark prior alert as "Resolved" with date
+
+WEEK-ON-WEEK SNAPSHOT (for email distribution):
+- Design a clean, text-based summary tab that can be copied and pasted into an email or WhatsApp:
+  "WEEKLY MIS SNAPSHOT — [Week Date]
+   SALES: Revenue ₹X.X L | Achievement 87% | ↓ vs last week
+   OPERATIONS: Output X units | Efficiency 92% | ↑ vs last week
+   [etc. for all departments]
+   RED FLAGS: [list of metrics still Red]"
+- This format auto-populates from Weekly MIS tab formulas — just copy and paste to share
+
+DATA ENTRY COMPLIANCE TRACKER:
+- For each department, track daily data entry compliance: Was all required data entered by Z Tab cutoff time? Score: 0/1 per metric per day
+- Monthly compliance rate per department: % of days where data was entered on time
+- Hall of shame: Department with lowest compliance — flag for management
+
+FORMULA AUDIT TRAIL:
+- Any number in Daily/Weekly/Monthly MIS should be traceable: Enter a metric name + date → FILTER formula shows all raw X Tab entries that make up that number — for verification and dispute resolution
+
+Provide all formulas, exception detection logic with COUNTIFS for consecutive days, and WhatsApp-friendly text output formula (using CONCATENATE or TEXTJOIN).`
+            }
+        ]
     },
 
     'mis-pivot-analysis': {
         icon:'🔄', badge:'mis', title:'Pivot & Trend Analysis Dashboard',
-        desc:'Slice and dice your data to find patterns -- no manual work',
+        desc:'Slice and dice your data to find patterns — no manual work',
         problem:['Management asks "what if we slice by region and product?" every meeting','Manual pivot tables take 30 minutes to set up and break after data refresh','Trend analysis done visually looking at numbers, no rigorous math','Same analysis requested every month, redone from scratch every time'],
         solution:['Dynamic pivot views created once, refreshed automatically','Trend calculated automatically (MOM %, QOQ %, YOY)','Trends visualized with charts, not guesswork','Templates saved and reused monthly, zero rework'],
-        prompts:{
-            chatgpt:'Build a Pivot & Trend Analysis Dashboard in Google Sheets for sales data. Raw data: Date, Region, Product Category, Product, Sales Rep, Revenue, Qty. Auto-create pivot views: Revenue by Region by Month, Revenue by Product Category, Top 10 Products by Revenue, Sales Rep performance ranking. Calculate: MOM growth %, QOQ growth %, YTD vs last year. Show trend arrows (↑↓→) for each metric.',
-            claude:'Create a comprehensive Pivot & Trend Analysis system in Google Sheets. Raw data: Date, Region, Product, Category, Sales Rep, Revenue, Qty, Returns. Build dynamic pivot summaries using SUMIFS: Region x Month matrix, Product Category x Quarter view, Sales Rep ranking with MOM growth. Auto-calculate: MOM %, QOQ %, YOY comparison. Trend indicators. Interactive month/quarter filter using data validation dropdowns.',
-            gemini:'Design a Trend Analysis Dashboard for Google Sheets. Sales raw data: Date, Region, Product, Sales Rep, Revenue, Qty. Create: Region-wise monthly pivot, Product category performance, Sales rep ranking. Auto-show: MOM growth, QOQ trend, YTD comparison. Filter by region and product using dropdowns. Trend arrows (↑↓) for each metric.',
-            perplexity:'How to build a dynamic Pivot and Trend Analysis in Google Sheets without manually refreshing pivot tables? Need: SUMIFS-based pivot by region/product/month, MOM and YOY growth formulas, dropdown filters, trend arrows. Best approach for MIS reporting?',
-            notebooklm:'Document a Pivot and Trend Analysis system for Google Sheets. Cover: raw data structure requirements, SUMIFS pivot formula patterns, MOM/QOQ/YOY growth formulas, dropdown filter setup, trend arrow logic, adding new dimensions (region/product), monthly update process. Include examples of pivot layouts used in manufacturing MIS.'
-        }
+        prompts:[
+            {
+                title:'Build the Core SUMIFS-Based Pivot System',
+                text:`I want to build a dynamic Pivot and Trend Analysis system in Google Sheets without using built-in pivot tables (which break when data refreshes). I want formula-based pivots using SUMIFS. Here is the structure:
+
+RAW DATA (X Tab): Date, Region (North/South/East/West), State, Product Category (Electronics/Apparel/Home/FMCG), Product Name, Product Code, Sales Rep, Revenue (₹), Units Sold, Returns (units), Discount % given
+
+REFERENCE TABS:
+- Y Tab: Product Code, Product Name, Category, Cost Price, Supplier — for enrichment
+- Z Tab: Region, State, Zone mapping — for geographic rollup
+
+BUILD THESE FORMULA-BASED PIVOT VIEWS:
+
+PIVOT 1 — Region × Month Revenue Matrix:
+- Rows: 4 Regions (North/South/East/West)
+- Columns: Jan, Feb, Mar … Dec, Full Year Total
+- Each cell: SUMIFS(Revenue, Region=row, MONTH(Date)=column month, YEAR(Date)=current year)
+- Totals: Column totals (all regions per month) and Row totals (all months per region)
+- % of total column: Each cell as % of that month's total revenue
+
+PIVOT 2 — Product Category × Region:
+- Rows: 4 Product Categories
+- Columns: 4 Regions
+- Each cell: SUMIFS(Revenue, Category=row, Region=column)
+- Category totals and Region totals
+- % contribution of each Category-Region cell to grand total
+
+PIVOT 3 — Sales Rep Performance:
+- Rows: All Sales Reps (use unique list from Z Tab or UNIQUE formula)
+- Columns: Revenue, Units, Returns, Return Rate %, Avg Discount %, Rank
+- Sorted by Revenue descending
+
+Give complete SUMIFS formulas for all three pivots with dynamic month references using DATE and MONTH functions.`
+            },
+            {
+                title:'MOM, QOQ & YOY Trend Calculations',
+                text:`I have a sales data sheet in Google Sheets. X Tab: Date, Region, Product Category, Sales Rep, Revenue, Units Sold. Y Tab: Product master. Z Tab: Region/State mapping. I have SUMIFS-based pivot views. Now I need comprehensive trend analysis.
+
+BUILD FULL TREND ANALYSIS MODULE:
+
+MONTH-ON-MONTH (MOM) ANALYSIS:
+- For each Region and Product Category: Current month revenue, Prior month revenue, MOM Change (₹), MOM Change % = (Current − Prior)/Prior×100
+- Trend arrow logic: ↑ if MOM > +5%, ↓ if MOM < −5%, → if within ±5%
+- Best MOM month in current year: Which month had highest MOM growth? MAXIFS approach
+- Consecutive growth/decline: Has Region X grown 3+ months in a row? (COUNTIFS check on monthly values)
+
+QUARTER-ON-QUARTER (QOQ) ANALYSIS:
+- Define quarters: Q1=Jan–Mar, Q2=Apr–Jun, Q3=Jul–Sep, Q4=Oct–Dec
+- Use IFS(MONTH()<=3,"Q1", MONTH()<=6,"Q2"...) to assign quarter to each row
+- Q1 vs Q2 vs Q3 vs Q4 revenue: SUMIFS with quarter filter
+- QOQ growth for each quarter vs prior quarter
+- Best and worst quarter this year per Region and Category
+
+YEAR-ON-YEAR (YOY) ANALYSIS:
+- Current year (YEAR(Date)=current year) vs prior year revenue
+- YOY growth % per Region, per Category, per Sales Rep
+- YOY growth by month: Jan this year vs Jan last year, Feb vs Feb, etc. — show which months improved
+- Cumulative YTD this year vs same period last year: SUMIFS with YEAR and MONTH ≤ current month filter
+
+COMPOUND TREND:
+- 3-month rolling average: For each month, average of last 3 months revenue (smooths volatility)
+- Is trend accelerating? Compare average monthly growth in last 3 months vs average in prior 3 months
+
+Provide all formulas with dynamic year/quarter/month references and rolling average logic.`
+            },
+            {
+                title:'Interactive Trend Dashboard with Dropdown Filters',
+                text:`I have a sales analysis system in Google Sheets with X Tab (Date, Region, Product Category, Sales Rep, Revenue, Units), Y Tab (product master), Z Tab (region mapping), and SUMIFS-based pivots with MOM/QOQ/YOY trend calculations.
+
+Build an Interactive Trend Dashboard with user-controlled filters:
+
+DROPDOWN FILTER CONTROLS (using Data Validation):
+- Filter 1: Select Region (All / North / South / East / West)
+- Filter 2: Select Product Category (All / Electronics / Apparel / Home / FMCG)
+- Filter 3: Select Time Period (Current Month / Current Quarter / YTD / Full Year / Last 12 Months)
+- Filter 4: Select Metric (Revenue / Units Sold / Return Rate / Avg Discount)
+
+DYNAMIC PIVOT TABLE (responds to all 4 filters):
+- When Region = "All": Show all regions; when specific region selected, show only that region's data, broken by State (using Z Tab mapping)
+- When Category = "All": Show all categories; when specific selected, show only that category broken by Product
+- Formula approach: Use IF(Filter1="All", SUMIFS(all), SUMIFS(Region=Filter1)) pattern for each cell
+
+TREND CHART DATA (auto-updates with filter):
+- 12-month trend line: Monthly values for selected Region + Category combination
+- Table: Month, Selected Metric Value — updates based on dropdown selections
+- MOM change % for each month in the trend
+- This table feeds a line chart showing selected dimension's trend
+
+TOP 10 TABLE (dynamic):
+- When filtered to a Region: Show Top 10 Sales Reps in that region by selected metric
+- When filtered to a Category: Show Top 10 Products in that category
+- Use LARGE + INDEX/MATCH or SORT formula for dynamic ranking
+
+COMPARISON MODE:
+- Add second dimension filter: Compare Region A vs Region B side by side
+- Show: Selected metric for Region A, Region B, Difference (₹ and %), Winner indicator
+
+Provide all IF-wrapped SUMIFS formulas for filter logic, dropdown data validation setup, and dynamic chart table formulas.`
+            }
+        ]
     },
 
     'mis-data-cleaning': {
         icon:'🧹', badge:'mis', title:'Data Cleaning & Validation Tool',
-        desc:'Clean messy data fast -- duplicates, blanks, format errors',
+        desc:'Clean messy data fast — duplicates, blanks, format errors',
         problem:['Branch data arrives with typos ("Mumbai" vs "MUMBAI" vs "Bombay")','Same invoice entered twice by different staff, skewing totals','Blank cells in critical columns cause formulas to show errors','MIS manager spends 2 hours cleaning before analysis possible'],
         solution:['Text inconsistencies auto-detected and highlighted','Duplicates identified and marked with alert','Blank cells in required fields highlighted red','Data quality score shows % clean, clean data ready in 15 minutes'],
-        prompts:{
-            chatgpt:'Build a Data Cleaning and Validation tool in Google Sheets. I receive raw data monthly with issues: duplicate rows, blank cells in key columns, inconsistent text formats (e.g. "Mumbai" vs "mumbai" vs "MUMBAI"), numbers stored as text, date format mismatches. Build a checker sheet that: flags all duplicates, highlights blanks in required columns, standardizes text case, converts text-numbers to actual numbers, shows a data quality score at top (% clean vs % issues).',
-            claude:'Create a Data Quality and Cleaning system for Google Sheets. Input: raw data sheet (up to 5000 rows). Build a validation tab that auto-checks: duplicate rows (highlight + count), blank cells in required columns (Name, Date, Amount, Branch), text case inconsistencies, numbers stored as text, date format errors. Output: Data Quality Summary showing issue count by type, cleaned data tab with auto-fixes applied, error log for manual review items.',
-            gemini:'Design a Data Cleaning Dashboard for Google Sheets. For a raw data sheet with up to 5000 rows, auto-detect: duplicate entries, blanks in key columns, text format inconsistencies, numbers stored as text. Show: data quality score (%), issues by type, flagged rows. Include formulas to standardize text and fix common errors.',
-            perplexity:'How to build a Data Quality Checker in Google Sheets that automatically: finds duplicate rows, highlights blanks in required columns, identifies numbers stored as text, flags date format inconsistencies? What are the best formulas (COUNTIF, ISBLANK, ISNUMBER, etc.) and layout for a MIS data cleaning tool?',
-            notebooklm:'Write a complete guide on Data Cleaning and Validation in Google Sheets for MIS teams. Cover: identifying and removing duplicates (COUNTIF method), required field blank detection, text standardization (TRIM, PROPER, LOWER), number-text conversion, date format validation, building a data quality score, common data issues from branch submissions and how to fix them. Include a data quality checklist for MIS managers.'
-        }
+        prompts:[
+            {
+                title:'Build the Core Data Quality Checker',
+                text:`I want to build a Data Cleaning and Validation system in Google Sheets. I receive raw data monthly from 8 branches (up to 5,000 rows) with these common problems: duplicate rows, blank cells, inconsistent text formats, numbers stored as text, date format mismatches. Here is the structure:
+
+TAB STRUCTURE:
+- X Tab (Raw Data — untouched): Invoice No, Date, Branch Code, Product Code, Customer Name, Revenue (₹), Units, Sales Rep Name — this is the raw data as received, never edited
+- Y Tab (Master Reference): Valid Branch Codes list, Valid Product Codes list, Valid Sales Rep Names, Required columns list (columns that cannot be blank)
+- Z Tab (Cleaning Rules): Column Name, Rule Type (Must Not Be Blank / Must Be Positive Number / Must Match List / Must Be Valid Date / Must Be Unique), Error Severity (Critical/Warning)
+
+VALIDATION CHECKER TAB (auto-generated):
+For each row in X Tab, check:
+1. BLANK CHECK: Is any required column (from Z Tab) blank? → ISBLANK or LEN=0 check → flag "BLANK: [column name]"
+2. DUPLICATE CHECK: Is this row a duplicate of another row? COUNTIFS(Invoice No, Date, Revenue) > 1 → flag "DUPLICATE"
+3. BRANCH CODE VALIDATION: Does Branch Code exist in Y Tab valid list? COUNTIF(Y Tab branch list, this cell) = 0 → flag "INVALID BRANCH"
+4. PRODUCT CODE VALIDATION: Same approach for Product Code
+5. NUMBER FORMAT CHECK: Is Revenue stored as text (not number)? → ISNUMBER check → flag "TEXT AS NUMBER"
+6. DATE FORMAT CHECK: Is Date a valid date? ISNUMBER(DATEVALUE(cell)) — flag "INVALID DATE"
+
+OUTPUT: Validation Status column (CLEAN / ERRORS FOUND), Error Detail column (lists all errors in that row), Error Count column (how many issues per row)
+
+DATA QUALITY SCORE at top: Total rows, Clean rows, Error rows, Error rate %, Critical errors count, Warning count. Give complete formula set.`
+            },
+            {
+                title:'Auto-Cleaning & Standardization Formulas',
+                text:`I have a Data Quality Checker in Google Sheets with X Tab (raw data: Invoice No, Date, Branch Code, Product Code, Customer Name, Revenue, Units, Sales Rep), Y Tab (valid reference lists), Z Tab (cleaning rules), and Validation Checker tab showing errors per row.
+
+Now build the Auto-Cleaning layer:
+
+CLEANED DATA OUTPUT TAB (formula-based, not manual):
+For each column, apply cleaning formulas that output a corrected version:
+
+1. BRANCH CODE CLEANER:
+   - Formula: TRIM(UPPER(X Tab Branch Code)) — removes spaces, makes uppercase
+   - Fuzzy match for common errors: IF(UPPER(TRIM(cell))="MUMBAI", "MUM01", IF(...)) for known aliases — build lookup from Y Tab alias mapping column
+   - If still not found in Y Tab after cleaning: Flag "UNRESOLVABLE"
+
+2. TEXT COLUMN CLEANERS:
+   - Customer Name: TRIM(PROPER(cell)) — remove extra spaces, capitalize properly
+   - Sales Rep Name: TRIM(PROPER(cell))
+   - Remove leading/trailing spaces from all text columns: TRIM wrapper
+
+3. NUMBER CLEANERS:
+   - Revenue stored as text "₹1,23,456": VALUE(SUBSTITUTE(SUBSTITUTE(cell,"₹",""),",","")) — strip currency symbol and commas, convert to number
+   - Units stored as "150 units": VALUE(REGEXEXTRACT(cell,"[0-9]+")) — extract numeric part only (Google Sheets)
+   - Negative revenue: IF(Revenue<0, ABS(Revenue), Revenue) — flip negatives (data entry error assumed)
+
+4. DATE CLEANERS:
+   - Dates entered as "15-Jan-25" or "15/01/25" or "Jan 15, 2025": DATEVALUE approach for each format
+   - Year ambiguity: Dates with year "25" → add 2000 to get 2025 using TEXT and VALUE
+
+5. DUPLICATE HANDLER:
+   - Mark first occurrence of duplicate as "KEEP", subsequent as "DUPLICATE — DELETE"
+   - COUNTIFS with rows above current row: =COUNTIFS(Invoice No column, current cell, row number, "<="&current row)=1 → KEEP
+
+RECONCILIATION CHECK:
+- Sum of cleaned Revenue tab vs Sum of X Tab Revenue — should match unless errors corrected values
+- Count of rows in clean tab vs X Tab — difference = duplicates removed
+
+Provide all formulas, SUBSTITUTE approach for currency text, and duplicate row marking formula.`
+            },
+            {
+                title:'Data Quality MIS & Cleaning Process Documentation',
+                text:`I manage MIS for a company that receives data from 8 branches monthly. My Google Sheets has: X Tab (raw 5,000-row data), Y Tab (valid reference lists), Z Tab (cleaning rules), Validation Checker tab (error flags per row), Cleaned Data tab (auto-cleaned version). I need a complete Data Quality MIS and process system.
+
+BUILD A DATA QUALITY MIS WITH:
+
+1. DATA QUALITY SCORECARD:
+   - Overall data quality score: Clean rows / Total rows × 100
+   - Branch-wise quality score: COUNTIFS(clean rows, branch) / COUNTIFS(total rows, branch) — which branch submits cleanest data?
+   - Error type distribution: Count of Blank errors, Duplicate errors, Invalid Code errors, Format errors — which error type is most common?
+   - Quality trend: If you have prior month data — is data quality improving or declining MOM?
+   - Branch quality ranking: Rank 8 branches from cleanest to dirtiest data — for management action
+
+2. ERROR IMPACT ANALYSIS:
+   - Revenue at risk: Sum of revenue in error rows — how much revenue is potentially wrong?
+   - Critical vs Warning breakdown: Critical errors that will cause wrong MIS vs warnings that are cosmetic
+   - Errors by column: Which column has most errors? (Revenue, Date, Branch Code, etc.)
+   - Unresolvable errors: Rows that cannot be auto-cleaned — need manual correction — list them with details
+
+3. MONTHLY CLEANING LOG:
+   - Track per month: Raw rows received, Errors found, Auto-cleaned rows, Manually corrected rows, Final clean rows, Time to clean (manual entry), Who cleaned
+   - Cleaning efficiency trend: Are errors reducing over time as branches improve?
+
+4. BRANCH FEEDBACK REPORT:
+   - Auto-generate a per-branch error report: "Branch MUM01 submitted 450 rows. Found 23 errors: 8 blank dates, 10 invalid product codes, 5 duplicates. Please correct and resubmit rows [list row numbers]."
+   - Use TEXTJOIN or CONCATENATE to build this message from error data
+   - Error detail list per branch: FILTER(Validation tab, Branch Code = selected branch, Error Status = "ERRORS FOUND")
+
+5. DATA CLEANING STANDARD OPERATING PROCEDURE (SOP) in a dedicated tab:
+   - Step-by-step monthly cleaning process: Receive data → Run validation → Review quality score → Auto-clean → Manual fix critical errors → Reconcile → Approve for MIS → Archive
+   - Common error patterns by branch: Which branches consistently make which errors?
+   - Escalation rule: If quality score <80%, reject and send back to branch for correction before MIS
+
+Provide all formulas, FILTER formula for branch-wise error list, TEXTJOIN for error messages, and SOP tab layout.`
+            }
+        ]
     },
 
     'mis-executive-deck': {
         icon:'📑', badge:'mis', title:'Executive MIS Deck Preparation',
         desc:'Turn your MIS data into a management-ready presentation',
-        problem:['After MIS done on Friday, 4 hours spent building presentation deck','Charts recreated manually, prone to formula errors in overnight numbers','Data dumped into slides without insight -- no "so what"','Board asks questions, answers not in deck because analysis not done'],
+        problem:['After MIS done on Friday, 4 hours spent building presentation deck','Charts recreated manually, prone to formula errors in overnight numbers','Data dumped into slides without insight — no "so what"','Board asks questions, answers not in deck because analysis not done'],
         solution:['MIS structured for slide-ready output with built-in insights','Key insights auto-calculated and highlighted','Story-driven structure forces analysis during MIS prep','Board questions anticipated and answered in advance'],
-        prompts:{
-            chatgpt:'I have a monthly MIS report with: Revenue (actual vs target), Production output, Collection %, Vendor payables, Headcount, and Key issues. Help me structure a 10-slide Executive MIS Deck. For each slide give me: Slide title (insight-first, not just label), What chart/table to use, What data goes in it, The one key takeaway message. Make it story-driven -- what happened, why, and what action is needed.',
-            claude:'Create a framework for converting Monthly MIS data into an Executive Presentation. I have MIS data covering: Sales (revenue, target, achievement by region), Operations (production, downtime, efficiency), Finance (collections, payables, cash flow), HR (headcount, attrition). Build a 12-slide deck structure: each slide with insight-driven title, chart type, data to show, narrative guidance, and recommended action. Format as a management review deck -- focus on exceptions, trends, and decisions needed.',
-            gemini:'Design a 10-slide Monthly MIS Executive Deck structure. Data available: revenue vs target, production output, quality metrics, collections, payables, HR metrics. For each slide: insight-first headline, chart type (bar/line/table), key data points, one-line insight. Make it boardroom-ready -- no data dumps, only decisions and actions.',
-            perplexity:'How should I structure a Monthly Management MIS Presentation? I have data on: Sales performance, Production, Finance (collections and payables), HR. What is the best 10-12 slide structure? What chart types work for each section? How do I write insight-first slide titles instead of just labeling the data?',
-            notebooklm:'Create a complete guide on preparing an Executive MIS Deck from monthly data. Cover: slide structure (10-12 slides), insight-first titling (not "Sales Data" but "Revenue 8% below target -- North region under-performing"), chart type selection for different metrics, MOM comparison slide, exception reporting approach, how to present variance and action items, deck review checklist. Include slide-by-slide template for manufacturing company MIS.'
-        }
+        prompts:[
+            {
+                title:'Design the 10-Slide Executive MIS Deck Structure',
+                text:`I have completed my Monthly MIS in Google Sheets covering: Revenue vs Target, Production Output, Quality Metrics, Collections, Vendor Payables, Headcount, and Attrition. Now I need to convert this into a 10-slide Executive MIS Deck for a board/management review.
+
+Give me a complete slide-by-slide structure where every slide has:
+- Slide title (insight-driven headline, not just a label — e.g., "Revenue 8% below target — North region underperforming" not "Sales Dashboard")
+- What chart or table to use (bar chart / line chart / data table / scorecard / text only)
+- Exactly what data goes into that chart/table (pull from which MIS metrics)
+- The one key message each slide must land (what should the audience think when they see this slide?)
+- One recommended action or decision request (what should management DO based on this slide?)
+
+DECK NARRATIVE ARC (make it a business story, not a data dump):
+- Slide 1: Executive Summary — What happened this month in 90 seconds? (3 wins, 3 concerns, 1 decision needed)
+- Slide 2: Revenue Performance — Did we hit target? By how much? Which part of business drove the gap?
+- Slide 3: Regional/Segment Breakdown — Where is the problem? Where is the opportunity?
+- Slide 4: Operations Performance — Are we producing efficiently?
+- Slide 5: Quality & Delivery — Are we delivering on our promises to customers?
+- Slide 6: Financial Health — Collections, Payables, Cash position
+- Slide 7: People & HR — Team capacity, attrition risk, cost
+- Slide 8: MOM Trend — Are things getting better or worse? (3-6 month trend for top 5 KPIs)
+- Slide 9: Key Risks & Escalations — What needs immediate management attention?
+- Slide 10: Actions & Decisions Required — Who does what by when?
+
+For each slide, give insight-first headline formula (e.g., "[Metric] is [X%] [above/below] target because [reason]. Action: [recommended response]").`
+            },
+            {
+                title:'Build the Insight-First Narrative for Each Slide',
+                text:`I am preparing a Monthly MIS Executive Deck for a manufacturing company. My MIS data shows: Revenue ₹4.2 Cr vs Target ₹4.8 Cr (87.5% achievement), North region at 65% vs South at 103%, Production at 94% efficiency, Quality pass rate 96.2%, Collection ₹3.8 Cr vs target ₹4.5 Cr, Overdue payables ₹1.2 Cr, Headcount 248 vs plan 260, Attrition 3 exits this month.
+
+For each of the 10 slides in my deck, write:
+
+1. THE INSIGHT-FIRST HEADLINE (not just a label): The headline itself should convey the message. Someone reading only headlines should understand the month's story.
+
+2. THE DATA STORY (2–3 bullet points): What the data shows, what's driving it, what it means.
+
+3. THE MANAGEMENT QUESTION this slide answers: What question is management asking? (e.g., "Why did we miss revenue target?" "Is the collection gap a risk to cash flow?")
+
+4. THE RECOMMENDED ACTION OR DECISION: Specific, actionable — not generic. "Assign 2 additional sales resources to North region by [date]" not "improve North region performance."
+
+5. THE FOLLOW-UP QUESTION TO ANTICIPATE: What will the CEO/MD ask after seeing this slide? Prepare the answer in the notes.
+
+USE THIS DATA to write actual content (not templates) for all 10 slides. Make the narrative logical: each slide should flow into the next, building a coherent picture of what happened and what to do. The deck should end with 3–5 specific decisions that management needs to make before the next meeting.`
+            },
+            {
+                title:'Google Sheets to Presentation — Data Flow & Chart Guide',
+                text:`I have a Monthly MIS in Google Sheets with auto-calculated tabs for Sales, Operations, Finance, HR, and a Master Dashboard. I am building a 10-slide Executive Deck in Google Slides or PowerPoint. I need a system to efficiently move data from Google Sheets to the presentation with minimum manual work and maximum accuracy.
+
+BUILD A DATA-TO-DECK WORKFLOW WITH:
+
+1. CHART DATA TABLES IN GOOGLE SHEETS (one tab called "Deck Data"):
+   - Pre-structured tables ready to paste into presentation charts
+   - Revenue chart data: Month, Actual Revenue, Target Revenue, Achievement % — 6 months of data for trend slide
+   - Regional comparison chart: Region, Actual, Target, Achievement % — for bar chart
+   - KPI scorecard table: Department, Metric, Actual, Target, Status (color code) — for executive summary table
+   - Trend data table: Last 6 months for top 5 KPIs — for multi-line trend chart
+   - Action items table: Area, Issue, Owner, Due Date, Status — for decisions slide
+   All pre-formatted with number formatting (₹ in Lakhs with 1 decimal, % with 1 decimal)
+
+2. CHART TYPE RECOMMENDATIONS PER SLIDE:
+   - Which chart type works best for each slide's data (clustered bar / grouped bar / line / waterfall / simple table / scorecard / doughnut)
+   - When to use a table instead of a chart (when there are <5 data points, or when exact numbers matter more than visual trend)
+   - Chart design rules for board decks: Maximum 5 data series per chart, always show target line, use company colors, label the insight on the chart (not just axes)
+
+3. SLIDE DESIGN PRINCIPLES FOR DATA-HEAVY SLIDES:
+   - The "So What" box: Every data slide should have a highlighted box with 1 sentence — the key takeaway. How to write it.
+   - Traffic light indicators: When and how to use Red/Amber/Green status icons without cluttering the slide
+   - Number formatting rules: When to show ₹ vs Lakhs vs Crores, when to show 1 decimal vs whole number, how to format %
+   - Annotation guidelines: How to annotate a chart to highlight the problem point (e.g., circle the month where revenue dropped, add text "North miss starts here")
+
+4. DECK QUALITY CHECKLIST:
+   - Before sending to board: 15-point checklist covering data accuracy, narrative consistency, number formatting, action items completeness, slide count, chart labels, and key message clarity
+   - Red flags: Slides with no clear insight, data without context, missing comparisons (vs target, vs last month, vs last year)
+
+5. EXECUTIVE Q&A PREP:
+   - For each major metric in the deck, prepare: Expected question from board, Answer with data reference, Supporting detail slide or backup data (where to find it in the MIS)
+   - Format as a Q&A reference sheet the presenter can review before the meeting
+
+Provide complete Deck Data tab structure, chart type decision guide, and quality checklist.`
+            }
+        ]
     }
 };
 
-// - AI Tool Profiles -
+// AI Tool Profiles
 const aiToolDB = {
     'ai-chatgpt': {
         icon:'🟢', badge:'ai', title:'ChatGPT',
@@ -827,7 +2239,7 @@ const aiToolDB = {
         link:'https://chat.openai.com',
         strengths:['Step-by-step Google Sheets setup guides','Formula design and explanation','Dashboard layout and structure','Iterating and fixing errors'],
         bestFor:'Building new Google Sheets tools from scratch, designing formulas, and getting clear step-by-step instructions.',
-        tip:'After ChatGPT gives you the design, ask: "Now explain each formula in simple language like I\'m a beginner." This helps you understand -- not just copy blindly.',
+        tip:'After ChatGPT gives you the design, ask: "Now explain each formula in simple language like I\'m a beginner." This helps you understand — not just copy blindly.',
         when:['You need a new Google Sheets tool designed','You want step-by-step formula explanation','You\'re a beginner or intermediate user','You want to iterate and refine']
     },
     'ai-claude': {
@@ -841,11 +2253,11 @@ const aiToolDB = {
     },
     'ai-gemini': {
         icon:'🔵', badge:'ai', title:'Google Gemini',
-        headline:'Native Google Workspace integration -- works directly in Sheets',
+        headline:'Native Google Workspace integration — works directly in Sheets',
         link:'https://gemini.google.com',
         strengths:['Native Google Sheets knowledge','Works inside Google Workspace','Quick formula optimization','Google-native feature awareness'],
         bestFor:'Quick Google Sheets tasks, especially when integrated directly into Google Workspace.',
-        tip:'Gemini can be accessed directly inside Google Sheets via the "Help me organize" feature -- no copy-paste needed for simple tasks.',
+        tip:'Gemini can be accessed directly inside Google Sheets via the "Help me organize" feature — no copy-paste needed for simple tasks.',
         when:['You want AI directly inside Google Sheets','You need quick formula suggestions','You work heavily in Google Workspace','You want Google-native feature tips']
     },
     'ai-perplexity': {
@@ -853,7 +2265,7 @@ const aiToolDB = {
         headline:'Best for finding current best practices and comparing methods',
         link:'https://perplexity.ai',
         strengths:['Current Google Sheets best practices','Comparing different approaches','Cited and verifiable information','How-to guides with sources'],
-        bestFor:'Research, best practice validation, and understanding the "why" behind methods -- not just the "how".',
+        bestFor:'Research, best practice validation, and understanding the "why" behind methods — not just the "how".',
         tip:'Use Perplexity to ask "What is the current best practice for [MIS task]?" It will cite sources so you can verify.',
         when:['You want to verify best practices','You\'re comparing two approaches','You need cited information','You\'re researching a new MIS topic']
     },
@@ -862,15 +2274,12 @@ const aiToolDB = {
         headline:'Best for creating team guides and documenting MIS processes',
         link:'https://notebooklm.google.com',
         strengths:['Creating detailed how-to guides','Synthesizing uploaded documents','Building team SOPs','Organizing complex information'],
-        bestFor:'After your MIS is built -- create training guides, SOPs, and documentation for your team using NotebookLM.',
+        bestFor:'After your MIS is built — create training guides, SOPs, and documentation for your team using NotebookLM.',
         tip:'Upload your MIS design document or formula guide into NotebookLM and ask it to create a training guide for new team members.',
         when:['You need to document an MIS process','You\'re training a new team member','You want a SOP from existing documents','You need organized knowledge from multiple sources']
     }
 };
 
-// ---
-//  BADGE LABELS
-// ---
 const badgeLabels = {
     dept: { label:'Department', css:'badge-dept' },
     ind:  { label:'Industry',   css:'badge-ind'  },
@@ -879,9 +2288,6 @@ const badgeLabels = {
     tool: { label:'Resource',   css:'badge-tool' }
 };
 
-// ---
-//  RENDER FUNCTIONS
-// ---
 function setHeader(icon, title, badge) {
     document.getElementById('titleIcon').textContent = icon;
     document.getElementById('titleText').textContent = title;
@@ -908,34 +2314,29 @@ function setActive(el) {
     if (el) el.classList.add('active');
 }
 
-// - Load Use Case -
 function loadUseCase(caseId, el) {
     const uc = useCasesDB[caseId];
     if (!uc) return;
     setActive(el);
     setHeader(uc.icon, uc.title, uc.badge);
 
-    const aiTools = {
-        chatgpt:    { name:'ChatGPT',      icon:'🟢', link:'https://chat.openai.com' },
-        claude:     { name:'Claude',       icon:'🟠', link:'https://claude.ai' },
-        gemini:     { name:'Gemini',       icon:'🔵', link:'https://gemini.google.com' },
-        perplexity: { name:'Perplexity',   icon:'⚡', link:'https://perplexity.ai' },
-        notebooklm: { name:'NotebookLM',   icon:'📓', link:'https://notebooklm.google.com' }
-    };
-
-    let allPromptsHTML = `
-        <div class="tool-header" style="margin-top:1.2rem;margin-bottom:0.5rem;">
-            <div class="tool-icon">💡</div>
-            <div class="tool-name">Recommended Solution (No Repetition)</div>
-        </div>
-        <div class="prompt-box">
-            <div class="prompt-text" id="prompt-${caseId}-single">${uc.prompts.chatgpt || Object.values(uc.prompts)[0]}</div>
-            <div class="btn-row">
-                <button class="copy-btn" onclick="copyPrompt('${caseId}-single', this)">📋 Copy Solution</button>
+    const promptsHTML = uc.prompts.map((p, i) => `
+        <div class="prompt-block">
+            <div class="prompt-block-header">
+                <div class="prompt-number">${i + 1}</div>
+                <div class="prompt-block-title">${p.title}</div>
             </div>
-        </div>`;
+            <div class="prompt-box">
+                <div class="prompt-label">📋 Ready-to-Use Prompt</div>
+                <div class="prompt-text" id="prompt-${caseId}-${i}">${p.text}</div>
+                <div class="btn-row">
+                    <button class="copy-btn" onclick="copyPrompt('${caseId}-${i}', this)">📋 Copy Prompt ${i + 1}</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
 
-document.getElementById('usecases-view').innerHTML = `
+    document.getElementById('usecases-view').innerHTML = `
         <div class="usecase-card">
             <div class="usecase-header">
                 <div class="usecase-icon">${uc.icon}</div>
@@ -956,23 +2357,18 @@ document.getElementById('usecases-view').innerHTML = `
             </div>
         </div>
         <div class="ai-tools-section">
-            <h3>📋 Copy Prompts For All AI Tools</h3>
-            <div class="ai-tool-card">
-                ${allPromptsHTML}
-            </div>
+            <h3>📋 3 Detailed Prompts — Copy & Use in Any AI Tool</h3>
+            ${promptsHTML}
         </div>`;
 
     showView('usecases');
 }
 
-// - Load AI Tool Profile -
 function loadTool(toolId, el) {
     setActive(el);
-
     if (aiToolDB[toolId]) {
         const ai = aiToolDB[toolId];
         setHeader(ai.icon, ai.title, ai.badge);
-
         document.getElementById('tools-view').innerHTML = `
             <div class="ai-profile-section">
                 <div class="ai-profile-header">
@@ -982,7 +2378,6 @@ function loadTool(toolId, el) {
                         <div class="ai-profile-desc">${ai.headline}</div>
                     </div>
                 </div>
-
                 <div class="problem-solution">
                     <div class="solution" style="border-left-color:var(--accent)">
                         <h4 style="color:var(--accent)">💪 Strengths</h4>
@@ -993,17 +2388,14 @@ function loadTool(toolId, el) {
                         <ul class="benefit-list">${ai.when.map(w=>`<li>${w}</li>`).join('')}</ul>
                     </div>
                 </div>
-
                 <div class="info-block" style="border-left-color:var(--success)">
                     <h4>Best For</h4>
                     <p>${ai.bestFor}</p>
                 </div>
-
                 <div class="info-block" style="border-left-color:var(--warning)">
                     <h4>💡 Pro Tip</h4>
                     <p>${ai.tip}</p>
                 </div>
-
                 <div class="ai-profile-link">
                     <a href="${ai.link}" target="_blank">Open ${ai.title} →</a>
                 </div>
@@ -1012,7 +2404,6 @@ function loadTool(toolId, el) {
     }
 }
 
-// - Copy Prompt -
 function copyPrompt(promptId, btn) {
     const el = document.getElementById(`prompt-${promptId}`);
     if (!el) return;
@@ -1024,7 +2415,6 @@ function copyPrompt(promptId, btn) {
     });
 }
 
-// - Search -
 document.getElementById('searchInput').addEventListener('input', function() {
     const q = this.value.toLowerCase();
     document.querySelectorAll('.sidebar-item').forEach(item => {
